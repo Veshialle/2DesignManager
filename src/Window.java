@@ -15,8 +15,8 @@ class MyCanvas extends JComponent {
 public int x;
 public int y;
 	
-
-public void paint(Graphics g) {
+// Creo il rettangolo di prova
+public void paint(Graphics g) { 
     g.drawRect (x, y, 200, 200);  
   }
 }
@@ -33,41 +33,90 @@ public class Window {
     canvas.x=window.getWidth()/100*spostX;
     canvas.y=window.getHeight()/100*spostY;
 	
-	JButton btnNewButton = new JButton("<-->");
+	JButton btnLeft = new JButton("Left");
 	
 	JSpinner spinnerInputPos = new JSpinner();
+	
+	JButton btnRight = new JButton("Right");
+	
+	JButton btnDown = new JButton("Down");
+	
+	JButton btnUp = new JButton("Up");
+	
+	//creazione layout
 	GroupLayout groupLayout = new GroupLayout(window.getContentPane());
 	groupLayout.setHorizontalGroup(
 		groupLayout.createParallelGroup(Alignment.LEADING)
 			.addGroup(groupLayout.createSequentialGroup()
-				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-					.addComponent(canvas, GroupLayout.PREFERRED_SIZE, 794, GroupLayout.PREFERRED_SIZE)
-					.addGroup(groupLayout.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE)
-						.addGap(18)
-						.addComponent(spinnerInputPos, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)))
-				.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				.addContainerGap()
+				.addComponent(btnLeft)
+				.addPreferredGap(ComponentPlacement.RELATED)
+				.addComponent(btnRight)
+				.addPreferredGap(ComponentPlacement.RELATED)
+				.addComponent(btnUp)
+				.addPreferredGap(ComponentPlacement.RELATED)
+				.addComponent(btnDown)
+				.addPreferredGap(ComponentPlacement.RELATED)
+				.addComponent(spinnerInputPos, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
+				.addContainerGap(412, Short.MAX_VALUE))
+			.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+				.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addComponent(canvas, GroupLayout.PREFERRED_SIZE, 794, GroupLayout.PREFERRED_SIZE)
+				.addContainerGap())
 	);
 	groupLayout.setVerticalGroup(
 		groupLayout.createParallelGroup(Alignment.LEADING)
 			.addGroup(groupLayout.createSequentialGroup()
 				.addContainerGap()
 				.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
-					.addComponent(spinnerInputPos, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addGap(25)
-				.addComponent(canvas, GroupLayout.PREFERRED_SIZE, 416, GroupLayout.PREFERRED_SIZE)
+					.addComponent(btnLeft, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+					.addComponent(btnRight)
+					.addComponent(spinnerInputPos, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addComponent(btnUp)
+					.addComponent(btnDown))
+				.addPreferredGap(ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+				.addComponent(canvas, GroupLayout.PREFERRED_SIZE, 465, GroupLayout.PREFERRED_SIZE)
 				.addContainerGap())
 	);
 	window.getContentPane().setLayout(groupLayout);
     window.setVisible(true);
-    btnNewButton.addActionListener(e -> {
-    	canvas.x=canvas.x+(int) spinnerInputPos.getValue();
+    
+    //bottone Left
+    btnLeft.addActionListener(e -> {
+    	if((int) spinnerInputPos.getValue() >=0){
+    		canvas.x=canvas.x-(int) spinnerInputPos.getValue();
+    	}
+    	window.repaint();
+    
+    });
+    
+    //bottone Right
+    btnRight.addActionListener(e -> {
+    	if((int) spinnerInputPos.getValue() >=0){
+    		canvas.x=canvas.x+(int) spinnerInputPos.getValue();
+    	}
     	window.repaint();
     
     });
    
+    
+  //bottone Down
+    btnRight.addActionListener(e -> {
+    	if((int) spinnerInputPos.getValue() >=0){
+    		canvas.y=canvas.y+(int) spinnerInputPos.getValue();
+    	}
+    	window.repaint();
+    
+    });
+    
+  //bottone Up
+    btnRight.addActionListener(e -> {
+    	if((int) spinnerInputPos.getValue() >=0){
+    		canvas.y=canvas.y-(int) spinnerInputPos.getValue();
+    	}
+    	window.repaint();
+    
+    });
     
   }
 }
