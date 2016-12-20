@@ -1,12 +1,15 @@
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.Polygon;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JButton;
+
 import java.awt.BorderLayout;
 import java.awt.Component;
 
@@ -23,8 +26,11 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JMenu;
 import javax.swing.JList;
+
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.event.ActionEvent;
 
@@ -78,6 +84,7 @@ class Figura{
     public int [] xPoints = new int[]{0,0,0,0};
     public int [] yPoints = new int[]{0,0,0,0};
     public String tipo;
+    public Polygon p;
     public Figura(String s, int x,int y,int width,int height) {
     	this.tipo=s;
     	this.x=x;
@@ -108,6 +115,7 @@ class Figura{
         	xPoints = new int[] {x, 0, 0, 0};
             yPoints = new int[] {y, 0, 0, 0};
         }
+    	
     }
     public void move(int x,int y){   //muovi tutti i punti della figura
     	for(int i=0; i<this.nLati;i++){
@@ -176,9 +184,6 @@ class Figura{
     public int getHeight(){
         return this.height;
     }
-    
-    
-    
     public void draw(Graphics g){
     	
     	Graphics2D d = (Graphics2D)g;
@@ -186,19 +191,44 @@ class Figura{
     	//this.initFig(this.x, this.y, this.width, this.height);
         if(this.tipo=="cerchio"){ 
             d.drawOval(xPoints[0], yPoints[0], width, width);// in questo caso width e' il diametro
+            
         }
         if(this.tipo!="cerchio"){
-        	d.drawPolygon(xPoints, yPoints, nLati);
-
+        	//d.drawPolygon(xPoints, yPoints, nLati);
+        	p = new Polygon(xPoints, yPoints, nLati);
+        	d.drawPolygon(p);
+        	
+        	
         }
-        
     }
+    public boolean contains(Point test) {
+    	if(this.tipo!="cerchio")
+    		return p.contains(test);
+    	else{
+    		int xc = this.xPoints[0]+(this.width/2);
+    		int yc = this.yPoints[0]+(this.width/2);
+    		int quadratica = ((test.x-xc)*(test.x-xc)) + ((test.y - yc)*(test.y - yc));
+    		int raggio2 = (this.width/2)*(this.width/2);
+    		System.out.print(quadratica);
+			System.out.print(" ");
+			System.out.print(raggio2);
+			System.out.print("\n");
+    		if(quadratica <= raggio2){
+    			return true;
+    		}else
+    			return false;
+    	}
+    	
+      }
 }
 //FINE CLASSE FIGURA
 
 
 //INIZIO CLASSE WINDOW (MAIN)
 public class Window {
+	public static Point mousePt;
+	public static int firstSelIx;
+	public static boolean isInside;
     public static void main(String[] a) {
         
         List<Figura> fig = new ArrayList<Figura>(); //fig e' una lista di oggetti Figura
@@ -258,84 +288,89 @@ public class Window {
         //ignorare
         GroupLayout groupLayout = new GroupLayout(window.getContentPane());
         groupLayout.setHorizontalGroup(
-                                       groupLayout.createParallelGroup(Alignment.LEADING)
-                                       .addGroup(groupLayout.createSequentialGroup()
-                                                 .addContainerGap()
-                                                 .addComponent(btnLeft, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-                                                 .addPreferredGap(ComponentPlacement.RELATED)
-                                                 .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-                                                           .addGroup(groupLayout.createSequentialGroup()
-                                                                     .addComponent(btnUp, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-                                                                     .addPreferredGap(ComponentPlacement.RELATED)
-                                                                     .addComponent(btnRight, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-                                                                     .addPreferredGap(ComponentPlacement.RELATED)
-                                                                     .addComponent(spinnerPos, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE))
-                                                           .addComponent(btnDown, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE))
-                                                 .addPreferredGap(ComponentPlacement.RELATED)
-                                                 .addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-                                                           .addComponent(btnSetX, 0, 0, Short.MAX_VALUE)
-                                                           .addComponent(btnSetY, GroupLayout.PREFERRED_SIZE, 36, Short.MAX_VALUE))
-                                                 .addGap(13)
-                                                 .addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 173, GroupLayout.PREFERRED_SIZE)
-                                                 .addPreferredGap(ComponentPlacement.RELATED)
-                                                 .addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-                                                           .addComponent(btnRemoveFig, 0, 0, Short.MAX_VALUE)
-                                                           .addComponent(btnAddFig, GroupLayout.PREFERRED_SIZE, 38, Short.MAX_VALUE))
-                                                 .addPreferredGap(ComponentPlacement.RELATED)
-                                                 .addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-                                                           .addComponent(btnSetheight, 0, 0, Short.MAX_VALUE)
-                                                           .addComponent(btnSetWidth, GroupLayout.PREFERRED_SIZE, 81, Short.MAX_VALUE))
-                                                 .addPreferredGap(ComponentPlacement.RELATED)
-                                                 .addComponent(spinnerSizes, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
-                                                 .addPreferredGap(ComponentPlacement.RELATED)
-                                                 .addComponent(btnRotateRight)
-                                                 .addGap(493))
-                                       .addComponent(canvas, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 1206, Short.MAX_VALUE)
-                                       );
+        	groupLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(groupLayout.createSequentialGroup()
+        			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(groupLayout.createSequentialGroup()
+        					.addContainerGap()
+        					.addComponent(btnLeft)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+        						.addComponent(btnUp, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        						.addComponent(btnDown, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(btnRight)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(spinnerPos, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+        						.addComponent(btnSetY, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        						.addComponent(btnSetX, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 173, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(btnAddFig)
+        						.addComponent(btnRemoveFig))
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
+        					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+        						.addComponent(btnSetWidth, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        						.addComponent(btnSetheight, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(spinnerSizes, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(btnRotateRight))
+        				.addComponent(canvas, GroupLayout.PREFERRED_SIZE, 1196, GroupLayout.PREFERRED_SIZE))
+        			.addContainerGap(91, Short.MAX_VALUE))
+        );
         groupLayout.setVerticalGroup(
-                                     groupLayout.createParallelGroup(Alignment.LEADING)
-                                     .addGroup(groupLayout.createSequentialGroup()
-                                               .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-                                                         .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-                                                                   .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-                                                                             .addGroup(groupLayout.createSequentialGroup()
-                                                                                       .addGap(9)
-                                                                                       .addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-                                                                                                 .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-                                                                                                           .addComponent(scrollPane, 0, 0, Short.MAX_VALUE)
-                                                                                                           .addGroup(groupLayout.createSequentialGroup()
-                                                                                                                     .addPreferredGap(ComponentPlacement.RELATED)
-                                                                                                                     .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-                                                                                                                               .addComponent(btnAddFig)
-                                                                                                                               .addComponent(btnSetheight))
-                                                                                                                     .addPreferredGap(ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                                                                                                                     .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-                                                                                                                               .addComponent(btnRemoveFig)
-                                                                                                                               .addComponent(btnSetWidth)))
-                                                                                                           .addComponent(btnSetX))
-                                                                                                 .addGroup(groupLayout.createSequentialGroup()
-                                                                                                           .addComponent(btnUp)
-                                                                                                           .addGap(22)
-                                                                                                           .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-                                                                                                                     .addComponent(btnDown)
-                                                                                                                     .addComponent(btnSetY))))
-                                                                                       .addGap(42))
-                                                                             .addGroup(groupLayout.createSequentialGroup()
-                                                                                       .addGap(29)
-                                                                                       .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-                                                                                                 .addComponent(spinnerPos, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                                                                                 .addComponent(btnLeft, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-                                                                                                 .addComponent(btnRight))))
-                                                                   .addGroup(groupLayout.createSequentialGroup()
-                                                                             .addGap(27)
-                                                                             .addComponent(spinnerSizes, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                                                             .addPreferredGap(ComponentPlacement.RELATED)))
-                                                         .addGroup(groupLayout.createSequentialGroup()
-                                                                   .addContainerGap()
-                                                                   .addComponent(btnRotateRight)
-                                                                   .addPreferredGap(ComponentPlacement.RELATED)))
-                                               .addComponent(canvas, GroupLayout.PREFERRED_SIZE, 1062, GroupLayout.PREFERRED_SIZE))
-                                     );
+        	groupLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(groupLayout.createSequentialGroup()
+        			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+        					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+        						.addGroup(groupLayout.createSequentialGroup()
+        							.addGap(9)
+        							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+        								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+        									.addComponent(scrollPane, 0, 0, Short.MAX_VALUE)
+        									.addGroup(groupLayout.createSequentialGroup()
+        										.addPreferredGap(ComponentPlacement.RELATED)
+        										.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+        											.addComponent(btnAddFig)
+        											.addComponent(btnSetheight))
+        										.addPreferredGap(ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+        										.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+        											.addComponent(btnRemoveFig)
+        											.addComponent(btnSetWidth)))
+        									.addGroup(groupLayout.createSequentialGroup()
+        										.addComponent(btnSetX)
+        										.addPreferredGap(ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+        										.addComponent(btnSetY)))
+        								.addGroup(groupLayout.createSequentialGroup()
+        									.addPreferredGap(ComponentPlacement.RELATED)
+        									.addComponent(btnUp)
+        									.addGap(18)
+        									.addComponent(btnDown)))
+        							.addGap(42))
+        						.addGroup(groupLayout.createSequentialGroup()
+        							.addGap(29)
+        							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+        								.addComponent(spinnerPos, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        								.addComponent(btnLeft, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+        								.addComponent(btnRight))))
+        					.addGroup(groupLayout.createSequentialGroup()
+        						.addGap(27)
+        						.addComponent(spinnerSizes, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        						.addPreferredGap(ComponentPlacement.RELATED)))
+        				.addGroup(groupLayout.createSequentialGroup()
+        					.addContainerGap()
+        					.addComponent(btnRotateRight)
+        					.addPreferredGap(ComponentPlacement.RELATED)))
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(canvas, GroupLayout.PREFERRED_SIZE, 776, GroupLayout.PREFERRED_SIZE)
+        			.addGap(286))
+        );
         //fine impostazione layout
         
         JList<String> list_1 = new JList<>( model ); //una JList che prende la lista di stringhe model
@@ -432,7 +467,7 @@ public class Window {
             setLabel("Seleziona una figura");
             
             //---------------------------------------------------------
-            Figura f = new Figura(s,0,0,200,100); //inizializzo/creo la Figura(s=tipo di figura, x=0, y=0, larghezza, altezza);
+            Figura f = new Figura(s,200,200,200,100); //inizializzo/creo la Figura(s=tipo di figura, x=0, y=0, larghezza, altezza);
             fig.add(f); //aggiungi la figura appena creata f alla lista di Figure "fig"
             canvas.paintImage(); //disegna
             
@@ -500,7 +535,40 @@ public class Window {
             
         });
         
+        //mouse listener     
+        canvas.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));   
+        canvas.addMouseListener(new MouseAdapter() {  	
+        	@Override
+            public void mousePressed(MouseEvent e) {
+        		mousePt = e.getPoint();
+        		for(int i=fig.size()-1;i>=0;i--){
+        			if(fig.get(i).contains(mousePt)){//
+        				isInside=true;
+        				list_1.setSelectedIndex(i); 
+        				break;
+        			}else{
+        				isInside=false;
+        			}
+        		}
+                canvas.paintImage();                
+            }   	
+        }); 
+        canvas.addMouseMotionListener(new MouseAdapter() {
+        	@Override	
+        	public void mouseDragged(MouseEvent e) {
+        		if (isInside) {
+        			System.out.print("dragged\n");
+					firstSelIx = list_1.getSelectedIndex();
+					int dx = e.getX() - mousePt.x;
+					int dy = e.getY() - mousePt.y;
+					fig.get(firstSelIx).move(dx, dy);
+					mousePt = e.getPoint();
+					canvas.paintImage();
+				}
+        		}        	
+        });     
     }
+    
     
     private static void setLabel(String string) {
         // TODO Auto-generated method stub
