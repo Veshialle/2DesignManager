@@ -277,8 +277,8 @@ public class Window {
         
         JSpinner spinnerSizes = new JSpinner();// Finestrina input delle dimensioni
         
-        JButton btnRotateRight = new JButton("Enable Rotation"); // Bottone Ruota (destra?)
-        btnRotateRight.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+        JButton btnEnableRotation = new JButton("Enable Rotation"); // Bottone Ruota (destra?)
+        btnEnableRotation.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
         
         
         
@@ -319,7 +319,7 @@ public class Window {
         					.addPreferredGap(ComponentPlacement.RELATED)
         					.addComponent(spinnerSizes, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
         					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(btnRotateRight))
+        					.addComponent(btnEnableRotation))
         				.addComponent(canvas, GroupLayout.PREFERRED_SIZE, 1196, GroupLayout.PREFERRED_SIZE))
         			.addContainerGap(91, Short.MAX_VALUE))
         );
@@ -365,7 +365,7 @@ public class Window {
         						.addPreferredGap(ComponentPlacement.RELATED)))
         				.addGroup(groupLayout.createSequentialGroup()
         					.addContainerGap()
-        					.addComponent(btnRotateRight)
+        					.addComponent(btnEnableRotation)
         					.addPreferredGap(ComponentPlacement.RELATED)))
         			.addPreferredGap(ComponentPlacement.RELATED)
         			.addComponent(canvas, GroupLayout.PREFERRED_SIZE, 776, GroupLayout.PREFERRED_SIZE)
@@ -416,7 +416,7 @@ public class Window {
             }
         });
         
-        btnRotateRight.addActionListener(new ActionListener() { //Rotate Destra
+        btnEnableRotation.addActionListener(new ActionListener() { //Rotate Destra
             public void actionPerformed(ActionEvent e) {
             	
             	//tutto da fare ancora-------
@@ -435,7 +435,10 @@ public class Window {
                 f.angle=45;
                 */
                 Point center = f.getCenter();
-                RotationEnabled = true;
+                //RotationEnabled = true;
+                int angle = (int)spinnerSizes.getValue();
+                System.out.print((double)angle);
+        		f.rotate(angle);
                 canvas.paintImage();
                 System.out.print(center.x);
                 System.out.print(" ");
@@ -564,26 +567,41 @@ public class Window {
         	@Override	
         	public void mouseDragged(MouseEvent e) {
         		if (isInside) {
+    				firstSelIx = list_1.getSelectedIndex(); 
     				int dx = e.getX() - mousePt.x;
     				int dy = e.getY() - mousePt.y;
         			if(RotationEnabled)
         			{
         				double angle;
-        				angle = Math.atan2(dx, dy);
+        				Point center = fig.get(firstSelIx).getCenter();
+        				int dfx = e.getX() - center.x; //i sta per iniziale
+        				int dfy = e.getY() - center.y; 
+        				int dix = mousePt.x - center.x;
+        				int diy = mousePt.y - center.y;
+        				dx = dfx -dix;
+        				dy = dfy - diy;
+        				//angle = Math.atan2(dy,dx);
+        				angle = getAngle(dy,dx);
         				fig.get(firstSelIx).rotate(angle);
         				canvas.paintImage();
         			}
         			else
         			{
         				System.out.print("dragged\n");
-        				firstSelIx = list_1.getSelectedIndex();
 						fig.get(firstSelIx).move(dx, dy);
 						canvas.paintImage();
-        			}
+        		}
 					mousePt = e.getPoint();
 				}
         	}        	
-        });     
+        });   
+    }
+    public static double getAngle(int y, int x){
+    	double angle = Math.atan2(y, x);
+    	if (angle < 0){
+    		angle += 2*Math.PI;
+    	}
+    	return angle; 
     }
     
     
