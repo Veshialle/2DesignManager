@@ -125,34 +125,19 @@ class Figura{
     	
     }
 
-    public void rotate(float angle){ //ancora non implementata
+    public void rotate(double angle){ //ancora non implementata
 		
-		//trovare center.x center.y
-		int maxX = 0;
-	    int maxY = 0;
-	    int minX = 0;
-	    int minY = 0;
-	    for (int index = 0; index < this.nLati; index++) {
-	        maxX = Math.max(maxX, xPoints[index]);
-	        minX = Math.min(minX, xPoints[index]);
-	    }
-	    for (int index = 0; index < this.nLati; index++) {
-	        maxY = Math.max(maxY, yPoints[index]);
-	        minY = Math.min(minY, yPoints[index]);
-	    }
-	    
-	    int xc = (maxX-minX)/2;
-		int yc = (maxY-minY)/2;
-		
+		Point center = getCenter();
 		
 		//farlo per tutti i xPoints
 		//ruotare
 		for(int i=0;i<this.nLati;i++){
-		double[] pt = {xPoints[i], yPoints[i]};
-		AffineTransform.getRotateInstance(Math.toRadians(angle), xc, yc)
-		  .transform(pt, 0, pt, 0, 1); // specifying to use this double[] to hold coords
-		xPoints[i] = (int) pt[0];
-		yPoints[i] = (int) pt[1];
+			double[] pt = {xPoints[i], yPoints[i]};
+			System.out.print(xPoints[i]+ " "+ yPoints[i] + "\n");
+			AffineTransform.getRotateInstance(Math.toRadians(angle), center.x, center.y).transform(pt, 0, pt, 0, 1); // specifying to use this double[] to hold coords
+			xPoints[i] = (int) pt[0];
+			yPoints[i] = (int) pt[1];
+			System.out.print(xPoints[i]+ " "+ yPoints[i] + "\n");
 		}
 	}
     
@@ -184,6 +169,24 @@ class Figura{
     public int getHeight(){
         return this.height;
     }
+    public Point getCenter(){
+    	Point center = new Point(0,0);
+    	if(this.tipo!="cerchio"){
+    		for(int i=0;i < nLati; i++){
+    			center.x += this.xPoints[i];
+    			center.y += this.yPoints[i];
+    		}
+    		center.x /= nLati;
+    		center.y /= nLati;
+    	}
+    	else{
+    		center.x = this.xPoints[0];
+    		center.y = this.yPoints[0];
+    		center.x += this.width /2;
+    		center.y += this.width /2;
+    	}
+    	return center;
+    }
     public void draw(Graphics g){
     	
     	Graphics2D d = (Graphics2D)g;
@@ -209,11 +212,7 @@ class Figura{
     		int yc = this.yPoints[0]+(this.width/2);
     		int quadratica = ((test.x-xc)*(test.x-xc)) + ((test.y - yc)*(test.y - yc));
     		int raggio2 = (this.width/2)*(this.width/2);
-    		System.out.print(quadratica);
-			System.out.print(" ");
-			System.out.print(raggio2);
-			System.out.print("\n");
-    		if(quadratica <= raggio2){
+    		if(quadratica <= raggio2){ // disuguaglianza per vedere se il punto in cui ho clickato col mouse è all'interno (circorferenza compresa) nel cerchio disegnato
     			return true;
     		}else
     			return false;
@@ -229,6 +228,7 @@ public class Window {
 	public static Point mousePt;
 	public static int firstSelIx;
 	public static boolean isInside;
+	public static boolean RotationEnabled = false;
     public static void main(String[] a) {
         
         List<Figura> fig = new ArrayList<Figura>(); //fig e' una lista di oggetti Figura
@@ -277,7 +277,7 @@ public class Window {
         
         JSpinner spinnerSizes = new JSpinner();// Finestrina input delle dimensioni
         
-        JButton btnRotateRight = new JButton("Rotate Right"); // Bottone Ruota (destra?)
+        JButton btnRotateRight = new JButton("Enable Rotation"); // Bottone Ruota (destra?)
         btnRotateRight.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
         
         
@@ -431,9 +431,16 @@ public class Window {
                     f.setX(f.getY());
                     f.setY(x);
                 }*/
-                
+                /*
                 f.angle=45;
+                */
+                Point center = f.getCenter();
+                RotationEnabled = true;
                 canvas.paintImage();
+                System.out.print(center.x);
+                System.out.print(" ");
+                System.out.print(center.y);
+                System.out.print("\n");
                 
                 //---------------------------
             }
@@ -557,15 +564,25 @@ public class Window {
         	@Override	
         	public void mouseDragged(MouseEvent e) {
         		if (isInside) {
-        			System.out.print("dragged\n");
-					firstSelIx = list_1.getSelectedIndex();
-					int dx = e.getX() - mousePt.x;
-					int dy = e.getY() - mousePt.y;
-					fig.get(firstSelIx).move(dx, dy);
+    				int dx = e.getX() - mousePt.x;
+    				int dy = e.getY() - mousePt.y;
+        			if(RotationEnabled)
+        			{
+        				double angle;
+        				angle = Math.atan2(dx, dy);
+        				fig.get(firstSelIx).rotate(angle);
+        				canvas.paintImage();
+        			}
+        			else
+        			{
+        				System.out.print("dragged\n");
+        				firstSelIx = list_1.getSelectedIndex();
+						fig.get(firstSelIx).move(dx, dy);
+						canvas.paintImage();
+        			}
 					mousePt = e.getPoint();
-					canvas.paintImage();
 				}
-        		}        	
+        	}        	
         });     
     }
     
