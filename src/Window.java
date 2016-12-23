@@ -33,6 +33,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.event.ActionEvent;
+import javax.swing.SpinnerNumberModel;
 
 
 //INIZIO CLASSE MYCANVAS
@@ -77,15 +78,15 @@ class MyCanvas extends JComponent {
 
 // INIZIO CLASSE FIGURA
 class Figura{
-    private int x,y,width,height;
+    private double x,y,width,height;
     private int nLati;
     public boolean visibile=true;
-    public int angle;
-    public int [] xPoints = new int[]{0,0,0,0};
-    public int [] yPoints = new int[]{0,0,0,0};
+    public double angle;
+    public double [] xPoints = new double[]{0,0,0,0};
+    public double [] yPoints = new double[]{0,0,0,0};
     public String tipo;
     public Polygon p;
-    public Figura(String s, int x,int y,int width,int height) {
+    public Figura(String s, double x,double y,double width,double height) {
     	this.tipo=s;
     	this.x=x;
     	this.y=y;
@@ -93,31 +94,31 @@ class Figura{
     	this.height=height;
     	this.init(x, y, width, height);  //inizializza i punti della figura
 	}
-    public void init(int x,int y,int width,int height){ //inizializza i punti della figura
+    public void init(double x,double y,double width,double height){ //inizializza i punti della figura
     	if(this.tipo=="rettangolo"){
             this.nLati=4;
-            xPoints = new int[] {x, x+width, x+width, x};
-            yPoints = new int[] {y, y, y+height,y+height};
+            xPoints = new double[] {x, x+width, x+width, x};
+            yPoints = new double[] {y, y, y+height,y+height};
         }else if(this.tipo=="triangolo"){
             this.nLati=3;
-            xPoints = new int[] {x, x+(width/2), x+width, 0 };
-            yPoints = new int[] {y, y-height, y, 0};
+            xPoints = new double[] {x, x+(width/2), x+width, 0 };
+            yPoints = new double[] {y, y-height, y, 0};
         }else if(this.tipo=="quadrato"){
             this.nLati=4;
-            xPoints = new int[] {x, x+width, x+width, x};
-            yPoints = new int[] {y, y, y+width,y+width};
+            xPoints = new double[] {x, x+width, x+width, x};
+            yPoints = new double[] {y, y, y+width,y+width};
         }else if(this.tipo=="rombo"){
             this.nLati=4;
-            xPoints = new int[] {x, x+(width/2), x+width, x+(width/2)};
-            yPoints = new int[] {y, y-(height/2), y,y+(height/2)};
+            xPoints = new double[] {x, x+(width/2), x+width, x+(width/2)};
+            yPoints = new double[] {y, y-(height/2), y,y+(height/2)};
         }else if(this.tipo=="cerchio"){
         	this.nLati=1;
-        	xPoints = new int[] {x, 0, 0, 0};
-            yPoints = new int[] {y, 0, 0, 0};
+        	xPoints = new double[] {x, 0, 0, 0};
+            yPoints = new double[] {y, 0, 0, 0};
         }
     	
     }
-    public void move(int x,int y){   //muovi tutti i punti della figura
+    public void move(double x,double y){   //muovi tutti i punti della figura
     	for(int i=0; i<this.nLati;i++){
     		xPoints[i]=xPoints[i]+x;
     		yPoints[i]=yPoints[i]+y;
@@ -127,63 +128,77 @@ class Figura{
 
     public void rotate(double angle){ //ancora non implementata
 		
-		Point center = getCenter();
+		double centerX = getCenterX();		
+		double centerY = getCenterY();
 		
 		//farlo per tutti i xPoints
 		//ruotare
 		for(int i=0;i<this.nLati;i++){
 			double[] pt = {xPoints[i], yPoints[i]};
-			System.out.print(xPoints[i]+ " "+ yPoints[i] + "\n");
-			AffineTransform.getRotateInstance(Math.toRadians(angle), center.x, center.y).transform(pt, 0, pt, 0, 1); // specifying to use this double[] to hold coords
-			xPoints[i] = (int) pt[0];
-			yPoints[i] = (int) pt[1];
-			System.out.print(xPoints[i]+ " "+ yPoints[i] + "\n");
+			AffineTransform.getRotateInstance(Math.toRadians(angle), centerX, centerY).transform(pt, 0, pt, 0, 1); // specifying to use this double[] to hold coords
+			xPoints[i] = pt[0];
+			yPoints[i] = pt[1];
+			/*
+			 * Per poter risolvere la traslazione (verso l'origine del canvas se rotazione oraria o verso +inf e +inf se antioraria)
+			 * la rotazione dovrebbe essere affinata, il ritorno ad intero fa perdere parte del calcolo nella rotazione
+			 */
+			
 		}
 	}
     
-	public void setX(int x){
+	public void setX(double x){
         this.move(x-this.xPoints[0], 0);
     }
 	
-    public void setY(int y){
+    public void setY(double y){
     	this.move(0, y-this.yPoints[0]);
     }
     public int getNLati(){
         return this.nLati;
     }
-    public int getX(){
+    public double getX(){
         return this.x;
     }
-    public int getY(){
+    public double getY(){
         return this.y;
     }
-    public void setWidth(int width){
+    public void setWidth(double width){
         this.width=width;
     }
-    public void setHeight(int height){
-        this.height=height;
+    public void setHeight(double d){
+        this.height=d;
     }
-    public int getWidth(){
+    public double getWidth(){
         return this.width;
     }
-    public int getHeight(){
+    public double getHeight(){
         return this.height;
     }
-    public Point getCenter(){
-    	Point center = new Point(0,0);
+    public double getCenterX(){
+    	double center = 0;
     	if(this.tipo!="cerchio"){
     		for(int i=0;i < nLati; i++){
-    			center.x += this.xPoints[i];
-    			center.y += this.yPoints[i];
+    			center += this.xPoints[i];
     		}
-    		center.x /= nLati;
-    		center.y /= nLati;
+    		center /= nLati;
     	}
     	else{
-    		center.x = this.xPoints[0];
-    		center.y = this.yPoints[0];
-    		center.x += this.width /2;
-    		center.y += this.width /2;
+    		center = this.xPoints[0];
+    		center += this.width /2;
+    	}
+    	return center;
+    }
+    public double getCenterY(){
+    	double center = 0;
+    	if(this.tipo!="cerchio"){
+    		for(int i=0;i < nLati; i++){
+    			center += this.yPoints[i];
+    		}
+    		center /= nLati;
+    	}
+    	else{
+    		center = this.yPoints[0];
+    		center += this.width /2;
     	}
     	return center;
     }
@@ -193,12 +208,19 @@ class Figura{
     	
     	//this.initFig(this.x, this.y, this.width, this.height);
         if(this.tipo=="cerchio"){ 
-            d.drawOval(xPoints[0], yPoints[0], width, width);// in questo caso width e' il diametro
+            d.drawOval((int)xPoints[0], (int)yPoints[0], (int)width, (int)width);// in questo caso width e' il diametro
             
         }
         if(this.tipo!="cerchio"){
         	//d.drawPolygon(xPoints, yPoints, nLati);
-        	p = new Polygon(xPoints, yPoints, nLati);
+        	int [] xP = {0,0,0,0};
+        	int [] yP = {0,0,0,0};
+        	for(int i=0;i<this.getNLati(); i++)
+        	{
+        		xP[i] = (int)xPoints[i];
+        		yP[i] = (int)yPoints[i];
+        	}
+        	p = new Polygon(xP, yP, nLati);
         	d.drawPolygon(p);
         	
         	
@@ -208,10 +230,10 @@ class Figura{
     	if(this.tipo!="cerchio")
     		return p.contains(test);
     	else{
-    		int xc = this.xPoints[0]+(this.width/2);
-    		int yc = this.yPoints[0]+(this.width/2);
-    		int quadratica = ((test.x-xc)*(test.x-xc)) + ((test.y - yc)*(test.y - yc));
-    		int raggio2 = (this.width/2)*(this.width/2);
+    		double xc = this.xPoints[0]+(this.width/2);
+    		double yc = this.yPoints[0]+(this.width/2);
+    		double quadratica = ((test.x-xc)*(test.x-xc)) + ((test.y - yc)*(test.y - yc));
+    		double raggio2 = (this.width/2)*(this.width/2);
     		if(quadratica <= raggio2){ // disuguaglianza per vedere se il punto in cui ho clickato col mouse è all'interno (circorferenza compresa) nel cerchio disegnato
     			return true;
     		}else
@@ -245,6 +267,7 @@ public class Window {
         JButton btnLeft = new JButton("Left"); //Bottone "Left"
         btnLeft.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
         JSpinner spinnerPos = new JSpinner(); //Finestrina Input spostamenti, a destra del bottone "Right"
+        spinnerPos.setModel(new SpinnerNumberModel(new Double(0), null, null, new Double(1)));
         JButton btnRight = new JButton("Right");//Bottone "Right"
         btnRight.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
         JButton btnDown = new JButton("Down");//Bottone "Down"
@@ -276,9 +299,10 @@ public class Window {
         btnSetWidth.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
         
         JSpinner spinnerSizes = new JSpinner();// Finestrina input delle dimensioni
+        spinnerSizes.setModel(new SpinnerNumberModel(0.0, -179.9, 179.9, 1.0));
         
-        JButton btnEnableRotation = new JButton("Enable Rotation"); // Bottone Ruota (destra?)
-        btnEnableRotation.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+        JButton btnRotation = new JButton("Rotation"); // Bottone Ruota (orario)
+        btnRotation.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
         
         
         
@@ -319,7 +343,7 @@ public class Window {
         					.addPreferredGap(ComponentPlacement.RELATED)
         					.addComponent(spinnerSizes, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
         					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(btnEnableRotation))
+        					.addComponent(btnRotation))
         				.addComponent(canvas, GroupLayout.PREFERRED_SIZE, 1196, GroupLayout.PREFERRED_SIZE))
         			.addContainerGap(91, Short.MAX_VALUE))
         );
@@ -365,7 +389,7 @@ public class Window {
         						.addPreferredGap(ComponentPlacement.RELATED)))
         				.addGroup(groupLayout.createSequentialGroup()
         					.addContainerGap()
-        					.addComponent(btnEnableRotation)
+        					.addComponent(btnRotation)
         					.addPreferredGap(ComponentPlacement.RELATED)))
         			.addPreferredGap(ComponentPlacement.RELATED)
         			.addComponent(canvas, GroupLayout.PREFERRED_SIZE, 776, GroupLayout.PREFERRED_SIZE)
@@ -385,7 +409,7 @@ public class Window {
             public void actionPerformed(ActionEvent e) {
                 int firstSelIx = list_1.getSelectedIndex();
                 Figura f = fig.get(firstSelIx);
-                f.setX((int) spinnerPos.getValue());
+                f.setX((double) spinnerPos.getValue());
                 canvas.paintImage();
             }
         });
@@ -394,7 +418,7 @@ public class Window {
             public void actionPerformed(ActionEvent e) {
                 int firstSelIx = list_1.getSelectedIndex();
                 Figura f = fig.get(firstSelIx);
-                f.setY((int) spinnerPos.getValue());
+                f.setY((double) spinnerPos.getValue());
                 canvas.paintImage();
             }
         });
@@ -403,7 +427,7 @@ public class Window {
             public void actionPerformed(ActionEvent e) {
                 int firstSelIx = list_1.getSelectedIndex();
                 Figura f = fig.get(firstSelIx);
-                f.setHeight((int) spinnerSizes.getValue());
+                f.setHeight((double) spinnerSizes.getValue());
                 canvas.paintImage();
             }
         });
@@ -411,12 +435,12 @@ public class Window {
         btnSetWidth.addActionListener(new ActionListener() { //Imposta Larghezza
             public void actionPerformed(ActionEvent e) {
                 int firstSelIx = list_1.getSelectedIndex();
-                fig.get(firstSelIx).setWidth((int) spinnerSizes.getValue());
+                fig.get(firstSelIx).setWidth((double) spinnerSizes.getValue());
                 canvas.paintImage();
             }
         });
         
-        btnEnableRotation.addActionListener(new ActionListener() { //Rotate Destra
+        btnRotation.addActionListener(new ActionListener() { //Rotate Destra
             public void actionPerformed(ActionEvent e) {
             	
             	//tutto da fare ancora-------
@@ -434,15 +458,17 @@ public class Window {
                 /*
                 f.angle=45;
                 */
-                Point center = f.getCenter();
+                double centerX = f.getCenterX();
+                double centerY = f.getCenterY();
                 //RotationEnabled = true;
-                int angle = (int)spinnerSizes.getValue();
-                System.out.print((double)angle);
+                double angle = (double)spinnerSizes.getValue();
+                //angle = (int)Math.toRadians((double)angle);
+                //System.out.print(angle);
         		f.rotate(angle);
                 canvas.paintImage();
-                System.out.print(center.x);
+                System.out.print(centerX);
                 System.out.print(" ");
-                System.out.print(center.y);
+                System.out.print(centerY);
                 System.out.print("\n");
                 
                 //---------------------------
@@ -499,8 +525,8 @@ public class Window {
         //bottone Left
         btnLeft.addActionListener(e -> { //bottone muovi a Sinistra
         	int firstSelIx = list_1.getSelectedIndex(); //dammi l'indice della figura selezionata nella finestra di figure
-            if((int) spinnerPos.getValue() >=0){// se il valore della finestra di input delle posizioni e' positivo
-                int x1=(-(int) spinnerPos.getValue());//prendi il valore negativo
+            if((double) spinnerPos.getValue() >=0){// se il valore della finestra di input delle posizioni e' positivo
+                double x1=(-(double) spinnerPos.getValue());//prendi il valore negativo
                 fig.get(firstSelIx).move(x1, 0);  //muovi la figura selezionata del valore x1, y rimangono uguali
             }
             canvas.paintImage();//disegna di nuovo
@@ -511,8 +537,8 @@ public class Window {
         //bottone Right
         btnRight.addActionListener(e -> {  //stessa cosa di prima, muovi a destra
         	int firstSelIx = list_1.getSelectedIndex();
-            if((int) spinnerPos.getValue() >=0){
-            	int x1=(+(int) spinnerPos.getValue());
+            if((double) spinnerPos.getValue() >=0){
+            	double x1=(+(double) spinnerPos.getValue());
                 fig.get(firstSelIx).move(x1, 0); 
                 
             }
@@ -524,8 +550,8 @@ public class Window {
         //bottone Down
         btnDown.addActionListener(e -> {  //stessa cosa di prima, muovi in giu'
         	int firstSelIx = list_1.getSelectedIndex();
-            if((int) spinnerPos.getValue() >=0){
-            	int y1=(+(int) spinnerPos.getValue());
+            if((double) spinnerPos.getValue() >=0){
+            	double y1=(+(double) spinnerPos.getValue());
                 fig.get(firstSelIx).move(0, y1); 
                 
             }
@@ -536,8 +562,8 @@ public class Window {
         //bottone Up
         btnUp.addActionListener(e -> {   //stessa cosa di prima, muovi in su
         	int firstSelIx = list_1.getSelectedIndex();
-            if((int) spinnerPos.getValue() >=0){
-            	int y1=(-(int) spinnerPos.getValue());
+            if((double) spinnerPos.getValue() >=0){
+            	double y1=(-(double) spinnerPos.getValue());
                 fig.get(firstSelIx).move(0, y1);
                 
             }
@@ -568,20 +594,47 @@ public class Window {
         	public void mouseDragged(MouseEvent e) {
         		if (isInside) {
     				firstSelIx = list_1.getSelectedIndex(); 
-    				int dx = e.getX() - mousePt.x;
-    				int dy = e.getY() - mousePt.y;
+    				double dx = e.getX() - mousePt.x;
+    				double dy = e.getY() - mousePt.y;
         			if(RotationEnabled)
         			{
         				double angle;
-        				Point center = fig.get(firstSelIx).getCenter();
+        				double centerX = fig.get(firstSelIx).getCenterX();
+        				double centerY = fig.get(firstSelIx).getCenterY();
+        				/*
         				int dfx = e.getX() - center.x; //i sta per iniziale
         				int dfy = e.getY() - center.y; 
         				int dix = mousePt.x - center.x;
         				int diy = mousePt.y - center.y;
         				dx = dfx -dix;
         				dy = dfy - diy;
-        				//angle = Math.atan2(dy,dx);
-        				angle = getAngle(dy,dx);
+        				*/
+        				double xf = e.getX() - centerX;
+        				double yf = e.getY() - centerY;
+        				double xi = mousePt.x - centerX;
+        				double yi = mousePt.y - centerY;
+        				angle = Math.atan2(yi, xi) - Math.atan2(yf, xf);
+        				/*if (xf = 0)
+        				{
+        					if(yf> 0)
+        						anglef = Math.PI /2;
+        					if(yf < 0)
+        						anglef = -Math.PI /2;
+        				}
+        				else if(xf > 0)
+        				{
+        					anglef = Math.
+        				}else if (xf < 0 && yf >= 0)
+        				{
+        					
+        				}else if(xf < 0 && yf < 0)
+        				{
+        					
+        				}*/
+        				System.out.print("Angle:" + angle + "\n");
+        				System.out.print("I:" + xi +" "+yi +"F: "+xf +" " + yf+ "\n");
+        				if(Math.abs(angle)<1)
+        					angle = 1;
         				fig.get(firstSelIx).rotate(angle);
         				canvas.paintImage();
         			}
