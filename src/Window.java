@@ -165,6 +165,43 @@ class Figura{
     public void setWidth(double width){
         this.width=width;
     }
+    public void resize(double dx, double dy){
+    	double cx = this.getCenterX();
+    	double cy = this.getCenterY();
+    	
+
+    	for(int i=0;i<xPoints.length;i++){
+    		if(xPoints[i]<cx)
+    			if(!(xPoints[i]+5>cx))
+    				xPoints[i]-=dx;
+    			else
+    				xPoints[i]-=5;
+    		else if(cx==xPoints[i]){
+    			//non fare nulla
+    		}else{
+    			if(!(xPoints[i]-5<cx))
+    				xPoints[i]+=dx;
+    			else
+    				xPoints[i]+=5;
+    		}
+    		
+    		if(yPoints[i]<cy)
+    			if(!(yPoints[i]+5>cy))
+    				yPoints[i]-=dy;
+    			else
+    				yPoints[i]-=5;
+    		else if(cy==yPoints[i]){
+    			//non fare nulla
+    		}else{
+    			if(!(yPoints[i]-5<cy))
+    				yPoints[i]+=dy;
+    			else
+    				yPoints[i]+=5;
+    		}
+    	}
+    }
+        
+
     public void setHeight(double d){
         this.height=d;
     }
@@ -206,12 +243,16 @@ class Figura{
     	
     	Graphics2D d = (Graphics2D)g;
     	
+    	
     	//this.initFig(this.x, this.y, this.width, this.height);
         if(this.tipo=="cerchio"){ 
             d.drawOval((int)xPoints[0], (int)yPoints[0], (int)width, (int)width);// in questo caso width e' il diametro
             
         }
         if(this.tipo!="cerchio"){
+        	
+        	
+        	
         	//d.drawPolygon(xPoints, yPoints, nLati);
         	int [] xP = {0,0,0,0};
         	int [] yP = {0,0,0,0};
@@ -222,6 +263,8 @@ class Figura{
         	}
         	p = new Polygon(xP, yP, nLati);
         	d.drawPolygon(p);
+        	
+        	
         	
         	
         }
@@ -250,7 +293,7 @@ public class Window {
 	public static Point mousePt;
 	public static int firstSelIx;
 	public static boolean isInside;
-	public static boolean RotationEnabled = false;
+	public static boolean RotationEnabled = false, Resize = false;
     public static void main(String[] a) {
         
         List<Figura> fig = new ArrayList<Figura>(); //fig e' una lista di oggetti Figura
@@ -437,6 +480,7 @@ public class Window {
                 int firstSelIx = list_1.getSelectedIndex();
                 fig.get(firstSelIx).setWidth((double) spinnerSizes.getValue());
                 canvas.paintImage();
+                Resize=(!Resize);
             }
         });
         
@@ -596,7 +640,15 @@ public class Window {
     				firstSelIx = list_1.getSelectedIndex(); 
     				double dx = e.getX() - mousePt.x;
     				double dy = e.getY() - mousePt.y;
-        			if(RotationEnabled)
+    				if(Resize){
+    					double cx = fig.get(firstSelIx).getCenterX();
+    					double cy = fig.get(firstSelIx).getCenterY();
+    					
+    					
+    					fig.get(firstSelIx).resize(dx,dy);
+    					canvas.paintImage();
+    				}
+    				else if(RotationEnabled)
         			{
         				double angle;
         				double centerX = fig.get(firstSelIx).getCenterX();
@@ -663,7 +715,6 @@ public class Window {
         
     }
 }
-
 
 
 
