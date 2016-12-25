@@ -34,6 +34,10 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.event.ActionEvent;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.JScrollBar;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
+
 
 
 //INIZIO CLASSE MYCANVAS
@@ -81,7 +85,7 @@ class Figura{
     private double x,y,width,height;
     private int nLati;
     public boolean visibile=true;
-    public double angle;
+    private double angle;
     public double [] xPoints = new double[]{0,0,0,0};
     public double [] yPoints = new double[]{0,0,0,0};
     public String tipo;
@@ -130,12 +134,13 @@ class Figura{
 		
 		double centerX = getCenterX();		
 		double centerY = getCenterY();
-		
+		double rotationAngle = angle - getAngle();
+		this.setAngle = angle;		
 		//farlo per tutti i xPoints
 		//ruotare
 		for(int i=0;i<this.nLati;i++){
 			double[] pt = {xPoints[i], yPoints[i]};
-			AffineTransform.getRotateInstance(Math.toRadians(angle), centerX, centerY).transform(pt, 0, pt, 0, 1); // specifying to use this double[] to hold coords
+			AffineTransform.getRotateInstance(Math.toRadians(rotationAngle), centerX, centerY).transform(pt, 0, pt, 0, 1); // specifying to use this double[] to hold coords
 			xPoints[i] = pt[0];
 			yPoints[i] = pt[1];
 			/*
@@ -153,6 +158,9 @@ class Figura{
     public void setY(double y){
     	this.move(0, y-this.yPoints[0]);
     }
+    public double setAngle(double angle){
+    	return this.angle = angle;
+    }
     public int getNLati(){
         return this.nLati;
     }
@@ -161,6 +169,9 @@ class Figura{
     }
     public double getY(){
         return this.y;
+    }
+    public double getAngle(){
+    	return this.angle;
     }
     public void setWidth(double width){
         this.width=width;
@@ -342,10 +353,15 @@ public class Window {
         btnSetWidth.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
         
         JSpinner spinnerSizes = new JSpinner();// Finestrina input delle dimensioni
-        spinnerSizes.setModel(new SpinnerNumberModel(0.0, -179.9, 179.9, 1.0));
+        spinnerSizes.setModel(new SpinnerNumberModel(0.0, 0.0, 360.0, 1.0));
         
         JButton btnRotation = new JButton("Rotation"); // Bottone Ruota (orario)
         btnRotation.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+        
+        JScrollBar rotationBar = new JScrollBar();
+        rotationBar.setMinimum(-180);
+        rotationBar.setMaximum(180);
+        rotationBar.setOrientation(JScrollBar.HORIZONTAL);
         
         
         
@@ -384,18 +400,37 @@ public class Window {
         						.addComponent(btnSetWidth, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         						.addComponent(btnSetheight, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(spinnerSizes, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(btnRotation))
+        					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+        						.addGroup(groupLayout.createSequentialGroup()
+        							.addComponent(spinnerSizes, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(btnRotation))
+        						.addComponent(rotationBar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         				.addComponent(canvas, GroupLayout.PREFERRED_SIZE, 1196, GroupLayout.PREFERRED_SIZE))
-        			.addContainerGap(91, Short.MAX_VALUE))
+        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         groupLayout.setVerticalGroup(
         	groupLayout.createParallelGroup(Alignment.LEADING)
         		.addGroup(groupLayout.createSequentialGroup()
         			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-        				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-        					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(groupLayout.createSequentialGroup()
+        					.addGap(29)
+        					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(spinnerPos, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(btnLeft, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(btnRight)))
+        				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+        					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+        						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+        							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+        								.addGroup(groupLayout.createSequentialGroup()
+        									.addGap(27)
+        									.addComponent(spinnerSizes, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        								.addGroup(groupLayout.createSequentialGroup()
+        									.addContainerGap()
+        									.addComponent(btnRotation)))
+        							.addPreferredGap(ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+        							.addComponent(rotationBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         						.addGroup(groupLayout.createSequentialGroup()
         							.addGap(9)
         							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
@@ -418,22 +453,8 @@ public class Window {
         									.addPreferredGap(ComponentPlacement.RELATED)
         									.addComponent(btnUp)
         									.addGap(18)
-        									.addComponent(btnDown)))
-        							.addGap(42))
-        						.addGroup(groupLayout.createSequentialGroup()
-        							.addGap(29)
-        							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-        								.addComponent(spinnerPos, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        								.addComponent(btnLeft, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-        								.addComponent(btnRight))))
-        					.addGroup(groupLayout.createSequentialGroup()
-        						.addGap(27)
-        						.addComponent(spinnerSizes, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        						.addPreferredGap(ComponentPlacement.RELATED)))
-        				.addGroup(groupLayout.createSequentialGroup()
-        					.addContainerGap()
-        					.addComponent(btnRotation)
-        					.addPreferredGap(ComponentPlacement.RELATED)))
+        									.addComponent(btnDown)))))
+        					.addGap(42)))
         			.addPreferredGap(ComponentPlacement.RELATED)
         			.addComponent(canvas, GroupLayout.PREFERRED_SIZE, 776, GroupLayout.PREFERRED_SIZE)
         			.addGap(286))
@@ -505,7 +526,7 @@ public class Window {
                 double centerX = f.getCenterX();
                 double centerY = f.getCenterY();
                 //RotationEnabled = true;
-                double angle = (double)spinnerSizes.getValue();
+                double angle = (double)rotationBar.getValue();
                 //angle = (int)Math.toRadians((double)angle);
                 //System.out.print(angle);
         		f.rotate(angle);
@@ -519,6 +540,15 @@ public class Window {
             }
                 
             
+        });
+
+        rotationBar.addAdjustmentListener(new AdjustmentListener() {
+        	public void adjustmentValueChanged(AdjustmentEvent e) {
+        		double angle = (double) e.getValue();
+        		Figura f = fig.get(firstSelIx);
+        		System.out.println("Rotation "+ angle + "\n");
+        		f.rotate(angle);
+          }
         });
         
         btnAddFig.addActionListener(e -> { //Bottone aggiungi/crea una nuova Figura
