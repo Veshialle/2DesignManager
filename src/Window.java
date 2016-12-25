@@ -34,6 +34,8 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.event.ActionEvent;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.JScrollBar;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
@@ -463,9 +465,20 @@ public class Window {
         //fine impostazione layout
         
         JList<String> list_1 = new JList<>( model ); //una JList che prende la lista di stringhe model
-        scrollPane.setViewportView(list_1); //passo la JList al panello di visualizzazione
+        scrollPane.setViewportView(list_1); //passo la JList al pannello di visualizzazione
         window.getContentPane().setLayout(groupLayout);
         
+        // Per poter settare la barra dell'angolo quando si seleziona tramite la lista (scrollPane)
+        list_1.addListSelectionListener(new ListSelectionListener(){
+			@Override
+			public void valueChanged(ListSelectionEvent arg0) {
+				// TODO Auto-generated method stub
+        			firstSelIx = list_1.getSelectedIndex();
+        			System.out.print(firstSelIx);
+    				rotationBar.setValue((int)fig.get(firstSelIx).getAngle());
+        			
+			}
+    	});
         
         window.setVisible(true);
         canvas.paintImage();
@@ -585,6 +598,8 @@ public class Window {
             
             model.addElement( f.tipo );	//aggiungi alla lista di stringhe il tipo della nuova figura
             list_1.setSelectedIndex(model.getSize()-1);//seleziona nella lista output l'ultima figura inserita
+            firstSelIx = list_1.getSelectedIndex();
+			rotationBar.setValue((int)fig.get(firstSelIx).getAngle());
             
         });
         
@@ -657,6 +672,9 @@ public class Window {
         			if(fig.get(i).contains(mousePt)){//
         				isInside=true;
         				list_1.setSelectedIndex(i); 
+        				
+        	            firstSelIx = list_1.getSelectedIndex();
+        				rotationBar.setValue((int)fig.get(firstSelIx).getAngle());
         				break;
         			}else{
         				isInside=false;
