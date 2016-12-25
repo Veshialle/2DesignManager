@@ -135,9 +135,7 @@ class Figura{
 		double centerX = getCenterX();		
 		double centerY = getCenterY();
 		double rotationAngle = angle - getAngle();
-		this.setAngle = angle;		
-		//farlo per tutti i xPoints
-		//ruotare
+		this.setAngle(angle);	
 		for(int i=0;i<this.nLati;i++){
 			double[] pt = {xPoints[i], yPoints[i]};
 			AffineTransform.getRotateInstance(Math.toRadians(rotationAngle), centerX, centerY).transform(pt, 0, pt, 0, 1); // specifying to use this double[] to hold coords
@@ -158,9 +156,6 @@ class Figura{
     public void setY(double y){
     	this.move(0, y-this.yPoints[0]);
     }
-    public double setAngle(double angle){
-    	return this.angle = angle;
-    }
     public int getNLati(){
         return this.nLati;
     }
@@ -169,9 +164,12 @@ class Figura{
     }
     public double getY(){
         return this.y;
-    }
+    }   
     public double getAngle(){
     	return this.angle;
+    }
+    public void setAngle(double angle){
+    	this.angle = angle;
     }
     public void setWidth(double width){
         this.width=width;
@@ -359,6 +357,7 @@ public class Window {
         btnRotation.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
         
         JScrollBar rotationBar = new JScrollBar();
+        rotationBar.setBlockIncrement(0);
         rotationBar.setMinimum(-180);
         rotationBar.setMaximum(180);
         rotationBar.setOrientation(JScrollBar.HORIZONTAL);
@@ -548,6 +547,7 @@ public class Window {
         		Figura f = fig.get(firstSelIx);
         		System.out.println("Rotation "+ angle + "\n");
         		f.rotate(angle);
+        		canvas.paintImage();
           }
         });
         
