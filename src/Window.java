@@ -135,9 +135,7 @@ class Figura{
 		double centerX = getCenterX();		
 		double centerY = getCenterY();
 		double rotationAngle = angle - getAngle();
-		this.setAngle = angle;		
-		//farlo per tutti i xPoints
-		//ruotare
+		this.setAngle(angle);	
 		for(int i=0;i<this.nLati;i++){
 			double[] pt = {xPoints[i], yPoints[i]};
 			AffineTransform.getRotateInstance(Math.toRadians(rotationAngle), centerX, centerY).transform(pt, 0, pt, 0, 1); // specifying to use this double[] to hold coords
@@ -158,9 +156,6 @@ class Figura{
     public void setY(double y){
     	this.move(0, y-this.yPoints[0]);
     }
-    public double setAngle(double angle){
-    	return this.angle = angle;
-    }
     public int getNLati(){
         return this.nLati;
     }
@@ -169,9 +164,12 @@ class Figura{
     }
     public double getY(){
         return this.y;
-    }
+    }   
     public double getAngle(){
     	return this.angle;
+    }
+    public void setAngle(double angle){
+    	this.angle = angle;
     }
     public void setWidth(double width){
         this.width=width;
@@ -304,7 +302,7 @@ public class Window {
 	public static Point mousePt;
 	public static int firstSelIx;
 	public static boolean isInside;
-	public static boolean RotationEnabled = false, Resize = false;
+	public static boolean Resize = false;
     public static void main(String[] a) {
         
         List<Figura> fig = new ArrayList<Figura>(); //fig e' una lista di oggetti Figura
@@ -356,12 +354,15 @@ public class Window {
         spinnerSizes.setModel(new SpinnerNumberModel(0.0, 0.0, 360.0, 1.0));
         
         JButton btnRotation = new JButton("Rotation"); // Bottone Ruota (orario)
+        btnRotation.setEnabled(false); //sempre bottone disabilitato, ora non è più necessario questo!
         btnRotation.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
         
         JScrollBar rotationBar = new JScrollBar();
+        rotationBar.setEnabled(fig.isEmpty());
         rotationBar.setMinimum(-180);
-        rotationBar.setMaximum(180);
+        rotationBar.setMaximum(190); //non capisco come mai, ma settando a 180 (come dovrebbe essere) arriva solo fino a 170
         rotationBar.setOrientation(JScrollBar.HORIZONTAL);
+        
         
         
         
@@ -548,6 +549,7 @@ public class Window {
         		Figura f = fig.get(firstSelIx);
         		System.out.println("Rotation "+ angle + "\n");
         		f.rotate(angle);
+        		canvas.paintImage();
           }
         });
         
@@ -678,7 +680,7 @@ public class Window {
     					fig.get(firstSelIx).resize(dx,dy);
     					canvas.paintImage();
     				}
-    				else if(RotationEnabled)
+    				else if(false) // sempre falso perché inutile atm e, se cancello questo if, mi da errore (!!)
         			{
         				double angle;
         				double centerX = fig.get(firstSelIx).getCenterX();
