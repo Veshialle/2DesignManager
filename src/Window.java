@@ -36,10 +36,31 @@ import java.awt.event.ActionEvent;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+
 import javax.swing.JScrollBar;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 
 //INIZIO CLASSE MYCANVAS
@@ -355,8 +376,7 @@ public class Window {
         JSpinner spinnerSizes = new JSpinner();// Finestrina input delle dimensioni
         spinnerSizes.setModel(new SpinnerNumberModel(0.0, 0.0, 360.0, 1.0));
         
-        JButton btnRotation = new JButton("Rotation"); // Bottone Ruota (orario)
-        btnRotation.setEnabled(false); //sempre bottone disabilitato, ora non è più necessario questo!
+        JButton btnRotation = new JButton("Zero Degree");
         btnRotation.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
         
         JScrollBar rotationBar = new JScrollBar();
@@ -364,6 +384,9 @@ public class Window {
         rotationBar.setMinimum(-180);
         rotationBar.setMaximum(190); //non capisco come mai, ma settando a 180 (come dovrebbe essere) arriva solo fino a 170
         rotationBar.setOrientation(JScrollBar.HORIZONTAL);
+        
+        JButton btnSave = new JButton("Salva Canvas");
+        btnSave.setFont(new Font("Dialog", Font.PLAIN, 10));
         
         
         
@@ -407,31 +430,35 @@ public class Window {
         						.addGroup(groupLayout.createSequentialGroup()
         							.addComponent(spinnerSizes, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
         							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(btnRotation))
-        						.addComponent(rotationBar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        							.addComponent(btnRotation)
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(btnSave))
+        						.addComponent(rotationBar, GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)))
         				.addComponent(canvas, GroupLayout.PREFERRED_SIZE, 1196, GroupLayout.PREFERRED_SIZE))
         			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         groupLayout.setVerticalGroup(
         	groupLayout.createParallelGroup(Alignment.LEADING)
         		.addGroup(groupLayout.createSequentialGroup()
-        			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+        			.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
         				.addGroup(groupLayout.createSequentialGroup()
         					.addGap(29)
         					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
         						.addComponent(spinnerPos, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
         						.addComponent(btnLeft, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
         						.addComponent(btnRight)))
-        				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-        					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-        						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+        				.addGroup(groupLayout.createSequentialGroup()
+        					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+        						.addGroup(groupLayout.createSequentialGroup()
         							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
         								.addGroup(groupLayout.createSequentialGroup()
         									.addGap(27)
         									.addComponent(spinnerSizes, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         								.addGroup(groupLayout.createSequentialGroup()
         									.addContainerGap()
-        									.addComponent(btnRotation)))
+        									.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+        										.addComponent(btnRotation)
+        										.addComponent(btnSave))))
         							.addPreferredGap(ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
         							.addComponent(rotationBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         						.addGroup(groupLayout.createSequentialGroup()
@@ -519,38 +546,13 @@ public class Window {
             }
         });
         
-        btnRotation.addActionListener(new ActionListener() { //Rotate Destra
+        btnRotation.addActionListener(new ActionListener() { //Riportare alla posizione iniziale (0 gradi)
             public void actionPerformed(ActionEvent e) {
-            	
-            	//tutto da fare ancora-------
                 int firstSelIx = list_1.getSelectedIndex();
                 Figura f = fig.get(firstSelIx);
-                /*int x=f.getWidth();
-                if(f.tipo!="triangolo"){
-                    f.setWidth(f.getHeight());
-                    f.setHeight(x);
-                }else{
-                    x=f.getX();
-                    f.setX(f.getY());
-                    f.setY(x);
-                }*/
-                /*
-                f.angle=45;
-                */
-                double centerX = f.getCenterX();
-                double centerY = f.getCenterY();
-                //RotationEnabled = true;
-                double angle = (double)rotationBar.getValue();
-                //angle = (int)Math.toRadians((double)angle);
-                //System.out.print(angle);
-        		f.rotate(angle);
+        		f.rotate(0.0);
+        		rotationBar.setValue((int)f.getAngle());
                 canvas.paintImage();
-                System.out.print(centerX);
-                System.out.print(" ");
-                System.out.print(centerY);
-                System.out.print("\n");
-                
-                //---------------------------
             }
                 
             
@@ -690,56 +692,11 @@ public class Window {
     				firstSelIx = list_1.getSelectedIndex(); 
     				double dx = e.getX() - mousePt.x;
     				double dy = e.getY() - mousePt.y;
-    				if(Resize){
-    					double cx = fig.get(firstSelIx).getCenterX();
-    					double cy = fig.get(firstSelIx).getCenterY();
-    					
-    					
+    				if(Resize){	
     					fig.get(firstSelIx).resize(dx,dy);
     					canvas.paintImage();
     				}
-    				else if(false) // sempre falso perché inutile atm e, se cancello questo if, mi da errore (!!)
-        			{
-        				double angle;
-        				double centerX = fig.get(firstSelIx).getCenterX();
-        				double centerY = fig.get(firstSelIx).getCenterY();
-        				/*
-        				int dfx = e.getX() - center.x; //i sta per iniziale
-        				int dfy = e.getY() - center.y; 
-        				int dix = mousePt.x - center.x;
-        				int diy = mousePt.y - center.y;
-        				dx = dfx -dix;
-        				dy = dfy - diy;
-        				*/
-        				double xf = e.getX() - centerX;
-        				double yf = e.getY() - centerY;
-        				double xi = mousePt.x - centerX;
-        				double yi = mousePt.y - centerY;
-        				angle = Math.atan2(yi, xi) - Math.atan2(yf, xf);
-        				/*if (xf = 0)
-        				{
-        					if(yf> 0)
-        						anglef = Math.PI /2;
-        					if(yf < 0)
-        						anglef = -Math.PI /2;
-        				}
-        				else if(xf > 0)
-        				{
-        					anglef = Math.
-        				}else if (xf < 0 && yf >= 0)
-        				{
-        					
-        				}else if(xf < 0 && yf < 0)
-        				{
-        					
-        				}*/
-        				System.out.print("Angle:" + angle + "\n");
-        				System.out.print("I:" + xi +" "+yi +"F: "+xf +" " + yf+ "\n");
-        				if(Math.abs(angle)<1)
-        					angle = 1;
-        				fig.get(firstSelIx).rotate(angle);
-        				canvas.paintImage();
-        			}
+    				
         			else
         			{
         				System.out.print("dragged\n");
