@@ -51,10 +51,13 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
@@ -175,7 +178,17 @@ class Figura{
 	public void setX(double x){
         this.move(x-this.xPoints[0], 0);
     }
-	
+	/*la pezzo così, forse a sto punto converrebbe spostare tutto il salvataggio 
+		nell'xml in questa classe o, ancor meglio, crearne un'altra ad hoc.
+	*/
+	public double getxPoint(int i)
+	{
+		return this.xPoints[i];
+	}
+	public double getyPoint(int i)
+	{
+		return this.yPoints[i];
+	}
     public void setY(double y){
     	this.move(0, y-this.yPoints[0]);
     }
@@ -331,7 +344,7 @@ public class Window {
         List<Figura> fig = new ArrayList<Figura>(); //fig e' una lista di oggetti Figura
         
         
-        JFrame window = new JFrame();  //window sara' la mia finestra principale
+        JFrame window = new JFrame("2DesignManager");  //window sara' la mia finestra principale
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setBounds(30, 30, 1200, 1200);
         window.setResizable(false);
@@ -402,7 +415,7 @@ public class Window {
         			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
         				.addGroup(groupLayout.createSequentialGroup()
         					.addContainerGap()
-        					.addComponent(btnLeft)
+        					.addComponent(btnLeft, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
         					.addPreferredGap(ComponentPlacement.RELATED)
         					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
         						.addComponent(btnUp, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -440,14 +453,8 @@ public class Window {
         groupLayout.setVerticalGroup(
         	groupLayout.createParallelGroup(Alignment.LEADING)
         		.addGroup(groupLayout.createSequentialGroup()
-        			.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-        				.addGroup(groupLayout.createSequentialGroup()
-        					.addGap(29)
-        					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(spinnerPos, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(btnLeft, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(btnRight)))
-        				.addGroup(groupLayout.createSequentialGroup()
+        			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
         					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
         						.addGroup(groupLayout.createSequentialGroup()
         							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
@@ -484,7 +491,15 @@ public class Window {
         									.addComponent(btnUp)
         									.addGap(18)
         									.addComponent(btnDown)))))
-        					.addGap(42)))
+        					.addGap(42))
+        				.addGroup(groupLayout.createSequentialGroup()
+        					.addGap(36)
+        					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(btnRight)
+        						.addComponent(spinnerPos, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+        				.addGroup(groupLayout.createSequentialGroup()
+        					.addGap(35)
+        					.addComponent(btnLeft)))
         			.addPreferredGap(ComponentPlacement.RELATED)
         			.addComponent(canvas, GroupLayout.PREFERRED_SIZE, 776, GroupLayout.PREFERRED_SIZE)
         			.addGap(286))
@@ -662,6 +677,60 @@ public class Window {
             }
             canvas.paintImage();
             
+        });
+        //bottone Save
+        btnSave.addActionListener(e ->{
+        	int firstSelIx = list_1.getSelectedIndex();
+        	DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+        	DocumentBuilder docBuilder = null;
+			try {
+				docBuilder = docFactory.newDocumentBuilder();
+			} catch (ParserConfigurationException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+        	Document doc = docBuilder.newDocument();
+        	Element rootElement = doc.createElement("DesignPolygon");
+        	doc.appendChild(rootElement);
+        	 Element nLati = doc.createElement("nLati");
+        	 rootElement.appendChild(nLati);
+        	 String strNLati = String.valueOf(fig.get(firstSelIx).getNLati());
+        	 nLati.appendChild(doc.createTextNode(strNLati));
+        	 for(int i=0; i<fig.get(firstSelIx).getNLati();i++){
+        		 Element xPoint = doc.createElement("xPoint"+  String.valueOf(i));
+        		 String strxPoint = String.valueOf(fig.get(firstSelIx).getxPoint(i));
+            	 System.out.println(strxPoint);
+        		 xPoint.appendChild(doc.createTextNode(strxPoint));
+        		 nLati.appendChild(xPoint);
+        		 Element yPoint = doc.createElement("yPoint"+ String.valueOf(i));
+        		 String stryPoint = String.valueOf(fig.get(firstSelIx).getyPoint(i));
+            	 System.out.println(stryPoint);
+        		 yPoint.appendChild(doc.createTextNode(stryPoint));
+        		 nLati.appendChild(yPoint);        		 
+        	 }
+        	 Element angle = doc.createElement("angle");
+        	 String strAngle = String.valueOf(fig.get(firstSelIx).getAngle());
+        	 System.out.println(strAngle);
+        	 angle.appendChild(doc.createTextNode(strAngle));
+        	TransformerFactory transformerFactory = TransformerFactory.newInstance();
+     		try {
+				Transformer transformer = transformerFactory.newTransformer();
+	     		DOMSource source = new DOMSource(doc);
+	     		StreamResult result = new StreamResult(new File("polygonSaved.xml"));
+	     		
+	     		//debug
+	     		//result = new StreamResult(System.out);
+	     		
+	     		transformer.transform(source, result);
+	     		System.out.println("File saved!"); 
+			} catch (TransformerConfigurationException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (TransformerException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+     		
         });
         
         //mouse listener     
