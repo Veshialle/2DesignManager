@@ -42,7 +42,7 @@ import javax.swing.JScrollBar;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 
-
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -56,8 +56,8 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-
 import org.w3c.dom.Attr;
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
@@ -398,7 +398,7 @@ public class Window {
         rotationBar.setMaximum(190); //non capisco come mai, ma settando a 180 (come dovrebbe essere) arriva solo fino a 170
         rotationBar.setOrientation(JScrollBar.HORIZONTAL);
         
-        JButton btnSave = new JButton("Salva Canvas");
+        JButton btnSave = new JButton("Salva Figura");
         btnSave.setFont(new Font("Dialog", Font.PLAIN, 10));
         
         
@@ -681,56 +681,76 @@ public class Window {
         //bottone Save
         btnSave.addActionListener(e ->{
         	int firstSelIx = list_1.getSelectedIndex();
-        	DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-        	DocumentBuilder docBuilder = null;
-			try {
-				docBuilder = docFactory.newDocumentBuilder();
-			} catch (ParserConfigurationException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-        	Document doc = docBuilder.newDocument();
-        	Element rootElement = doc.createElement("DesignPolygon");
-        	doc.appendChild(rootElement);
-        	 Element nLati = doc.createElement("nLati");
-        	 rootElement.appendChild(nLati);
-        	 String strNLati = String.valueOf(fig.get(firstSelIx).getNLati());
-        	 nLati.appendChild(doc.createTextNode(strNLati));
-        	 for(int i=0; i<fig.get(firstSelIx).getNLati();i++){
-        		 Element xPoint = doc.createElement("xPoint"+  String.valueOf(i));
-        		 String strxPoint = String.valueOf(fig.get(firstSelIx).getxPoint(i));
-            	 System.out.println(strxPoint);
-        		 xPoint.appendChild(doc.createTextNode(strxPoint));
-        		 nLati.appendChild(xPoint);
-        		 Element yPoint = doc.createElement("yPoint"+ String.valueOf(i));
-        		 String stryPoint = String.valueOf(fig.get(firstSelIx).getyPoint(i));
-            	 System.out.println(stryPoint);
-        		 yPoint.appendChild(doc.createTextNode(stryPoint));
-        		 nLati.appendChild(yPoint);        		 
-        	 }
-        	 Element angle = doc.createElement("angle");
-        	 String strAngle = String.valueOf(fig.get(firstSelIx).getAngle());
-        	 System.out.println(strAngle);
-        	 angle.appendChild(doc.createTextNode(strAngle));
-        	TransformerFactory transformerFactory = TransformerFactory.newInstance();
-     		try {
-				Transformer transformer = transformerFactory.newTransformer();
-	     		DOMSource source = new DOMSource(doc);
-	     		StreamResult result = new StreamResult(new File("polygonSaved.xml"));
-	     		
+        	String fileName = "polygonSaved.xml";
+        	File file = new File(fileName);
+        	
+        	try
+        	{
+    			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+    			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+    			Document doc = null;
+    			Element rootElement = null;
+        		if (!file.exists()){// da creare a nuovo con tutta la pappardella
+        			file.createNewFile();
+        			doc = docBuilder.newDocument();
+            		rootElement = doc.createElement("DesignPolygon");
+            		doc.appendChild(rootElement);
+        		}
+        		else
+        		{
+        			doc = docBuilder.parse(file);
+        			rootElement = doc.getDocumentElement();
+        			doc.getDocumentElement().appendChild(doc.importNode(rootElement,true));
+        		}
+        		Element nLati = doc.createElement("nLati");
+        		rootElement.appendChild(nLati);
+        		String strNLati = String.valueOf(fig.get(firstSelIx).getNLati());
+        		nLati.appendChild(doc.createTextNode(strNLati));
+        		for(int i=0; i<fig.get(firstSelIx).getNLati();i++){
+        			Element xPoint = doc.createElement("xPoint"+  String.valueOf(i));
+        			String strxPoint = String.valueOf(fig.get(firstSelIx).getxPoint(i));
+        			System.out.println(strxPoint);
+        			xPoint.appendChild(doc.createTextNode(strxPoint));
+        			nLati.appendChild(xPoint);
+        			Element yPoint = doc.createElement("yPoint"+ String.valueOf(i));
+        			String stryPoint = String.valueOf(fig.get(firstSelIx).getyPoint(i));
+        			System.out.println(stryPoint);
+        			yPoint.appendChild(doc.createTextNode(stryPoint));
+        			nLati.appendChild(yPoint);        		 
+        		}
+        		Element angle = doc.createElement("angle");
+        		String strAngle = String.valueOf(fig.get(firstSelIx).getAngle());
+        		System.out.println(strAngle);
+        		angle.appendChild(doc.createTextNode(strAngle));
+
+        		doc.getDocumentElement().appendChild(doc.importNode(rootElement, true));
+        		TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        		Transformer transformer = transformerFactory.newTransformer();
+				DOMSource source = new DOMSource(doc);
+				StreamResult result = new StreamResult(file);
+	     	
 	     		//debug
 	     		//result = new StreamResult(System.out);
-	     		
+	     	
 	     		transformer.transform(source, result);
 	     		System.out.println("File saved!"); 
-			} catch (TransformerConfigurationException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (TransformerException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-     		
+
+        	} catch (ParserConfigurationException pce) {
+        		// TODO Auto-generated catch block
+        		pce.printStackTrace();
+        	} catch (TransformerConfigurationException tce) {
+        		// TODO Auto-generated catch block
+        		tce.printStackTrace();
+        	} catch (TransformerException te) {
+        		// TODO Auto-generated catch block
+        		te.printStackTrace();
+        	} catch (IOException ioe) {
+        		// TODO Auto-generated catch block
+        		ioe.printStackTrace();
+        	} catch (SAXException SE) {
+        		// TODO Auto-generated catch block
+        		SE.printStackTrace();
+        	}
         });
         
         //mouse listener     
@@ -791,14 +811,3 @@ public class Window {
         
     }
 }
-
-
-
-
-
-
-
-
-
-
-
