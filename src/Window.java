@@ -32,38 +32,21 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
+import java.io.File;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 
+import org.xml.sax.SAXException;
 
 import javax.swing.JScrollBar;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-import org.w3c.dom.Attr;
-import org.w3c.dom.DOMException;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
 
 //INIZIO CLASSE MYCANVAS
@@ -106,232 +89,6 @@ class MyCanvas extends JComponent {
 //FINE CLASSE MYCANVAS
 
 
-// INIZIO CLASSE FIGURA
-class Figura{
-    private double x,y,width,height;
-    private int nLati;
-    public boolean visibile=true;
-    private double angle;
-    public double [] xPoints = new double[]{0,0,0,0};
-    public double [] yPoints = new double[]{0,0,0,0};
-    public String tipo;
-    public Polygon p;
-    public Figura(String s, double x,double y,double width,double height) {
-    	this.tipo=s;
-    	this.x=x;
-    	this.y=y;
-    	this.width=width;
-    	this.height=height;
-    	this.init(x, y, width, height);  //inizializza i punti della figura
-	}
-    public void init(double x,double y,double width,double height){ //inizializza i punti della figura
-    	if(this.tipo=="rettangolo"){
-            this.nLati=4;
-            xPoints = new double[] {x, x+width, x+width, x};
-            yPoints = new double[] {y, y, y+height,y+height};
-        }else if(this.tipo=="triangolo"){
-            this.nLati=3;
-            xPoints = new double[] {x, x+(width/2), x+width, 0 };
-            yPoints = new double[] {y, y-height, y, 0};
-        }else if(this.tipo=="quadrato"){
-            this.nLati=4;
-            xPoints = new double[] {x, x+width, x+width, x};
-            yPoints = new double[] {y, y, y+width,y+width};
-        }else if(this.tipo=="rombo"){
-            this.nLati=4;
-            xPoints = new double[] {x, x+(width/2), x+width, x+(width/2)};
-            yPoints = new double[] {y, y-(height/2), y,y+(height/2)};
-        }else if(this.tipo=="cerchio"){
-        	this.nLati=1;
-        	xPoints = new double[] {x, 0, 0, 0};
-            yPoints = new double[] {y, 0, 0, 0};
-        }
-    	
-    }
-    public void move(double x,double y){   //muovi tutti i punti della figura
-    	for(int i=0; i<this.nLati;i++){
-    		xPoints[i]=xPoints[i]+x;
-    		yPoints[i]=yPoints[i]+y;
-    	}
-    	
-    }
-
-    public void rotate(double angle){ //ancora non implementata
-		
-		double centerX = getCenterX();		
-		double centerY = getCenterY();
-		double rotationAngle = angle - getAngle();
-		this.setAngle(angle);	
-		for(int i=0;i<this.nLati;i++){
-			double[] pt = {xPoints[i], yPoints[i]};
-			AffineTransform.getRotateInstance(Math.toRadians(rotationAngle), centerX, centerY).transform(pt, 0, pt, 0, 1); // specifying to use this double[] to hold coords
-			xPoints[i] = pt[0];
-			yPoints[i] = pt[1];
-			/*
-			 * Per poter risolvere la traslazione (verso l'origine del canvas se rotazione oraria o verso +inf e +inf se antioraria)
-			 * la rotazione dovrebbe essere affinata, il ritorno ad intero fa perdere parte del calcolo nella rotazione
-			 */
-			
-		}
-	}
-    
-	public void setX(double x){
-        this.move(x-this.xPoints[0], 0);
-    }
-	/*la pezzo così, forse a sto punto converrebbe spostare tutto il salvataggio 
-		nell'xml in questa classe o, ancor meglio, crearne un'altra ad hoc.
-	*/
-	public double getxPoint(int i)
-	{
-		return this.xPoints[i];
-	}
-	public double getyPoint(int i)
-	{
-		return this.yPoints[i];
-	}
-    public void setY(double y){
-    	this.move(0, y-this.yPoints[0]);
-    }
-    public int getNLati(){
-        return this.nLati;
-    }
-    public double getX(){
-        return this.x;
-    }
-    public double getY(){
-        return this.y;
-    }   
-    public double getAngle(){
-    	return this.angle;
-    }
-    public void setAngle(double angle){
-    	this.angle = angle;
-    }
-    public void setWidth(double width){
-        this.width=width;
-    }
-    public void resize(double dx, double dy){
-    	double cx = this.getCenterX();
-    	double cy = this.getCenterY();
-    	
-
-    	for(int i=0;i<xPoints.length;i++){
-    		if(xPoints[i]<cx)
-    			if(!(xPoints[i]+5>cx))
-    				xPoints[i]-=dx;
-    			else
-    				xPoints[i]-=5;
-    		else if(cx==xPoints[i]){
-    			//non fare nulla
-    		}else{
-    			if(!(xPoints[i]-5<cx))
-    				xPoints[i]+=dx;
-    			else
-    				xPoints[i]+=5;
-    		}
-    		
-    		if(yPoints[i]<cy)
-    			if(!(yPoints[i]+5>cy))
-    				yPoints[i]-=dy;
-    			else
-    				yPoints[i]-=5;
-    		else if(cy==yPoints[i]){
-    			//non fare nulla
-    		}else{
-    			if(!(yPoints[i]-5<cy))
-    				yPoints[i]+=dy;
-    			else
-    				yPoints[i]+=5;
-    		}
-    	}
-    }
-        
-
-    public void setHeight(double d){
-        this.height=d;
-    }
-    public double getWidth(){
-        return this.width;
-    }
-    public double getHeight(){
-        return this.height;
-    }
-    public double getCenterX(){
-    	double center = 0;
-    	if(this.tipo!="cerchio"){
-    		for(int i=0;i < nLati; i++){
-    			center += this.xPoints[i];
-    		}
-    		center /= nLati;
-    	}
-    	else{
-    		center = this.xPoints[0];
-    		center += this.width /2;
-    	}
-    	return center;
-    }
-    public double getCenterY(){
-    	double center = 0;
-    	if(this.tipo!="cerchio"){
-    		for(int i=0;i < nLati; i++){
-    			center += this.yPoints[i];
-    		}
-    		center /= nLati;
-    	}
-    	else{
-    		center = this.yPoints[0];
-    		center += this.width /2;
-    	}
-    	return center;
-    }
-    public void draw(Graphics g){
-    	
-    	Graphics2D d = (Graphics2D)g;
-    	
-    	
-    	//this.initFig(this.x, this.y, this.width, this.height);
-        if(this.tipo=="cerchio"){ 
-            d.drawOval((int)xPoints[0], (int)yPoints[0], (int)width, (int)width);// in questo caso width e' il diametro
-            
-        }
-        if(this.tipo!="cerchio"){
-        	
-        	
-        	
-        	//d.drawPolygon(xPoints, yPoints, nLati);
-        	int [] xP = {0,0,0,0};
-        	int [] yP = {0,0,0,0};
-        	for(int i=0;i<this.getNLati(); i++)
-        	{
-        		xP[i] = (int)xPoints[i];
-        		yP[i] = (int)yPoints[i];
-        	}
-        	p = new Polygon(xP, yP, nLati);
-        	d.drawPolygon(p);
-        	
-        	
-        	
-        	
-        }
-    }
-    public boolean contains(Point test) {
-    	if(this.tipo!="cerchio")
-    		return p.contains(test);
-    	else{
-    		double xc = this.xPoints[0]+(this.width/2);
-    		double yc = this.yPoints[0]+(this.width/2);
-    		double quadratica = ((test.x-xc)*(test.x-xc)) + ((test.y - yc)*(test.y - yc));
-    		double raggio2 = (this.width/2)*(this.width/2);
-    		if(quadratica <= raggio2){ // disuguaglianza per vedere se il punto in cui ho clickato col mouse è all'interno (circorferenza compresa) nel cerchio disegnato
-    			return true;
-    		}else
-    			return false;
-    	}
-    	
-      }
-}
-//FINE CLASSE FIGURA
-
 
 //INIZIO CLASSE WINDOW (MAIN)
 public class Window {
@@ -339,6 +96,7 @@ public class Window {
 	public static int firstSelIx;
 	public static boolean isInside;
 	public static boolean Resize = false;
+	public static int idFigura = XMLManager.getLastID();
     public static void main(String[] a) {
         
         List<Figura> fig = new ArrayList<Figura>(); //fig e' una lista di oggetti Figura
@@ -398,8 +156,11 @@ public class Window {
         rotationBar.setMaximum(190); //non capisco come mai, ma settando a 180 (come dovrebbe essere) arriva solo fino a 170
         rotationBar.setOrientation(JScrollBar.HORIZONTAL);
         
-        JButton btnSave = new JButton("Salva Figura");
+        JButton btnSave = new JButton("Save Polygon");
         btnSave.setFont(new Font("Dialog", Font.PLAIN, 10));
+        
+        JButton btnLoad = new JButton("Load Polygon");
+        btnLoad.setFont(new Font("Dialog", Font.PLAIN, 10));
         
         
         
@@ -445,7 +206,9 @@ public class Window {
         							.addPreferredGap(ComponentPlacement.RELATED)
         							.addComponent(btnRotation)
         							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(btnSave))
+        							.addComponent(btnSave)
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(btnLoad))
         						.addComponent(rotationBar, GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)))
         				.addComponent(canvas, GroupLayout.PREFERRED_SIZE, 1196, GroupLayout.PREFERRED_SIZE))
         			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -453,8 +216,8 @@ public class Window {
         groupLayout.setVerticalGroup(
         	groupLayout.createParallelGroup(Alignment.LEADING)
         		.addGroup(groupLayout.createSequentialGroup()
-        			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-        				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+        			.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+        				.addGroup(groupLayout.createSequentialGroup()
         					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
         						.addGroup(groupLayout.createSequentialGroup()
         							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
@@ -465,7 +228,8 @@ public class Window {
         									.addContainerGap()
         									.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
         										.addComponent(btnRotation)
-        										.addComponent(btnSave))))
+        										.addComponent(btnSave)
+        										.addComponent(btnLoad))))
         							.addPreferredGap(ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
         							.addComponent(rotationBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         						.addGroup(groupLayout.createSequentialGroup()
@@ -607,15 +371,15 @@ public class Window {
             
             //If you're here, the return value was null/empty.
             setLabel("Seleziona una figura");
-            
             //---------------------------------------------------------
-            Figura f = new Figura(s,200,200,200,100); //inizializzo/creo la Figura(s=tipo di figura, x=0, y=0, larghezza, altezza);
+            Figura f = new Figura(s,idFigura,200,200,200,100); //inizializzo/creo la Figura(s=tipo di figura, x=0, y=0, larghezza, altezza);
             fig.add(f); //aggiungi la figura appena creata f alla lista di Figure "fig"
             canvas.paintImage(); //disegna
             
             model.addElement( f.tipo );	//aggiungi alla lista di stringhe il tipo della nuova figura
             list_1.setSelectedIndex(model.getSize()-1);//seleziona nella lista output l'ultima figura inserita
             firstSelIx = list_1.getSelectedIndex();
+            idFigura++;
 			rotationBar.setValue((int)fig.get(firstSelIx).getAngle());
             
         });
@@ -681,78 +445,17 @@ public class Window {
         //bottone Save
         btnSave.addActionListener(e ->{
         	int firstSelIx = list_1.getSelectedIndex();
-        	String fileName = "polygonSaved.xml";
-        	File file = new File(fileName);
-        	
-        	try
-        	{
-    			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-    			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-    			Document doc = null;
-    			Element rootElement = null;
-        		if (!file.exists()){// da creare a nuovo con tutta la pappardella
-        			file.createNewFile();
-        			doc = docBuilder.newDocument();
-            		rootElement = doc.createElement("DesignPolygon");
-            		doc.appendChild(rootElement);
-        		}
-        		else
-        		{
-        			doc = docBuilder.parse(file);
-        			rootElement = doc.getDocumentElement();
-        			doc.getDocumentElement().appendChild(doc.importNode(rootElement,true));
-        		}
-        		Element nLati = doc.createElement("nLati");
-        		rootElement.appendChild(nLati);
-        		String strNLati = String.valueOf(fig.get(firstSelIx).getNLati());
-        		nLati.appendChild(doc.createTextNode(strNLati));
-        		for(int i=0; i<fig.get(firstSelIx).getNLati();i++){
-        			Element xPoint = doc.createElement("xPoint"+  String.valueOf(i));
-        			String strxPoint = String.valueOf(fig.get(firstSelIx).getxPoint(i));
-        			System.out.println(strxPoint);
-        			xPoint.appendChild(doc.createTextNode(strxPoint));
-        			nLati.appendChild(xPoint);
-        			Element yPoint = doc.createElement("yPoint"+ String.valueOf(i));
-        			String stryPoint = String.valueOf(fig.get(firstSelIx).getyPoint(i));
-        			System.out.println(stryPoint);
-        			yPoint.appendChild(doc.createTextNode(stryPoint));
-        			nLati.appendChild(yPoint);        		 
-        		}
-        		Element angle = doc.createElement("angle");
-        		String strAngle = String.valueOf(fig.get(firstSelIx).getAngle());
-        		System.out.println(strAngle);
-        		angle.appendChild(doc.createTextNode(strAngle));
-
-        		doc.getDocumentElement().appendChild(doc.importNode(rootElement, true));
-        		TransformerFactory transformerFactory = TransformerFactory.newInstance();
-        		Transformer transformer = transformerFactory.newTransformer();
-				DOMSource source = new DOMSource(doc);
-				StreamResult result = new StreamResult(file);
-	     	
-	     		//debug
-	     		//result = new StreamResult(System.out);
-	     	
-	     		transformer.transform(source, result);
-	     		System.out.println("File saved!"); 
-
-        	} catch (ParserConfigurationException pce) {
-        		// TODO Auto-generated catch block
-        		pce.printStackTrace();
-        	} catch (TransformerConfigurationException tce) {
-        		// TODO Auto-generated catch block
-        		tce.printStackTrace();
-        	} catch (TransformerException te) {
-        		// TODO Auto-generated catch block
-        		te.printStackTrace();
-        	} catch (IOException ioe) {
-        		// TODO Auto-generated catch block
-        		ioe.printStackTrace();
-        	} catch (SAXException SE) {
-        		// TODO Auto-generated catch block
-        		SE.printStackTrace();
-        	}
-        });
+        	 try {
+        		 XMLManager.savePolygon(fig.get(firstSelIx));
+        	 } catch (ParserConfigurationException | IOException | SAXException | TransformerException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+        	 }		
+         });
         
+        btnLoad.addActionListener(e ->{
+        	
+        });
         //mouse listener     
         canvas.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));   
         canvas.addMouseListener(new MouseAdapter() {  	
