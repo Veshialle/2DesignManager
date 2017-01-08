@@ -1,8 +1,8 @@
 import java.awt.Cursor;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
+//import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.Polygon;
+//import java.awt.Polygon;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,29 +10,29 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 
-import java.awt.BorderLayout;
+//import java.awt.BorderLayout;
 import java.awt.Component;
 
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.Icon;
-import javax.swing.JTextField;
+//import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JSpinner;
-import javax.swing.JMenuBar;
+//import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
-import javax.swing.JRadioButtonMenuItem;
+//import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JScrollPane;
-import javax.swing.JMenu;
+//import javax.swing.JMenu;
 import javax.swing.JList;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.geom.AffineTransform;
-import java.io.File;
+//import java.awt.geom.AffineTransform;
+//import java.io.File;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.SpinnerNumberModel;
@@ -52,7 +52,11 @@ import java.awt.event.AdjustmentListener;
 //INIZIO CLASSE MYCANVAS
 class MyCanvas extends JComponent {
     
-    private int x,y,index;
+    /**
+	 * mi dava troppo fastidio vedere giallo
+	 */
+	private static final long serialVersionUID = -943538260601289904L;
+	private int x,y;
     private List<Figura> array;
     
     
@@ -96,7 +100,7 @@ public class Window {
 	public static int firstSelIx;
 	public static boolean isInside;
 	public static boolean Resize = false;
-	public static int idFigura = XMLManager.getLastID();
+	public static int idFigura = XMLManager.getLastID()+1;
     public static void main(String[] a) {
         
         List<Figura> fig = new ArrayList<Figura>(); //fig e' una lista di oggetti Figura
@@ -156,10 +160,10 @@ public class Window {
         rotationBar.setMaximum(190); //non capisco come mai, ma settando a 180 (come dovrebbe essere) arriva solo fino a 170
         rotationBar.setOrientation(JScrollBar.HORIZONTAL);
         
-        JButton btnSave = new JButton("Save Polygon");
+        JButton btnSave = new JButton("Save Figure");
         btnSave.setFont(new Font("Dialog", Font.PLAIN, 10));
         
-        JButton btnLoad = new JButton("Load Polygon");
+        JButton btnLoad = new JButton("Load Figure");
         btnLoad.setFont(new Font("Dialog", Font.PLAIN, 10));
         
         
@@ -181,7 +185,7 @@ public class Window {
         					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
         						.addComponent(btnUp, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         						.addComponent(btnDown, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
         					.addComponent(btnRight)
         					.addPreferredGap(ComponentPlacement.RELATED)
         					.addComponent(spinnerPos, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
@@ -257,13 +261,12 @@ public class Window {
         									.addComponent(btnDown)))))
         					.addGap(42))
         				.addGroup(groupLayout.createSequentialGroup()
-        					.addGap(36)
+        					.addGap(30)
         					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(btnLeft)
         						.addComponent(btnRight)
-        						.addComponent(spinnerPos, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-        				.addGroup(groupLayout.createSequentialGroup()
-        					.addGap(35)
-        					.addComponent(btnLeft)))
+        						.addComponent(spinnerPos, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addGap(59)))
         			.addPreferredGap(ComponentPlacement.RELATED)
         			.addComponent(canvas, GroupLayout.PREFERRED_SIZE, 776, GroupLayout.PREFERRED_SIZE)
         			.addGap(286))
@@ -280,7 +283,6 @@ public class Window {
 			public void valueChanged(ListSelectionEvent arg0) {
 				// TODO Auto-generated method stub
         			firstSelIx = list_1.getSelectedIndex();
-        			System.out.print(firstSelIx);
     				rotationBar.setValue((int)fig.get(firstSelIx).getAngle());
         			
 			}
@@ -341,7 +343,6 @@ public class Window {
         	public void adjustmentValueChanged(AdjustmentEvent e) {
         		double angle = (double) e.getValue();
         		Figura f = fig.get(firstSelIx);
-        		System.out.println("Rotation "+ angle + "\n");
         		f.rotate(angle);
         		canvas.paintImage();
           }
@@ -445,17 +446,72 @@ public class Window {
         //bottone Save
         btnSave.addActionListener(e ->{
         	int firstSelIx = list_1.getSelectedIndex();
-        	 try {
-        		 XMLManager.savePolygon(fig.get(firstSelIx));
-        	 } catch (ParserConfigurationException | IOException | SAXException | TransformerException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-        	 }		
+        	if(fig.isEmpty()){
+                Component frame = null;
+        		JOptionPane.showMessageDialog(frame, "Error, first create or load a figure\n");
+        	}
+        	else
+        	{
+        		String name = JOptionPane.showInputDialog("Inserire nome della figura.", fig.get(firstSelIx).tipo);
+        			fig.get(firstSelIx).setTipo(name);
+        		try {
+        		 	XMLManager.savePolygon(fig.get(firstSelIx));
+        	 	} catch (ParserConfigurationException | IOException | SAXException | TransformerException e1) {
+        		 // TODO Auto-generated catch block
+        		 e1.printStackTrace();
+        	 	}		
+        	}
          });
         
-        btnLoad.addActionListener(e ->{
-        	
-        });
+        btnLoad.addActionListener(e ->{           
+           List<Figura> loadFig =  new ArrayList<Figura>();
+            int L;
+            int loadSelIx = 0;
+            try {
+				loadFig = XMLManager.loadPolygon();
+			} catch (ParserConfigurationException | SAXException | IOException all) {
+				// TODO Auto-generated catch block
+				all.printStackTrace();
+			}
+            if(loadFig == null){
+            	Component frame = null;
+            	JOptionPane.showMessageDialog(frame, "Error, first save a figure");
+            }else{
+            	L = loadFig.size();
+				Object[] loadedChoose = new Object[L];
+            	for(int i=0; i< L; i++){
+            		loadedChoose[i] = loadFig.get(i).tipo +" "+ loadFig.get(i).getId();
+            	}
+            	Component frame = null;
+            	Icon icon = null;
+            	String choosed = null;
+            	choosed = (String)JOptionPane.showInputDialog(frame, "Select figure:\n", "Load", JOptionPane.PLAIN_MESSAGE, icon, loadedChoose, loadedChoose[0]);
+            	String[] parts = choosed.split(" ");
+            	String tipoChoosed = parts[0];
+            	int idChoosed = Integer.parseInt(parts[1]);
+            	for(int i=0;i<L;i++){
+            		if(idChoosed == loadFig.get(i).getId() && loadFig.get(i).tipo.equals(tipoChoosed)){
+            			loadSelIx = i;
+            		}
+            	}
+            	//If a string was returned, say so.
+            	if (loadSelIx < 0) {
+            		setLabel("Verra' caricata la figura " + loadFig.get(loadSelIx).tipo + "!");
+            	}
+            	//If you're here, the return value was null/empty.
+            	setLabel("Seleziona una figura");
+            	//---------------------------------------------------------
+            	fig.add(loadFig.get(loadSelIx)); //aggiungi la figura appena creata f alla lista di Figure "fig"
+
+            	canvas.paintImage(); //disegna
+            
+            	model.addElement( loadFig.get(loadSelIx).tipo );	//aggiungi alla lista di stringhe il tipo della nuova figura
+            	list_1.setSelectedIndex(model.getSize()-1);//seleziona nella lista output l'ultima figura inserita
+            	firstSelIx = list_1.getSelectedIndex();
+            	idFigura++;
+            	rotationBar.setValue((int)fig.get(firstSelIx).getAngle());
+            }
+         });
         //mouse listener     
         canvas.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));   
         canvas.addMouseListener(new MouseAdapter() {  	
@@ -491,7 +547,6 @@ public class Window {
     				
         			else
         			{
-        				System.out.print("dragged\n");
 						fig.get(firstSelIx).move(dx, dy);
 						canvas.paintImage();
         		}
@@ -500,14 +555,6 @@ public class Window {
         	}        	
         });   
     }
-    public static double getAngle(int y, int x){
-    	double angle = Math.atan2(y, x);
-    	if (angle < 0){
-    		angle += 2*Math.PI;
-    	}
-    	return angle; 
-    }
-    
     
     private static void setLabel(String string) {
         // TODO Auto-generated method stub

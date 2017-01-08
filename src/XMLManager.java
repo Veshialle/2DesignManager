@@ -7,7 +7,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
+//import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -61,7 +61,10 @@ public class XMLManager {
 		Element figura = doc.createElement("Figura");
 		figura.setAttribute("idFigura", String.valueOf(fig.getId()));
 		rootElement.appendChild(figura);
-		Element nLati = doc.createElement("nlati");
+		Element tipo = doc.createElement("tipo");
+		tipo.appendChild(doc.createTextNode(fig.tipo));
+		figura.appendChild(tipo);
+		Element nLati = doc.createElement("nLati");
 		String strNLati = String.valueOf(fig.getNLati());
 		nLati.appendChild(doc.createTextNode(strNLati));
 		figura.appendChild(nLati);
@@ -78,7 +81,6 @@ public class XMLManager {
 		}
 		Element angle = doc.createElement("angle");
 		String strAngle = String.valueOf(fig.getAngle());
-		System.out.println(strAngle);
 		angle.appendChild(doc.createTextNode(strAngle));
 		figura.appendChild(angle);
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -93,7 +95,7 @@ public class XMLManager {
  		System.out.println("File saved!"); 
 	}
 	
-	public <list>Figura loadPolygon() throws ParserConfigurationException, SAXException, IOException{
+	public static List<Figura> loadPolygon() throws ParserConfigurationException, SAXException, IOException{
 		 List<Figura> loadFig = new ArrayList<Figura>();
 		 
 		if(!file.exists()){
@@ -105,69 +107,40 @@ public class XMLManager {
 		NodeList nList = doc.getElementsByTagName("Figura");
 		for(int i=0;i<nList.getLength();i++)
 		{
+			String tipo = null;
+			int nLati = 0, idFigura = 0;
+			double []xPoints = new double[]{0,0,0,0};
+			double []yPoints = new double[]{0,0,0,0};
+			double angle =0.0;
 			Node nNode = nList.item(i);
 			if(nNode.getNodeType() == Node.ELEMENT_NODE)
 			{
 				Element figElement = (Element) nNode;
-				String idFigura = figElement.getAttribute("id");
+				String strIdFigura = figElement.getAttribute("idFigura");
+				idFigura = Integer.parseInt(strIdFigura);
+				tipo =figElement.getElementsByTagName("tipo").item(0).getTextContent();
 				String strNLati = figElement.getElementsByTagName("nLati").item(0).getTextContent();
-				int nLati = Integer.parseInt(strNLati);    
-				double [] xPoints = new double[]{0,0,0,0};
-			    double [] yPoints = new double[]{0,0,0,0};
+				nLati = Integer.parseInt(strNLati);
 				for(int j=0;j< nLati; j++){
-					String xPoint = figElement.getElementsByTagName("xPoint"+i).item(0).getTextContent();
-					String yPoint = figElement.getElementsByTagName("yPoint"+i).item(0).getTextContent();
-					xPoints[i] = Integer.parseInt(xPoint);
-					yPoints[i] = Integer.parseInt(yPoint);
+					String xPoint = figElement.getElementsByTagName("xPoint"+j).item(0).getTextContent();
+					String yPoint = figElement.getElementsByTagName("yPoint"+j).item(0).getTextContent();
+					xPoints[j] = Double.parseDouble(xPoint);
+					yPoints[j] = Double.parseDouble(yPoint);
 				}
 				String strAngle = figElement.getElementsByTagName("angle").item(0).getTextContent();
+				angle = Double.parseDouble(strAngle);
 			}
+			Figura fig = new Figura(tipo,idFigura, nLati, xPoints, yPoints, angle);
+			loadFig.add(fig);
 		}
-		/*
-		docBuilder = docFactory.newDocumentBuilder();
-        doc = docBuilder.parse(file);
-        doc.getDocumentElement().normalize();
-        System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
-        NodeList nList = doc.getElementsByTagName("student");
-        System.out.println("----------------------------");
-        for (int temp = 0; temp < nList.getLength(); temp++) {
-           Node nNode = nList.item(temp);
-           System.out.println("\nCurrent Element :" 
-              + nNode.getNodeName());
-           if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-              Element eElement = (Element) nNode;
-              System.out.println("Student roll no : " 
-                 + eElement.getAttribute("rollno"));
-              System.out.println("First Name : " 
-                 + eElement
-                 .getElementsByTagName("firstname")
-                 .item(0)
-                 .getTextContent());
-              System.out.println("Last Name : " 
-              + eElement
-                 .getElementsByTagName("lastname")
-                 .item(0)
-                 .getTextContent());
-              System.out.println("Nick Name : " 
-              + eElement
-                 .getElementsByTagName("nickname")
-                 .item(0)
-                 .getTextContent());
-              System.out.println("Marks : " 
-              + eElement
-                 .getElementsByTagName("marks")
-                 .item(0)
-                 .getTextContent());
-           }
-        }
-        */
-		return null;
+		return loadFig;
 	}
 	
 	public static int getLastID(){
 		int idPolygon = 0;
 		if(!file.exists()){
 			idPolygon = 0;
+			return idPolygon;
 		}
 		try{
 			docBuilder = docFactory.newDocumentBuilder();
@@ -176,13 +149,11 @@ public class XMLManager {
 			docBuilder = docFactory.newDocumentBuilder();
 			Document doc = docBuilder.parse(file);
 			doc.getDocumentElement().normalize();
-			System.out.println("Root element: "+ doc.getDocumentElement().getNodeName());
 			NodeList nList = doc.getElementsByTagName("Figura");
-			System.out.println("-----------------------");
 			Node lastNode = nList.item(nList.getLength()-1);
 			if(lastNode.getNodeType() == Node.ELEMENT_NODE){
 				Element lastElement = (Element) lastNode;
-				idPolygon = Integer.parseInt(lastElement.getAttribute("id"));
+				idPolygon = Integer.parseInt(lastElement.getAttribute("idFigura"));
 			}
 		}catch(ParserConfigurationException pce){
 			pce.printStackTrace();
@@ -195,5 +166,4 @@ public class XMLManager {
 		}
 		return idPolygon;
 	}
-
 }

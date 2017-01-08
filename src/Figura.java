@@ -33,6 +33,15 @@ public class Figura{
     	this.height=height;
     	this.init(x, y, width, height);  //inizializza i punti della figura
 	}
+    //mossa azzardata, let's see what happen
+    public Figura(String tipo,int idFigura,int nLati, double[] xPoints, double[] yPoints, double angle){
+    	this.tipo = tipo;
+    	this.nLati = nLati;
+    	this.idFigura = idFigura;
+    	this.xPoints = xPoints;
+    	this.yPoints = yPoints;
+    	this.angle = angle;
+    }
     public void init(double x,double y,double width,double height){ //inizializza i punti della figura
     	if(this.tipo=="rettangolo"){
             this.nLati=4;
@@ -83,7 +92,9 @@ public class Figura{
 			
 		}
 	}
-    
+    public void setTipo(String name){
+    	this.tipo = name;
+    }
 	public void setX(double x){
         this.move(x-this.xPoints[0], 0);
     }
@@ -156,8 +167,7 @@ public class Figura{
     				yPoints[i]+=5;
     		}
     	}
-    }
-        
+    }        
 
     public void setHeight(double d){
         this.height=d;
@@ -203,13 +213,9 @@ public class Figura{
     	
     	//this.initFig(this.x, this.y, this.width, this.height);
         if(this.tipo=="cerchio"){ 
-            d.drawOval((int)xPoints[0], (int)yPoints[0], (int)width, (int)width);// in questo caso width e' il diametro
-            
+            d.drawOval((int)xPoints[0], (int)yPoints[0], (int)width, (int)width);// in questo caso width e' il diametro            
         }
         if(this.tipo!="cerchio"){
-        	
-        	
-        	
         	//d.drawPolygon(xPoints, yPoints, nLati);
         	int [] xP = {0,0,0,0};
         	int [] yP = {0,0,0,0};
@@ -219,13 +225,10 @@ public class Figura{
         		yP[i] = (int)yPoints[i];
         	}
         	p = new Polygon(xP, yP, nLati);
-        	d.drawPolygon(p);
-        	
-        	
-        	
-        	
+        	d.drawPolygon(p);	
         }
     }
+    
     public boolean contains(Point test) {
     	if(this.tipo!="cerchio")
     		return p.contains(test);
