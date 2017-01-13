@@ -155,7 +155,7 @@ public class Window {
         btnRotation.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
         
         JScrollBar rotationBar = new JScrollBar();
-        rotationBar.setEnabled(fig.isEmpty());
+        rotationBar.setEnabled(false);
         rotationBar.setMinimum(-180);
         rotationBar.setMaximum(190); //non capisco come mai, ma settando a 180 (come dovrebbe essere) arriva solo fino a 170
         rotationBar.setOrientation(JScrollBar.HORIZONTAL);
@@ -276,29 +276,7 @@ public class Window {
         JList<String> list_1 = new JList<>( model ); //una JList che prende la lista di stringhe model
         scrollPane.setViewportView(list_1); //passo la JList al pannello di visualizzazione
         window.getContentPane().setLayout(groupLayout);
-        
-        // Per poter settare la barra dell'angolo quando si seleziona tramite la lista (scrollPane)
-        // Commented becasue bugged (array out of boud. Seems something not working when removing a figure from the list
-        /*
-        list_1.addListSelectionListener(new ListSelectionListener(){
-			@Override
-			public void valueChanged(ListSelectionEvent arg0) {
-				// TODO Auto-generated method stub
-					firstSelIx = list_1.getSelectedIndex();
-    				rotationBar.setValue((int)fig.get(firstSelIx).getAngle());
-        			
-			}
-    	});
-        list_1.removeListSelectionListener(new ListSelectionListener(){
 
-			@Override
-			public void valueChanged(ListSelectionEvent arg0) {
-				// TODO Auto-generated method stub
-				firstSelIx = list_1.getSelectedIndex();
-				rotationBar.setValue((int)fig.get(firstSelIx).getAngle());
-			}        	
-        });
-        */
         window.setVisible(true);
         canvas.paintImage();
         
@@ -311,6 +289,19 @@ public class Window {
             }
         });
         
+        // Per poter settare la barra dell'angolo quando si seleziona tramite la lista (scrollPane)
+        
+        list_1.addListSelectionListener(new ListSelectionListener(){
+			@Override
+			public void valueChanged(ListSelectionEvent arg0) {
+				// TODO Auto-generated method stub
+					firstSelIx = list_1.getSelectedIndex();
+					if(firstSelIx >= 0){
+						rotationBar.setEnabled(true);
+						rotationBar.setValue((int)fig.get(firstSelIx).getAngle());
+					}
+			}
+    	});        
         btnSetY.addActionListener(new ActionListener() { //Imposta val Y
             public void actionPerformed(ActionEvent e) {
                 int firstSelIx = list_1.getSelectedIndex();
@@ -386,9 +377,10 @@ public class Window {
                 list_1.setSelectedIndex(model.getSize()-1);//seleziona nella lista output l'ultima figura inserita
                 firstSelIx = list_1.getSelectedIndex();
                 idFigura++;
+                rotationBar.setEnabled(!fig.isEmpty());
     			rotationBar.setValue((int)fig.get(firstSelIx).getAngle());
             }else{
-        		JOptionPane.showMessageDialog(frame, "Test");
+        		JOptionPane.showMessageDialog(frame, "Hai annullato la creazione di una nuova figura");
             }            
         });
         
@@ -396,9 +388,15 @@ public class Window {
             int firstSelIx = list_1.getSelectedIndex(); //dammi l'indice della figura selezionata
             fig.remove(firstSelIx); //rimuovi dalla lista di figure la figura con l'indice appena ricavato
             model.remove(firstSelIx);//rimuovi la stringa della figura nella lista dei tipi
+            scrollPane.validate();
             canvas.paintImage();//disegna di nuovo
+            boolean enableRotationbar = true;
             firstSelIx = list_1.getSelectedIndex();
+            if(firstSelIx < 0){
+            	enableRotationbar = false;
+            }
             
+        	rotationBar.setEnabled(enableRotationbar);
         });
         
         
@@ -521,7 +519,7 @@ public class Window {
                 	idFigura++;
                 	rotationBar.setValue((int)fig.get(firstSelIx).getAngle());
             	}else{
-            		JOptionPane.showMessageDialog(frame, "Test");
+            		JOptionPane.showMessageDialog(frame, "Hai annullato il caricamento di una nuova figura");
             	}
             }
          });
