@@ -22,15 +22,16 @@ public class Figura{
     public boolean visibile=true;
     private Color colore;
     private double angle;
-    public double [] xPoints = new double[]{0,0,0,0};
-    public double [] yPoints = new double[]{0,0,0,0};
-    public String tipo;
-    public String name;
-    public Polygon p;
+	private Float versione;
+    private double [] xPoints = new double[]{0,0,0,0};
+    private double [] yPoints = new double[]{0,0,0,0};
+    private String tipo;
+    private String name;
+    private Polygon p;
     public Figura(String name,String tipo,int idFigura, double x,double y,double width,double height) {
     	this.idFigura = idFigura;
     	this.tipo=tipo;
-    	this.name = name;
+    	this.setName(name);
     	this.x=x;
     	this.y=y;
     	this.width=width;
@@ -38,13 +39,16 @@ public class Figura{
     	this.init(x, y, width, height);  //inizializza i punti della figura
 	}
     //mossa azzardata, let's see what happen
-    public Figura(String name, String tipo,int idFigura,int nLati, double[] xPoints, double[] yPoints, double angle){
+    public Figura(String name,Float versione, String tipo,int idFigura,int nLati, double[] xPoints, double[] yPoints, double angle, Color colore){
     	this.tipo = tipo;
+    	this.setName(name);
     	this.nLati = nLati;
     	this.idFigura = idFigura;
     	this.xPoints = xPoints;
     	this.yPoints = yPoints;
     	this.angle = angle;
+    	this.colore = colore;
+    	this.setVersione(versione);
     }
     public void init(double x,double y,double width,double height){ //inizializza i punti della figura
     	if(this.tipo=="rettangolo"){
@@ -101,9 +105,7 @@ public class Figura{
 			
 		}
 	}
-    public void setTipo(String name){
-    	this.tipo = name;
-    }
+
 	public void setX(double x){
         this.move(x-this.xPoints[0], 0);
     }
@@ -255,5 +257,28 @@ public class Figura{
     	}
     	
       }
+	public Float getVersione() {
+		return versione;
+	}
+	public void setVersione(Float versione) {
+		this.versione = versione;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getTipo(){
+		return tipo;
+	}
+    public void setTipo(String name){
+    	this.tipo = name;
+    }
+    public void setColor(Color color){
+    	this.colore = color;
+    }public Color getColor(){
+		return colore;
+	}
 }
 //FINE CLASSE FIGURA

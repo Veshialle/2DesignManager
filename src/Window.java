@@ -130,7 +130,7 @@ public class Window {
         
         DefaultListModel<String> model = new DefaultListModel<>();  //lista di stringhe
         for ( Figura i : fig ){
-            model.addElement( i.tipo ); //aggiungo dentro la lista di stringe "model" il tipo di figura -> figura.tipo -> i.tipo
+            model.addElement( i.getTipo() ); //aggiungo dentro la lista di stringe "model" il tipo di figura -> figura.tipo -> i.tipo
         }
         
         JScrollPane scrollPane = new JScrollPane(); //Panello dove verra' visualizzata la lista degli oggetti presenti
@@ -385,7 +385,7 @@ public class Window {
             		fig.add(f); //aggiungi la figura appena creata f alla lista di Figure "fig"
             		canvas.paintImage(); //disegna
                 
-            		model.addElement( f.name );	//aggiungi alla lista di stringhe il tipo della nuova figura
+            		model.addElement( f.getName() );	//aggiungi alla lista di stringhe il tipo della nuova figura
             		list_1.setSelectedIndex(model.getSize()-1);//seleziona nella lista output l'ultima figura inserita
             		firstSelIx = list_1.getSelectedIndex();
             		idFigura++;
@@ -482,6 +482,7 @@ public class Window {
         	{
         		try {
        				XMLManager.savePolygon(fig.get(firstSelIx));
+       				JOptionPane.showMessageDialog(frame, "Figure saved!");
        			}catch (ParserConfigurationException | IOException | SAXException | TransformerException e1) {
        				// TODO Auto-generated catch block
        				e1.printStackTrace();
@@ -507,7 +508,8 @@ public class Window {
             	L = loadFig.size();
 				Object[] loadedChoose = new Object[L];
             	for(int i=0; i< L; i++){
-            		loadedChoose[i] = loadFig.get(i).tipo +" "+ loadFig.get(i).getId();
+            		loadedChoose[i] = "Versione numero: " +loadFig.get(i).getVersione();
+            		//System.out.println( "Prendo il primo punto della figura " + i + " versione :" + loadFig.get(i).getVersione() + " per test: " + loadFig.get(i).getxPoint(0)+ " , "+ loadFig.get(i).getyPoint(0)+ " !");
             	}
             	Component frame = null;
             	Icon icon = null;
@@ -516,20 +518,24 @@ public class Window {
            	
             	//If a string was returned, say so.
             	if( (choosed != null) && (choosed.length() > 0)) {
-                	String[] parts = choosed.split(" ");
-                	String tipoChoosed = parts[0];
-                	int idChoosed = Integer.parseInt(parts[1]);
+            		//System.out.println(choosed);
+                	String[] parts = choosed.split(": ");
+                	Float versione = Float.valueOf(parts[1]);
             		for(int i=0;i<L;i++){
-            			if(idChoosed == loadFig.get(i).getId() && loadFig.get(i).tipo.equals(tipoChoosed)){
+            			if(Float.compare(versione, loadFig.get(i).getVersione())==0){
             				loadSelIx = i;
             			}
             		}
-            		setLabel("Verra' caricata la figura " + loadFig.get(loadSelIx).tipo + "!");
+            		/*
+            		 * test
+            		System.out.println("Verra' caricata la versione " + loadFig.get(loadSelIx).getVersione() +" della figura: " + loadFig.get(loadSelIx).getName() + "!");
+            		System.out.println( "Prendo il primo punto per test: " + loadFig.get(loadSelIx).getxPoint(0)+ " , "+ loadFig.get(loadSelIx).getyPoint(0)+ " !");
+            		 */
                 	fig.add(loadFig.get(loadSelIx)); //aggiungi la figura appena creata f alla lista di Figure "fig"
 
                 	canvas.paintImage(); //disegna
                 
-                	model.addElement( loadFig.get(loadSelIx).tipo );	//aggiungi alla lista di stringhe il tipo della nuova figura
+                	model.addElement( loadFig.get(loadSelIx).getTipo() );	//aggiungi alla lista di stringhe il tipo della nuova figura
                 	list_1.setSelectedIndex(model.getSize()-1);//seleziona nella lista output l'ultima figura inserita
                 	firstSelIx = list_1.getSelectedIndex();
                 	idFigura++;
