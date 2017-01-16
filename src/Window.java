@@ -1,4 +1,5 @@
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Graphics;
 //import java.awt.Graphics2D;
 import java.awt.Point;
@@ -136,6 +137,7 @@ public class Window {
         JButton btnAddFig = new JButton("+Fig"); //Bottone aggiungi Figura
         btnAddFig.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
         JButton btnRemoveFig = new JButton("-Fig");//Bottone rimuovi Figura
+        btnRemoveFig.setEnabled(false);
         btnRemoveFig.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
         JButton btnSetX = new JButton("Set X");//Bottone set X
         btnSetX.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
@@ -321,12 +323,19 @@ public class Window {
             }
         });
         
+        
         btnSetWidth.addActionListener(new ActionListener() { //Imposta Larghezza
             public void actionPerformed(ActionEvent e) {
                 int firstSelIx = list_1.getSelectedIndex();
                 fig.get(firstSelIx).setWidth((double) spinnerSizes.getValue());
                 canvas.paintImage();
                 Resize=(!Resize);
+                if(Resize)
+                	btnSetWidth.setText("Disable Resizing");
+                else
+                	btnSetWidth.setText("Enable Resizing");
+                
+                	
             }
         });
         
@@ -382,6 +391,7 @@ public class Window {
             		idFigura++;
             		rotationBar.setEnabled(!fig.isEmpty());
             		rotationBar.setValue((int)fig.get(firstSelIx).getAngle());
+            		btnRemoveFig.setEnabled(true);
             	}
             }else{
         		JOptionPane.showMessageDialog(frame, "Hai annullato la creazione di una nuova figura");
@@ -389,23 +399,27 @@ public class Window {
         });
         
         btnRemoveFig.addActionListener(e -> { //Bottone rimuovi Figura
-            int firstSelIx = list_1.getSelectedIndex(); //dammi l'indice della figura selezionata
-            fig.remove(firstSelIx); //rimuovi dalla lista di figure la figura con l'indice appena ricavato
-            model.remove(firstSelIx);//rimuovi la stringa della figura nella lista dei tipi
-            scrollPane.validate();
-            canvas.paintImage();//disegna di nuovo
-            list_1.setSelectedIndex(model.getSize() -1);
-            boolean enableRotationbar = true;
-            firstSelIx = list_1.getSelectedIndex();
             
-            if(firstSelIx < 0){
-            	enableRotationbar = false;
-            }
-        	rotationBar.setEnabled(enableRotationbar);
+            	int firstSelIx = list_1.getSelectedIndex(); //dammi l'indice della figura selezionata
+                fig.remove(firstSelIx); //rimuovi dalla lista di figure la figura con l'indice appena ricavato
+                model.remove(firstSelIx);//rimuovi la stringa della figura nella lista dei tipi
+                scrollPane.validate();
+                canvas.paintImage();//disegna di nuovo
+                list_1.setSelectedIndex(model.getSize() -1);
+                boolean enableRotationbar = true;
+                firstSelIx = list_1.getSelectedIndex();
+            
+                if(firstSelIx < 0){
+                	enableRotationbar = false;
+                }
+                rotationBar.setEnabled(enableRotationbar);
         	
-    		if (enableRotationbar){
-    			rotationBar.setValue((int)fig.get(firstSelIx).getAngle());
-    		}
+                if (enableRotationbar){
+                	rotationBar.setValue((int)fig.get(firstSelIx).getAngle());
+                }
+                if(model.isEmpty())
+                	btnRemoveFig.setEnabled(false);
+            
         });
         
         
