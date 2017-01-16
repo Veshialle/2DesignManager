@@ -32,8 +32,9 @@ public class XMLManager {
 	static DocumentBuilder docBuilder;
 	static Document doc;
 	static Element rootElement;
-	static String fileName = "polygonSaved.xml";
-	static File file = new File(fileName);
+	static String fileName;
+	static String pathName = "save/";
+	static File path = new File(pathName);
 	/**
 	 * @param Figura fig
 	 * @throws ParserConfigurationException 
@@ -43,7 +44,9 @@ public class XMLManager {
 	 */
 	public static void savePolygon(Figura fig) throws ParserConfigurationException, IOException, SAXException, TransformerException {
 		// TODO Auto-generated method stub
-		
+		fileName = fig.name + ".xml";
+		//File file = new File(fileName);
+		File  file= new File(path, fileName);
 		docBuilder = docFactory.newDocumentBuilder();
 		doc = null;
 		rootElement = null;
@@ -61,6 +64,9 @@ public class XMLManager {
 		Element figura = doc.createElement("Figura");
 		figura.setAttribute("idFigura", String.valueOf(fig.getId()));
 		rootElement.appendChild(figura);
+		Element nome = doc.createElement("nome");
+		nome.appendChild(doc.createTextNode(fig.name));
+		figura.appendChild(nome);
 		Element tipo = doc.createElement("tipo");
 		tipo.appendChild(doc.createTextNode(fig.tipo));
 		figura.appendChild(tipo);
@@ -92,52 +98,67 @@ public class XMLManager {
  		//result = new StreamResult(System.out);
  	
  		transformer.transform(source, result);
- 		System.out.println("File saved!"); 
 	}
+	//need to fix due to adding the typo name to class Figure
 	
 	public static List<Figura> loadPolygon() throws ParserConfigurationException, SAXException, IOException{
+		
 		 List<Figura> loadFig = new ArrayList<Figura>();
 		 
-		if(!file.exists()){
+		if(countFigure() == 0){
 			return null;
 		}
-		docBuilder = docFactory.newDocumentBuilder();
-		doc = docBuilder.parse(file);
-		doc.getDocumentElement().normalize();
-		NodeList nList = doc.getElementsByTagName("Figura");
-		for(int i=0;i<nList.getLength();i++)
-		{
-			String tipo = null;
-			int nLati = 0, idFigura = 0;
-			double []xPoints = new double[]{0,0,0,0};
-			double []yPoints = new double[]{0,0,0,0};
-			double angle =0.0;
-			Node nNode = nList.item(i);
-			if(nNode.getNodeType() == Node.ELEMENT_NODE)
+		else {
+			File []totalFile = path.listFiles();
+			for(File file : totalFile)
 			{
-				Element figElement = (Element) nNode;
-				String strIdFigura = figElement.getAttribute("idFigura");
-				idFigura = Integer.parseInt(strIdFigura);
-				tipo =figElement.getElementsByTagName("tipo").item(0).getTextContent();
-				String strNLati = figElement.getElementsByTagName("nLati").item(0).getTextContent();
-				nLati = Integer.parseInt(strNLati);
-				for(int j=0;j< nLati; j++){
-					String xPoint = figElement.getElementsByTagName("xPoint"+j).item(0).getTextContent();
-					String yPoint = figElement.getElementsByTagName("yPoint"+j).item(0).getTextContent();
-					xPoints[j] = Double.parseDouble(xPoint);
-					yPoints[j] = Double.parseDouble(yPoint);
+				docBuilder = docFactory.newDocumentBuilder();
+			
+				doc = docBuilder.parse(file);
+				doc.getDocumentElement().normalize();
+				NodeList nList = doc.getElementsByTagName("Figura");
+				for(int i=0;i<nList.getLength();i++)
+				{
+					String tipo = null, nome = null;
+					int nLati = 0, idFigura = 0;
+					double []xPoints = new double[]{0,0,0,0};
+					double []yPoints = new double[]{0,0,0,0};
+					double angle =0.0;
+					Node nNode = nList.item(i);
+					if(nNode.getNodeType() == Node.ELEMENT_NODE)
+					{
+						Element figElement = (Element) nNode;
+						String strIdFigura = figElement.getAttribute("idFigura");
+						idFigura = Integer.parseInt(strIdFigura);
+						nome =figElement.getElementsByTagName("nome").item(0).getTextContent();
+						tipo =figElement.getElementsByTagName("tipo").item(0).getTextContent();
+						String strNLati = figElement.getElementsByTagName("nLati").item(0).getTextContent();
+						nLati = Integer.parseInt(strNLati);
+						for(int j=0;j< nLati; j++){
+							String xPoint = figElement.getElementsByTagName("xPoint"+j).item(0).getTextContent();
+							String yPoint = figElement.getElementsByTagName("yPoint"+j).item(0).getTextContent();
+							xPoints[j] = Double.parseDouble(xPoint);
+							yPoints[j] = Double.parseDouble(yPoint);
+						}
+						String strAngle = figElement.getElementsByTagName("angle").item(0).getTextContent();
+						angle = Double.parseDouble(strAngle);
+					}
+					Figura fig = new Figura(nome, tipo,idFigura, nLati, xPoints, yPoints, angle);
+					loadFig.add(fig);
 				}
-				String strAngle = figElement.getElementsByTagName("angle").item(0).getTextContent();
-				angle = Double.parseDouble(strAngle);
 			}
-			Figura fig = new Figura(tipo,idFigura, nLati, xPoints, yPoints, angle);
-			loadFig.add(fig);
+			return loadFig;
 		}
-		return loadFig;
 	}
 	
+	public static int countFigure(){
+		return path.listFiles().length;
+	}
+	
+		/*		
 	public static int getLastID(){
-		int idPolygon = 0;
+		 int idPolygon = 0;
+		 
 		if(!file.exists()){
 			idPolygon = 0;
 			return idPolygon;
@@ -166,4 +187,7 @@ public class XMLManager {
 		}
 		return idPolygon;
 	}
+		*/
+	
+	
 }

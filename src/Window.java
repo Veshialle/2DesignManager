@@ -100,7 +100,7 @@ public class Window {
 	public static int firstSelIx;
 	public static boolean isInside;
 	public static boolean Resize = false;
-	public static int idFigura = XMLManager.getLastID()+1;
+	public static int idFigura = XMLManager.countFigure();
     public static void main(String[] a) {
         
         List<Figura> fig = new ArrayList<Figura>(); //fig e' una lista di oggetti Figura
@@ -370,16 +370,19 @@ public class Window {
             
             //If a string was returned, say so.
             if ((s != null) && (s.length() > 0)) {
-                Figura f = new Figura(s,idFigura,200,200,200,100); //inizializzo/creo la Figura(s=tipo di figura, x=0, y=0, larghezza, altezza);
-                fig.add(f); //aggiungi la figura appena creata f alla lista di Figure "fig"
-                canvas.paintImage(); //disegna
+            	String name = JOptionPane.showInputDialog("Inserire nome della figura.", s);
+            	if(name!=null && name.length() > 0){
+            		Figura f = new Figura(name, s,idFigura,200,200,200,100); //inizializzo/creo la Figura(s=tipo di figura, x=0, y=0, larghezza, altezza);
+            		fig.add(f); //aggiungi la figura appena creata f alla lista di Figure "fig"
+            		canvas.paintImage(); //disegna
                 
-                model.addElement( f.tipo );	//aggiungi alla lista di stringhe il tipo della nuova figura
-                list_1.setSelectedIndex(model.getSize()-1);//seleziona nella lista output l'ultima figura inserita
-                firstSelIx = list_1.getSelectedIndex();
-                idFigura++;
-                rotationBar.setEnabled(!fig.isEmpty());
-    			rotationBar.setValue((int)fig.get(firstSelIx).getAngle());
+            		model.addElement( f.name );	//aggiungi alla lista di stringhe il tipo della nuova figura
+            		list_1.setSelectedIndex(model.getSize()-1);//seleziona nella lista output l'ultima figura inserita
+            		firstSelIx = list_1.getSelectedIndex();
+            		idFigura++;
+            		rotationBar.setEnabled(!fig.isEmpty());
+            		rotationBar.setValue((int)fig.get(firstSelIx).getAngle());
+            	}
             }else{
         		JOptionPane.showMessageDialog(frame, "Hai annullato la creazione di una nuova figura");
             }            
@@ -391,13 +394,18 @@ public class Window {
             model.remove(firstSelIx);//rimuovi la stringa della figura nella lista dei tipi
             scrollPane.validate();
             canvas.paintImage();//disegna di nuovo
+            list_1.setSelectedIndex(model.getSize() -1);
             boolean enableRotationbar = true;
             firstSelIx = list_1.getSelectedIndex();
+            
             if(firstSelIx < 0){
             	enableRotationbar = false;
             }
-            
         	rotationBar.setEnabled(enableRotationbar);
+        	
+    		if (enableRotationbar){
+    			rotationBar.setValue((int)fig.get(firstSelIx).getAngle());
+    		}
         });
         
         
@@ -452,26 +460,19 @@ public class Window {
         //bottone Save
         btnSave.addActionListener(e ->{
         	int firstSelIx = list_1.getSelectedIndex();
+            Component frame = null;
         	if(fig.isEmpty()){
-                Component frame = null;
         		JOptionPane.showMessageDialog(frame, "Error, first create or load a figure\n");
         	}
         	else
         	{
-        		String name = JOptionPane.showInputDialog("Inserire nome della figura.", fig.get(firstSelIx).tipo);
-        		if( (name!= null) && (name.length() > 0) && (!name.equals(""))){
-        			fig.get(firstSelIx).setTipo(name);
-        			try {
-        				XMLManager.savePolygon(fig.get(firstSelIx));
-        			}catch (ParserConfigurationException | IOException | SAXException | TransformerException e1) {
-        				// TODO Auto-generated catch block
-        				e1.printStackTrace();
-        			}
-        		}
-        		else{
-        			Component frame = null;
-            		JOptionPane.showMessageDialog(frame, "Error, the name of the figure can not be empty");
-        		}
+        		try {
+       				XMLManager.savePolygon(fig.get(firstSelIx));
+       			}catch (ParserConfigurationException | IOException | SAXException | TransformerException e1) {
+       				// TODO Auto-generated catch block
+       				e1.printStackTrace();
+       				JOptionPane.showMessageDialog(frame, "Error saving the Figure!");
+       			}
         	}
          });
         

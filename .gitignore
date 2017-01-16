@@ -1,4 +1,5 @@
 /bin/
+/save/
 .DS_Store
 polygonSaved.xml
 .bug.txt

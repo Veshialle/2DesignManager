@@ -25,10 +25,12 @@ public class Figura{
     public double [] xPoints = new double[]{0,0,0,0};
     public double [] yPoints = new double[]{0,0,0,0};
     public String tipo;
+    public String name;
     public Polygon p;
-    public Figura(String s,int idFigura, double x,double y,double width,double height) {
+    public Figura(String name,String tipo,int idFigura, double x,double y,double width,double height) {
     	this.idFigura = idFigura;
-    	this.tipo=s;
+    	this.tipo=tipo;
+    	this.name = name;
     	this.x=x;
     	this.y=y;
     	this.width=width;
@@ -36,7 +38,7 @@ public class Figura{
     	this.init(x, y, width, height);  //inizializza i punti della figura
 	}
     //mossa azzardata, let's see what happen
-    public Figura(String tipo,int idFigura,int nLati, double[] xPoints, double[] yPoints, double angle){
+    public Figura(String name, String tipo,int idFigura,int nLati, double[] xPoints, double[] yPoints, double angle){
     	this.tipo = tipo;
     	this.nLati = nLati;
     	this.idFigura = idFigura;
