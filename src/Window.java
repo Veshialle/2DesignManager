@@ -142,10 +142,11 @@ public class Window {
         JButton btnSetY = new JButton("Set Y");//Bottone set Y
         btnSetY.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
         
-        JButton btnSetheight = new JButton("Set Height"); //bottone set height (altezza)
+        JButton btnSetheight = new JButton("Set Height");
+        btnSetheight.setEnabled(false);
         btnSetheight.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
         
-        JButton btnSetWidth = new JButton("Set Width");// bottone set width (larghezza)
+        JButton btnSetWidth = new JButton("Enable Resizing");// bottone set width (larghezza)
         btnSetWidth.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
         
         JSpinner spinnerSizes = new JSpinner();// Finestrina input delle dimensioni

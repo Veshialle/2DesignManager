@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -19,6 +20,7 @@ public class Figura{
     private double x,y,width,height;
     private int nLati;
     public boolean visibile=true;
+    private Color colore;
     private double angle;
     public double [] xPoints = new double[]{0,0,0,0};
     public double [] yPoints = new double[]{0,0,0,0};
@@ -47,22 +49,27 @@ public class Figura{
             this.nLati=4;
             xPoints = new double[] {x, x+width, x+width, x};
             yPoints = new double[] {y, y, y+height,y+height};
+            this.colore=Color.BLACK;
         }else if(this.tipo=="triangolo"){
             this.nLati=3;
             xPoints = new double[] {x, x+(width/2), x+width, 0 };
             yPoints = new double[] {y, y-height, y, 0};
+            this.colore=Color.ORANGE;
         }else if(this.tipo=="quadrato"){
             this.nLati=4;
             xPoints = new double[] {x, x+width, x+width, x};
             yPoints = new double[] {y, y, y+width,y+width};
+            this.colore=Color.GREEN;
         }else if(this.tipo=="rombo"){
             this.nLati=4;
             xPoints = new double[] {x, x+(width/2), x+width, x+(width/2)};
             yPoints = new double[] {y, y-(height/2), y,y+(height/2)};
+            this.colore=Color.YELLOW;
         }else if(this.tipo=="cerchio"){
         	this.nLati=1;
         	xPoints = new double[] {x, 0, 0, 0};
             yPoints = new double[] {y, 0, 0, 0};
+            this.colore=Color.BLUE;
         }
     	
     }
@@ -225,6 +232,8 @@ public class Figura{
         		yP[i] = (int)yPoints[i];
         	}
         	p = new Polygon(xP, yP, nLati);
+        	d.setColor(colore);
+        	d.fillPolygon(p);
         	d.drawPolygon(p);	
         }
     }
