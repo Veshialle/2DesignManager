@@ -391,7 +391,8 @@ public class Window {
             		idFigura++;
             		rotationBar.setEnabled(!fig.isEmpty());
             		rotationBar.setValue((int)fig.get(firstSelIx).getAngle());
-            		btnRemoveFig.setEnabled(true);
+            		if(!(model.isEmpty()))
+                    	btnRemoveFig.setEnabled(true);
             	}
             }else{
         		JOptionPane.showMessageDialog(frame, "Hai annullato la creazione di una nuova figura");
@@ -543,6 +544,8 @@ public class Window {
             	}else{
             		JOptionPane.showMessageDialog(frame, "Hai annullato il caricamento di una nuova figura");
             	}
+            	if(!(model.isEmpty()))
+                	btnRemoveFig.setEnabled(true);
             }
          });
         //mouse listener     
