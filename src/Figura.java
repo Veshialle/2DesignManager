@@ -264,7 +264,15 @@ public class Figura{
 		this.versione = versione;
 	}
 	public String getName() {
+		if(name.isEmpty())
+			return tipo;
 		return name;
+	}
+	public String getFinalName(){
+		if(name.isEmpty())
+			return tipo;
+		String finalName = name + " " + versione;
+		return finalName;
 	}
 	public void setName(String name) {
 		this.name = name;

@@ -1,6 +1,7 @@
 import java.awt.Cursor;
-import java.awt.Dimension;
+//import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
 //import java.awt.Graphics2D;
 import java.awt.Point;
 //import java.awt.Polygon;
@@ -18,6 +19,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 //import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JSpinner;
@@ -27,6 +29,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 //import javax.swing.JMenu;
 import javax.swing.JList;
+import java.awt.Toolkit;
+
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -35,6 +39,7 @@ import java.awt.event.MouseEvent;
 //import java.awt.geom.AffineTransform;
 //import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.awt.event.ActionEvent;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ListSelectionEvent;
@@ -47,7 +52,6 @@ import org.xml.sax.SAXException;
 import javax.swing.JScrollBar;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
-
 
 
 //INIZIO CLASSE MYCANVAS
@@ -97,11 +101,25 @@ class MyCanvas extends JComponent {
 
 //INIZIO CLASSE WINDOW (MAIN)
 public class Window {
+
+/*
+	private static ImageIcon loadIcon(String strPath)
+	{
+		URL imgURL = getClass().getResource(strPath);
+		if(imgURL != null)
+			return new ImageIcon(imgURL);
+		else
+			return null;
+	}
+	*/
+
 	public static Point mousePt;
 	public static int firstSelIx;
 	public static boolean isInside;
 	public static boolean Resize = false;
 	public static int idFigura = XMLManager.countFigure();
+
+	static Image icon= Toolkit.getDefaultToolkit().getImage("save/2DMIcon.png");
     public static void main(String[] a) {
         
         List<Figura> fig = new ArrayList<Figura>(); //fig e' una lista di oggetti Figura
@@ -111,6 +129,8 @@ public class Window {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setBounds(30, 30, 1200, 1200);
         window.setResizable(false);
+		if(icon != null)
+			window.setIconImage(icon);
         MyCanvas canvas = new MyCanvas(fig); // canvas sara' lo spazio dove disegno le figure
         
         
@@ -130,7 +150,7 @@ public class Window {
         
         DefaultListModel<String> model = new DefaultListModel<>();  //lista di stringhe
         for ( Figura i : fig ){
-            model.addElement( i.getTipo() ); //aggiungo dentro la lista di stringe "model" il tipo di figura -> figura.tipo -> i.tipo
+            model.addElement( i.getFinalName() ); //aggiungo dentro la lista di stringe "model" il tipo di figura -> figura.tipo -> i.tipo
         }
         
         JScrollPane scrollPane = new JScrollPane(); //Panello dove verra' visualizzata la lista degli oggetti presenti
@@ -385,13 +405,14 @@ public class Window {
             		fig.add(f); //aggiungi la figura appena creata f alla lista di Figure "fig"
             		canvas.paintImage(); //disegna
                 
-            		model.addElement( f.getName() );	//aggiungi alla lista di stringhe il tipo della nuova figura
+            		model.addElement( f.getFinalName() );	//aggiungi alla lista di stringhe il tipo della nuova figura
             		list_1.setSelectedIndex(model.getSize()-1);//seleziona nella lista output l'ultima figura inserita
             		firstSelIx = list_1.getSelectedIndex();
             		idFigura++;
             		rotationBar.setEnabled(!fig.isEmpty());
             		rotationBar.setValue((int)fig.get(firstSelIx).getAngle());
-            		btnRemoveFig.setEnabled(true);
+            		if(!(model.isEmpty()))
+                    	btnRemoveFig.setEnabled(true);
             	}
             }else{
         		JOptionPane.showMessageDialog(frame, "Hai annullato la creazione di una nuova figura");
@@ -535,7 +556,7 @@ public class Window {
 
                 	canvas.paintImage(); //disegna
                 
-                	model.addElement( loadFig.get(loadSelIx).getTipo() );	//aggiungi alla lista di stringhe il tipo della nuova figura
+                	model.addElement( loadFig.get(loadSelIx).getFinalName() );	//aggiungi alla lista di stringhe il tipo della nuova figura
                 	list_1.setSelectedIndex(model.getSize()-1);//seleziona nella lista output l'ultima figura inserita
                 	firstSelIx = list_1.getSelectedIndex();
                 	idFigura++;
@@ -543,6 +564,8 @@ public class Window {
             	}else{
             		JOptionPane.showMessageDialog(frame, "Hai annullato il caricamento di una nuova figura");
             	}
+            	if(!(model.isEmpty()))
+                	btnRemoveFig.setEnabled(true);
             }
          });
         //mouse listener     

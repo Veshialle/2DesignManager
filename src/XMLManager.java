@@ -83,7 +83,7 @@ public class XMLManager {
 			doc = docBuilder.parse(file);
 			rootElement = doc.getDocumentElement();
 			Float newVersione = (float) (fig.getVersione()+0.1);
-			System.out.println("La nuova versione salvata è la: " +newVersione);
+			//System.out.println("La nuova versione salvata è la: " +newVersione);
 			fig.setVersione(newVersione);
 		}
 		Element versione = doc.createElement("versione");
@@ -154,7 +154,7 @@ public class XMLManager {
 					Float versione = null;			
 					Element figElement = (Element) nNode;
 					String strIdFigura = figElement.getAttribute("idFigura");
-					System.out.println("L'id della figura è:" +strIdFigura);
+					//System.out.println("L'id della figura è:" +strIdFigura);
 					idFigura = Integer.parseInt(strIdFigura);
 					nome =figElement.getElementsByTagName("nome").item(0).getTextContent();
 					tipo =figElement.getElementsByTagName("tipo").item(0).getTextContent();
@@ -186,7 +186,7 @@ public class XMLManager {
 							return null;
 						}
 						Figura fig = new Figura(nome,versione, tipo,idFigura, nLati, xPoints, yPoints, angle, colore);
-		        		//System.out.println( "Prendo il primo punto della figura " + j + " versione :" + fig.getVersione() + " per test: " + fig.getxPoint(0)+ " , "+ fig.getyPoint(0)+ " !"); //test
+		        		//System.out.println( "Prendo il primo punto della figura " + j + " versione :" + fig.getVersione() + " per test: " + fig.getxPoint(0)+ " , "+ fig.getyPoint(0)+ " !"); //te
 						loadFig.add(fig);
 					}
 					/*
