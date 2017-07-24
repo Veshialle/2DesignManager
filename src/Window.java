@@ -81,15 +81,13 @@ class MyCanvas extends JComponent {
     public MyCanvas(List<Figura> fig) {
         this.array = fig;
     }
-    
+
     public void paintImage(){
         Graphics d = getGraphics();
         d.clearRect(0, 0, getWidth(), getHeight() ); //pulisce il canvas
         for (Figura i : array) { //per ogni figura nella lista di figure
             if (i.visibile == true) {//se la figura e' visibile
                 i.draw(d);//chiama il metodo "disegna" della figura
-                
-                
             }
         }
         this.validate();
@@ -145,12 +143,12 @@ public class Window {
         btnDown.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
         JButton btnUp = new JButton("Up");//Bottone "Up"
         btnUp.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
-        
+
         
         
         DefaultListModel<String> model = new DefaultListModel<>();  //lista di stringhe
         for ( Figura i : fig ){
-            model.addElement( i.getFinalName() ); //aggiungo dentro la lista di stringe "model" il tipo di figura -> figura.tipo -> i.tipo
+            model.addElement( i.getFinalName() ); //aggiungo dentro la lista di stringhe "model" il tipo di figura -> figura.tipo -> i.tipo
         }
         
         JScrollPane scrollPane = new JScrollPane(); //Panello dove verra' visualizzata la lista degli oggetti presenti
@@ -400,9 +398,18 @@ public class Window {
             //If a string was returned, say so.
             if ((s != null) && (s.length() > 0)) {
             	String name = JOptionPane.showInputDialog("Inserire nome della figura.", s);
+            	Figura f;
             	if(name!=null && name.length() > 0){
-            		Figura f = new Figura(name, s,idFigura,200,200,200,100); //inizializzo/creo la Figura(s=tipo di figura, x=0, y=0, larghezza, altezza);
-            		fig.add(f); //aggiungi la figura appena creata f alla lista di Figure "fig"
+            		if(s == "rettangolo" || s == "quadrato" || s=="rombo")
+            			f = new Quadrangle(name, s,idFigura,200,200,200,100); //inizializzo/creo la Figura(s=tipo di figura, x=0, y=0, larghezza, altezza);
+					else if(s == "cerchio")
+						f = new Circle(name, s,idFigura,200,200,200,100); //inizializzo/creo la Figura(s=tipo di figura, x=0, y=0, larghezza, altezza);
+					else if(s == "triangolo")
+						f = new Triangle(name, s,idFigura,200,200,200,100); //inizializzo/creo la Figura(s=tipo di figura, x=0, y=0, larghezza, altezza);
+					else
+						f = new Polygon(name, s,idFigura,200,200,200,100); //inizializzo/creo la Figura(s=tipo di figura, x=0, y=0, larghezza, altezza);
+
+					fig.add(f); //aggiungi la figura appena creata f alla lista di Figure "fig"
             		canvas.paintImage(); //disegna
                 
             		model.addElement( f.getFinalName() );	//aggiungi alla lista di stringhe il tipo della nuova figura

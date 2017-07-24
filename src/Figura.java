@@ -28,16 +28,23 @@ public class Figura{
     private String tipo;
     private String name;
     private Polygon p;
+
+    public Figura(){
+    	super();
+    	this.idFigura = -1;
+    	this.tipo = "";
+    	this.setName("");
+	}
+
     public Figura(String name,String tipo,int idFigura, double x,double y,double width,double height) {
     	this.idFigura = idFigura;
     	this.tipo=tipo;
     	this.setName(name);
-    	this.x=x;
-    	this.y=y;
     	this.width=width;
     	this.height=height;
     	this.init(x, y, width, height);  //inizializza i punti della figura
 	}
+
     //mossa azzardata, let's see what happen
     public Figura(String name,Float versione, String tipo,int idFigura,int nLati, double[] xPoints, double[] yPoints, double angle, Color colore){
     	this.tipo = tipo;
@@ -50,6 +57,7 @@ public class Figura{
     	this.colore = colore;
     	this.setVersione(versione);
     }
+
     public void init(double x,double y,double width,double height){ //inizializza i punti della figura
     	if(this.tipo=="rettangolo"){
             this.nLati=4;
@@ -140,6 +148,7 @@ public class Figura{
     }
     public void setAngle(double angle){
     	this.angle = angle;
+    	this.rotate(angle);
     }
     public void setWidth(double width){
         this.width=width;
@@ -157,26 +166,25 @@ public class Figura{
     				xPoints[i]-=5;
     		else if(cx==xPoints[i]){
     			//non fare nulla
-    		}else{
+    		} else {
     			if(!(xPoints[i]-5<cx))
     				xPoints[i]+=dx;
     			else
     				xPoints[i]+=5;
     		}
-    		
-    		if(yPoints[i]<cy)
-    			if(!(yPoints[i]+5>cy))
-    				yPoints[i]-=dy;
-    			else
-    				yPoints[i]-=5;
-    		else if(cy==yPoints[i]){
-    			//non fare nulla
-    		}else{
-    			if(!(yPoints[i]-5<cy))
-    				yPoints[i]+=dy;
-    			else
-    				yPoints[i]+=5;
-    		}
+			if(yPoints[i]<cy)
+				if(!(yPoints[i]+5>cy))
+					yPoints[i]-=dy;
+				else
+					yPoints[i]-=5;
+			else if(cy==yPoints[i]){
+				//non fare nulla
+			}else{
+				if(!(yPoints[i]-5<cy))
+					yPoints[i]+=dy;
+				else
+					yPoints[i]+=5;
+			}
     	}
     }        
 
@@ -285,8 +293,9 @@ public class Figura{
     }
     public void setColor(Color color){
     	this.colore = color;
-    }public Color getColor(){
+    }
+    public Color getColor(){
 		return colore;
 	}
 }
-//FINE CLASSE FIGURA
+
