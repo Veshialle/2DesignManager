@@ -16,28 +16,35 @@ import java.awt.geom.AffineTransform;
 
 // INIZIO CLASSE FIGURA
 public class Figura{
-	private int idFigura;
-    private double x,y,width,height;
-    private int nLati;
+	protected int idFigura;
+    protected double x,y,width,height;
+    protected int nLati;
     public boolean visibile=true;
     private Color colore;
-    private double angle;
+    protected double angle;
 	private Float versione;
-    private double [] xPoints = new double[]{0,0,0,0};
-    private double [] yPoints = new double[]{0,0,0,0};
-    private String tipo;
+    protected double [] xPoints = new double[]{0,0,0,0};
+    protected double [] yPoints = new double[]{0,0,0,0};
+    protected String tipo;
     private String name;
-    private Polygon p;
+    protected Polygon p;
+
+    public Figura(){
+    	super();
+    	this.idFigura = -1;
+    	this.tipo = "";
+    	this.setName("");
+	}
+
     public Figura(String name,String tipo,int idFigura, double x,double y,double width,double height) {
     	this.idFigura = idFigura;
     	this.tipo=tipo;
     	this.setName(name);
-    	this.x=x;
-    	this.y=y;
     	this.width=width;
     	this.height=height;
     	this.init(x, y, width, height);  //inizializza i punti della figura
 	}
+
     //mossa azzardata, let's see what happen
     public Figura(String name,Float versione, String tipo,int idFigura,int nLati, double[] xPoints, double[] yPoints, double angle, Color colore){
     	this.tipo = tipo;
@@ -50,6 +57,7 @@ public class Figura{
     	this.colore = colore;
     	this.setVersione(versione);
     }
+
     public void init(double x,double y,double width,double height){ //inizializza i punti della figura
     	if(this.tipo=="rettangolo"){
             this.nLati=4;
@@ -86,25 +94,8 @@ public class Figura{
     	}
     	
     }
-
-    public void rotate(double angle){ //ancora non implementata
-		
-		double centerX = getCenterX();		
-		double centerY = getCenterY();
-		double rotationAngle = angle - getAngle();
-		this.setAngle(angle);	
-		for(int i=0;i<this.nLati;i++){
-			double[] pt = {xPoints[i], yPoints[i]};
-			AffineTransform.getRotateInstance(Math.toRadians(rotationAngle), centerX, centerY).transform(pt, 0, pt, 0, 1); // specifying to use this double[] to hold coords
-			xPoints[i] = pt[0];
-			yPoints[i] = pt[1];
-			/*
-			 * Per poter risolvere la traslazione (verso l'origine del canvas se rotazione oraria o verso +inf e +inf se antioraria)
-			 * la rotazione dovrebbe essere affinata, il ritorno ad intero fa perdere parte del calcolo nella rotazione
-			 */
-			
-		}
-	}
+	public double getAngle(){ return 0.0;};
+	public void rotate(double angle){};
 
 	public void setX(double x){
         this.move(x-this.xPoints[0], 0);
@@ -134,12 +125,6 @@ public class Figura{
     }
     public double getY(){
         return this.y;
-    }   
-    public double getAngle(){
-    	return this.angle;
-    }
-    public void setAngle(double angle){
-    	this.angle = angle;
     }
     public void setWidth(double width){
         this.width=width;
@@ -157,26 +142,25 @@ public class Figura{
     				xPoints[i]-=5;
     		else if(cx==xPoints[i]){
     			//non fare nulla
-    		}else{
+    		} else {
     			if(!(xPoints[i]-5<cx))
     				xPoints[i]+=dx;
     			else
     				xPoints[i]+=5;
     		}
-    		
-    		if(yPoints[i]<cy)
-    			if(!(yPoints[i]+5>cy))
-    				yPoints[i]-=dy;
-    			else
-    				yPoints[i]-=5;
-    		else if(cy==yPoints[i]){
-    			//non fare nulla
-    		}else{
-    			if(!(yPoints[i]-5<cy))
-    				yPoints[i]+=dy;
-    			else
-    				yPoints[i]+=5;
-    		}
+			if(yPoints[i]<cy)
+				if(!(yPoints[i]+5>cy))
+					yPoints[i]-=dy;
+				else
+					yPoints[i]-=5;
+			else if(cy==yPoints[i]){
+				//non fare nulla
+			}else{
+				if(!(yPoints[i]-5<cy))
+					yPoints[i]+=dy;
+				else
+					yPoints[i]+=5;
+			}
     	}
     }        
 
@@ -285,8 +269,9 @@ public class Figura{
     }
     public void setColor(Color color){
     	this.colore = color;
-    }public Color getColor(){
+    }
+    public Color getColor(){
 		return colore;
 	}
 }
-//FINE CLASSE FIGURA
+

@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>9</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>603</x>
+      <y>9</y>
+      <w>189</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Composto&gt;&gt;
+Package::FatClass
+{Some Properties}
+--
+-id: Long
+- List&lt;Figura&gt; composition
+_-ClassAttribute: Long_
+--
++move():void
++draw():void
++contains():boolean
+/+AbstractOperation()/
+--
+Responsibilities
+-- Resp1
+*-- Resp2*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>333</y>
+      <w>189</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Poligono&gt;&gt;
+{Some Properties}
+--
+-id: Long
+_-ClassAttribute: Long_
+--
++init():void
++contains(Point test):boolean
++rotate(double angle): void
+/+AbstractOperation()/
+--
+Responsibilities
+-- Resp1
+*-- Resp2*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>234</x>
+      <y>63</y>
+      <w>189</w>
+      <h>243</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Figura&gt;&gt;
+{Some Properties}
+--
+-id: Long
+_-ClassAttribute: Long_
+--
++move():void
++draw():void
++setName(String name):void
++setTipo(String name):void
++setColor(Color color):void
+/+contains()/
+--
+Responsibilities
+-- Resp1
+*-- Resp2*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>585</x>
+      <y>297</y>
+      <w>189</w>
+      <h>198</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Cerchio&gt;&gt;
+Package::FatClass
+{Some Properties}
+--
+-id: Long
+_-ClassAttribute: Long_
+--
++init():void
++contains(Point test):boolean
+#Operation(i: int): int
+/+AbstractOperation()/
+--
+Responsibilities
+-- Resp1
+*-- Resp2*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>180</x>
+      <y>297</y>
+      <w>81</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>70.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>414</x>
+      <y>234</y>
+      <w>189</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;190.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>414</x>
+      <y>81</y>
+      <w>207</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;90.0;210.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>531</x>
+      <y>531</y>
+      <w>189</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Triangolo&gt;&gt;
+{Some Properties}
+--
+-id: Long
+_-ClassAttribute: Long_
+--
++init():void
++contains(Point test):boolean
++rotate(double angle): void
+/+AbstractOperation()/
+--
+Responsibilities
+-- Resp1
+*-- Resp2*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>396</x>
+      <y>297</y>
+      <w>225</w>
+      <h>252</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;230.0;260.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>414</x>
+      <y>0</y>
+      <w>216</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;90.0;220.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>324</x>
+      <y>531</y>
+      <w>189</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Quadrilatero&gt;&gt;
+{Some Properties}
+--
+-id: Long
+_-ClassAttribute: Long_
+--
++init():void
++contains(Point test):boolean
++rotate(double angle): void
+/+AbstractOperation()/
+--
+Responsibilities
+-- Resp1
+*-- Resp2*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>297</y>
+      <w>63</w>
+      <h>252</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;260.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>117</x>
+      <y>531</y>
+      <w>189</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Rombo&gt;&gt;
+{Some Properties}
+--
+-id: Long
+_-ClassAttribute: Long_
+--
++init():void
++contains(Point test):boolean
++rotate(double angle): void
+/+AbstractOperation()/
+--
+Responsibilities
+-- Resp1
+*-- Resp2*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>252</x>
+      <y>297</y>
+      <w>54</w>
+      <h>252</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>40.0;10.0;10.0;260.0</additional_attributes>
+  </element>
+</diagram>

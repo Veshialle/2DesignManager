@@ -102,7 +102,10 @@ public class XMLManager {
 			// da ottimizzare
 		}
 		Element angle = doc.createElement("angle");
-		String strAngle = String.valueOf(fig.getAngle());
+		String strAngle;
+		if(fig.getClass() != Circle.class)
+			strAngle = String.valueOf(fig.getAngle());
+		else strAngle = "0.0";
 		angle.appendChild(doc.createTextNode(strAngle));
 		versione.appendChild(angle);
 		Element color = doc.createElement("color");
