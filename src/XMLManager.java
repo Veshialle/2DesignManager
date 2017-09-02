@@ -195,14 +195,14 @@ public class XMLManager {
 						else
 							fig = new Circle(nome, versione, tipo, idFigura, nLati, xPoints, yPoints, angle, colore);
 						// System.out.println( "Prendo il primo punto della figura " + j + " versione :"
-						// + fig.getVersione() + " per test: " + fig.getxPoint(0)+ " , "+
+						// + fig.getVersione() + " per GUI_2DM: " + fig.getxPoint(0)+ " , "+
 						// fig.getyPoint(0)+ " !"); //te
 						loadFig.add(fig);
 					}
 					/*
-					 * test for(int i=0;i<loadFig.size(); i++){ System.out.println(
+					 * GUI_2DM for(int i=0;i<loadFig.size(); i++){ System.out.println(
 					 * "Prendo il primo punto della figura " + i + " versione :" +
-					 * loadFig.get(i).getVersione() + " per test: " + loadFig.get(i).getxPoint(0)+
+					 * loadFig.get(i).getVersione() + " per GUI_2DM: " + loadFig.get(i).getxPoint(0)+
 					 * " , "+ loadFig.get(i).getyPoint(0)+ " !"); }
 					 */
 					return loadFig;
