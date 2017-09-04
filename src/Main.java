@@ -16,6 +16,7 @@ import java.awt.Component;
 
 import javax.swing.DefaultListModel;
 import javax.swing.Icon;
+import javax.swing.JList;
 //import javax.swing.JTextField;
 //import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
