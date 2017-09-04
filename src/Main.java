@@ -4,6 +4,8 @@ import java.awt.Cursor;
 //import java.awt.Graphics2D;
 import java.awt.Point;
 //import java.awt.Polygon;
+import java.awt.event.*;
+import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,20 +21,22 @@ import javax.swing.Icon;
 import javax.swing.JOptionPane;
 //import javax.swing.JRadioButtonMenuItem;
 //import javax.swing.JMenu;
+import javax.swing.JList;
+import javax.swing.JSlider;
+import javax.swing.JColorChooser;
+import java.awt.Color;
 
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 //import java.awt.geom.AffineTransform;
 //import java.io.File;
 import java.io.IOException;
-import java.awt.event.ActionEvent;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
+
+
 
 import org.xml.sax.SAXException;
 
@@ -65,6 +69,11 @@ public class Main {
 		// figura.tipo -> i.tipo
 		for (Figura i : fig)
 			model.addElement(i.getFinalName()); // aggiungo dentro la lista di stringhe "model" il tipo di figura ->
+        window.list1 = new JList<>(model);
+        window.scrollPane.setViewportView(window.list1);
+		window.canvas.paintImage();
+
+
 
 		window.btnSetX.addActionListener(new ActionListener() { // Imposta val X
 			public void actionPerformed(ActionEvent e) {
@@ -83,9 +92,42 @@ public class Main {
 			public void valueChanged(ListSelectionEvent arg0) {
 				// TODO Auto-generated method stub
 				firstSelIx = window.list1.getSelectedIndex();
-				if (firstSelIx >= 0) {
+				if (!model.isEmpty()) {
+					window.btnRemoveFig.setEnabled(true);
+					window.btnSaveFig.setEnabled(true);
+					window.btnDown.setEnabled(true);
+					window.btnUp.setEnabled(true);
+					window.btnRight.setEnabled(true);
+					window.btnLeft.setEnabled(true);
+					window.btnSetX.setEnabled(true);
+					window.btnSetY.setEnabled(true);
+					window.spinnerPos.setEnabled(true);
+					window.radioMove.setEnabled(true);
+					window.radioResize.setEnabled(true);
+					window.btnColor.setEnabled(true);
+					window.btnRotation.setEnabled(true);
 					window.rotationBar.setEnabled(true);
 					window.rotationBar.setValue((int) fig.get(firstSelIx).getAngle());
+					if(model.getSize() >= 2){
+						window.btnCompFig.setEnabled(true);
+						if(fig.get(firstSelIx).getClass() != Composite.class) window.checkboColorComp.setEnabled(true);
+						else window.checkboColorComp.setEnabled(false);
+					} else window.btnCompFig.setEnabled(false);
+				} else {
+					window.btnRemoveFig.setEnabled(false);
+					window.btnSaveFig.setEnabled(false);
+					window.btnDown.setEnabled(false);
+					window.btnUp.setEnabled(false);
+					window.btnRight.setEnabled(false);
+					window.btnLeft.setEnabled(false);
+					window.btnSetX.setEnabled(false);
+					window.btnSetY.setEnabled(false);
+					window.spinnerPos.setEnabled(false);
+					window.radioMove.setEnabled(false);
+					window.radioResize.setEnabled(false);
+					window.btnColor.setEnabled(false);
+					window.btnRotation.setEnabled(false);
+					window.rotationBar.setEnabled(false);
 				}
 			}
 		});
@@ -97,20 +139,6 @@ public class Main {
 				window.canvas.paintImage();
 			}
 		});
-		/*
-		window.btnSetWidth.addActionListener(new ActionListener() { // Imposta Larghezza
-			public void actionPerformed(ActionEvent e) {
-				// int firstSelIx = window.list1.getSelectedIndex();
-
-				window.canvas.paintImage();
-				Resize = (!Resize);
-				if (Resize)
-					window.btnSetWidth.setText("Disable Resizing");
-				else
-					window.btnSetWidth.setText("Enable Resizing");
-
-			}
-		});*/
 		window.btnRotation.addActionListener(new ActionListener() { // Riportare alla posizione iniziale (0 gradi)
 			public void actionPerformed(ActionEvent e) {
 				int firstSelIx = window.list1.getSelectedIndex();
@@ -124,14 +152,15 @@ public class Main {
 		window.rotationBar.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				double angle = (double) e.getSource();
+                JSlider rotation = (JSlider) e.getSource();
+				double angle = (double) rotation.getValue();
 				Figura f = fig.get(firstSelIx);
 				f.rotate(angle, f.getCenterX(), f.getCenterY());
 				window.canvas.paintImage();
 			}
 		});
 
-		window.btnAddFig.addActionListener(e -> { // Bottone aggiungi/crea una nuova Figura
+		window.btnAddFig.addActionListener((ActionEvent e) -> { // Bottone aggiungi/crea una nuova Figura
 
 			// --------------------------------------------------------- Grazie google
 
@@ -196,6 +225,20 @@ public class Main {
 				window.btnRemoveFig.setEnabled(false);
 
 		});
+
+		// bottone scelta colore
+
+		window.btnColor.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0){
+				Color newColor = JColorChooser.showDialog(null, "Choose a color", Color.RED);
+				fig.get(firstSelIx).setColor(newColor);
+				window.canvas.paintImage();
+			}
+		});
+
+
+
+
 
 		// bottone Left
 		window.btnLeft.addActionListener(e -> { // bottone muovi a Sinistra
@@ -338,6 +381,7 @@ public class Main {
 						window.list1.setSelectedIndex(i);
 
 						firstSelIx = window.list1.getSelectedIndex();
+						/*
 						if (fig.get(i).getClass() != Circle.class) {
 							window.rotationBar.setEnabled(true);
 							window.btnRotation.setEnabled(true);
@@ -346,6 +390,7 @@ public class Main {
 							window.rotationBar.setEnabled(false);
 							window.btnRotation.setEnabled(false);
 						}
+						*/
 						break;
 					} else {
 						isInside = false;
@@ -373,6 +418,52 @@ public class Main {
 				}
 			}
 		});
+
+		window.checkGrid.addActionListener(e -> {
+			window.canvas.setGridFlag(window.checkGrid.isSelected());
+			window.canvas.paintImage();
+		});
+
+		window.canvas.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentResized(ComponentEvent e) {
+				window.canvas.paintImage();
+			}
+		});
+
+		window.btnCompFig.addActionListener(e ->{
+			Component frame = null;
+			Icon icon = null;
+			String choosed = null;
+
+			if (JOptionPane.showConfirmDialog(frame, "Are You sure to join the figures in the canvas?")
+					== JOptionPane.YES_OPTION){
+				String name = JOptionPane.showInputDialog("Inserire nome della figura.", fig.get(firstSelIx).getName());
+				Figura f;
+				f = new Composite(fig, true, name);
+				for(Figura i : fig){
+					firstSelIx = window.list1.getSelectedIndex(); // dammi l'indice della figura selezionata
+					fig.remove(firstSelIx); // rimuovi dalla lista di figure la figura con l'indice appena ricavato
+					model.remove(firstSelIx);// rimuovi la stringa della figura nella lista
+					window.list1.setSelectedIndex(model.getSize() - 1);
+					firstSelIx = window.list1.getSelectedIndex();
+					window.rotationBar.setValue((int) fig.get(firstSelIx).getAngle());
+				}
+
+				window.scrollPane.validate();
+				fig.add(f); // aggiungi la figura appena creata f alla lista di Figure "fig"
+				model.addElement(f.getFinalName()); // aggiungi alla lista di stringhe il tipo della nuova figura
+				window.list1.setSelectedIndex(model.getSize() - 1);// seleziona nella lista output l'ultima figura
+				// inserita
+				firstSelIx = window.list1.getSelectedIndex();
+				idFigura++;
+				window.rotationBar.setEnabled(!(fig.isEmpty()) || (fig.get(firstSelIx).getClass() != Circle.class));
+				window.rotationBar.setValue((int) fig.get(firstSelIx).getAngle());
+				window.canvas.paintImage();
+			}
+
+		});
+
 
 	}
 }

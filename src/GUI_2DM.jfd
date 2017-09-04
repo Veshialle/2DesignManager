@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "6.0.2.0.116" Java: "1.8.0_152-release" encoding: "UTF-8"
+JFDML JFormDesigner: "6.0.2.0.116" Java: "1.8.0_144" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -7,15 +7,19 @@ new FormModel {
 			"JavaCodeGenerator.defaultVariableModifiers": 4
 		}
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq {space :::p, comp scrollPane:::p:127:p, space u:::x, par l {comp btnColor::t:p:109:p, comp btnAddFig:3::p:104:p, comp btnSaveFig:3::p:104:p}, par l {seq l {space :p:15:p, par l:::p {comp btnRemoveFig:3::::x, comp btnLoadFig:3::p:109:p}, space u:::p, par l {seq l {comp radioMove:::p::p, space :p:33:p, comp sliderLabel:::p::p, space :p:30:p, comp btnRotation:::p::p}, seq l {comp radioResize:::p::p, space u:::p, comp rotationBar:::p::p}}, space :::p, comp btnRight:1::p::p, space :0:0:p, par l {comp btnUp:1:l:p::p, seq l {comp btnDown:1::p::p, space :0:0:p, comp btnLeft:1::p::p}}}, seq l {space :::p, par l {seq t {space :p:307:p, comp btnSetX:::p::p, space :::p, comp btnSetY:::p::p, space u:::p, comp spinnerPos:::p:67:p, space :p:40:p}, seq l {comp btnCompFig:::p::p, space :::p, comp checkboColorComp:::p::p}}}}, space :p:411:p}, comp canvas::l:::x}"
-			"$verticalGroup": "par l {seq t {space :p::p, par l {seq l {comp btnUp:2::p::p, space :0:0:p, par b {comp btnDown:2:b:p::p, comp btnRight:2:b:p::p, comp btnLeft:2:b:p::p}}, comp scrollPane:::p:105:p, seq {space :9:9:p, par l {seq l {par l {comp btnRemoveFig:4::p:24:p, comp btnAddFig:4:t:p:24:p}, space :::p, par l {comp btnLoadFig:4::p:24:p, comp btnSaveFig:4::p:24:p}, space u:::p, par b {comp btnCompFig::b:p:24:p, comp checkboColorComp::b:p:24:p, comp btnColor::b:p:24:p}}, seq l {par l {par b {comp radioMove::b:p:24:p, comp btnRotation::b:p:24:p}, comp sliderLabel::t:p::p}, space :::p, par l {comp radioResize:::p:24:p, comp rotationBar:::p:24:p}, space u:::p, par b {comp spinnerPos::b:p:24:p, comp btnSetY::b:p:24:p, comp btnSetX::b:p:24:p}}}}}, space :::p, comp canvas::::701:x}}"
+			"$horizontalGroup": "par l {seq {space :::p, comp scrollPane:::p:127:p, space u:p::p, par l:::p {comp btnAddFig:3:t::104:x, comp btnSaveFig:3:t::104:x, comp btnColor::t:::x}, par l {seq l {space :p:15:p, par l:::p {comp btnRemoveFig:3::::x, comp btnLoadFig:3::p:109:p}, space u:::p, par l {seq l {comp radioMove:::p::p, space :p:33:p, comp sliderLabel:::p::p, space :p:30:p, comp btnRotation:::p::p}, seq l {comp radioResize:::p::p, space u:::p, comp rotationBar:::p::p}}, space :p:6:p, comp btnRight:1::p::p, space :0:0:p, par l {comp btnUp:1:l:p::p, seq l {comp btnDown:1::p::p, space :0:0:p, comp btnLeft:1::p::p}}}, seq l {space :::p, par l {seq t {space :p:307:p, comp btnSetX:::p::p, space :::p, comp btnSetY:::p::p, space u:::p, comp spinnerPos:::p:67:p}, seq l {comp btnCompFig:::p::p, space :::p, comp checkboColorComp:::p::p, space :p:267:p}}, space s:::p, comp checkGrid:::p::p}}, space ::338:x}, comp canvas::l::1198:x}"
+			"$verticalGroup": "par l {seq t {space :p::p, par l {comp scrollPane:::p:105:p, seq {space :9:9:p, par l {seq l {par l {comp btnRemoveFig:4::p:24:p, comp btnAddFig:4:t:p:24:p}, space :::p, par l {comp btnLoadFig:4::p:24:p, comp btnSaveFig:4::p:24:p}, space u:::p, par b {comp btnCompFig::b:p:24:p, comp checkboColorComp::b:p:24:p, comp btnColor::b:p:24:p}}, seq l {par l {par b {comp radioMove::b:p:24:p, comp btnRotation::b:p:24:p}, comp sliderLabel::t:p::p}, space :::p, par l {seq {comp radioResize:::p:24:p, space :p:12:p}, seq t {comp rotationBar:::p:24:p, space :::p}}, par b {comp spinnerPos::b:p:24:p, comp btnSetY::b:p:24:p, comp btnSetX::b:p:24:p, comp checkGrid::b:p::p}}}}, seq l {comp btnUp:2::p::p, space :0:0:p, par b {comp btnDown:2:b:p::p, comp btnRight:2:b:p::p, comp btnLeft:2:b:p::p}}}, space :::p, comp canvas::::704:x}}"
 		} ) {
 			name: "this"
-			"minimumSize": new java.awt.Dimension( 800, 510 )
+			"minimumSize": new java.awt.Dimension( 1000, 738 )
+			"iconImage": new com.jformdesigner.model.SwingIcon( 1, "/home/veshialle/2DesignManager/src/2DMIcon.png" )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane"
 				add( new FormComponent( "javax.swing.JList" ) {
 					name: "list1"
+					auxiliary() {
+						"JavaCodeGenerator.typeParameters": "String"
+					}
 				} )
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
@@ -25,22 +29,27 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnSetY"
 				"text": "SetY"
+				"enabled": false
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnSetX"
 				"text": "SetX"
+				"enabled": false
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnRotation"
 				"text": "ZeroDegree"
+				"enabled": false
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnCompFig"
 				"text": "Composite Figure"
+				"enabled": false
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnColor"
 				"text": "Choice Color"
+				"enabled": false
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnLoadFig"
@@ -49,21 +58,25 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnSaveFig"
 				"text": "Save Figure"
+				"enabled": false
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnRemoveFig"
 				"text": "Remove Figure"
+				"enabled": false
 			} )
 			add( new FormComponent( "javax.swing.JRadioButton" ) {
 				name: "radioMove"
 				"text": "Move"
 				"$buttonGroup": new FormReference( "MouseHandlerFigure" )
 				"selected": true
+				"enabled": false
 			} )
 			add( new FormComponent( "javax.swing.JRadioButton" ) {
 				name: "radioResize"
 				"text": "Resize"
 				"$buttonGroup": new FormReference( "MouseHandlerFigure" )
+				"enabled": false
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "sliderLabel"
@@ -71,34 +84,50 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JSlider" ) {
 				name: "rotationBar"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 131072, -4, false )
+				"maximum": 180
+				"value": 0
+				"minimum": -180
+				"enabled": false
 			} )
 			add( new FormComponent( "javax.swing.JCheckBox" ) {
 				name: "checkboColorComp"
 				"text": "Aggregate Color"
+				"enabled": false
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnUp"
 				"text": "↑"
+				"enabled": false
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnLeft"
 				"text": "→"
+				"enabled": false
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnDown"
 				"text": "↓"
+				"enabled": false
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnRight"
 				"text": "←"
+				"enabled": false
 			} )
 			add( new FormComponent( "javax.swing.JSpinner" ) {
 				name: "spinnerPos"
+				"enabled": false
 			} )
 			add( new FormComponent( "MyCanvas" ) {
 				name: "canvas"
-				"minimumSize": new java.awt.Dimension( 1200, 675 )
+				"minimumSize": new java.awt.Dimension( 1000, 563 )
 				"preferredSize": new java.awt.Dimension( 1200, 675 )
+				"font": new java.awt.Font( "Roboto Medium", 0, 8 )
+			} )
+			add( new FormComponent( "javax.swing.JCheckBox" ) {
+				name: "checkGrid"
+				"text": "Grid"
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )

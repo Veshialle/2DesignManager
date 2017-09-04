@@ -5,13 +5,15 @@ import java.util.List;
 
 public class Composite extends Figura {
 	private List<Figura> Composition = new ArrayList<Figura>();
-	private boolean united;
+	private boolean United;
 
-	public Composite(List<Figura> Parts, boolean united) {
+	public Composite(List<Figura> Parts, boolean United, String name) {
+		super();
 		this.Composition = Parts;
-		this.united = united;
-		if (this.united) {
+		this.United = United;
+		if (this.United) {
 		}
+		super.setName(name);
 	}
 
 	public int getNFigure() {
