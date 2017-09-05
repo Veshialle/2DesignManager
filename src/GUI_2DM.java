@@ -1,6 +1,4 @@
 import java.awt.*;
-import java.awt.event.*;
-import java.beans.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 /*
@@ -16,15 +14,6 @@ public class GUI_2DM extends JFrame {
     public GUI_2DM() {
         initComponents();
     }
-
-    private void canvasPropertyChange(PropertyChangeEvent e) {
-        // TODO add your code here
-    }
-
-    private void canvasComponentResized(ComponentEvent e) {
-        // TODO add your code here
-    }
-
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -60,6 +49,9 @@ public class GUI_2DM extends JFrame {
 
         //======== scrollPane ========
         {
+
+            //---- list1 ----
+            list1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             scrollPane.setViewportView(list1);
         }
 
@@ -274,7 +266,8 @@ public class GUI_2DM extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - Matteo Gruppi
     protected JScrollPane scrollPane;
-    protected JList<String> list1;
+    protected JList<Figura
+> list1;
     protected JButton btnAddFig;
     protected JButton btnSetY;
     protected JButton btnSetX;

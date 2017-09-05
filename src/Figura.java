@@ -144,8 +144,7 @@ public class Figura {
 		this.width = width;
 	}
 
-	public void resize(double scale) {
-	};
+	public void resize(double scale) {	};
 
 	public void setHeight(double d) {
 		this.height = d;
@@ -187,45 +186,10 @@ public class Figura {
 		return center;
 	}
 
-	public void draw(Graphics g) {
-
-		Graphics2D d = (Graphics2D) g;
-
-		// this.initFig(this.x, this.y, this.width, this.height);
-		if (this.tipo == "cerchio") {
-			d.drawOval((int) xPoints[0], (int) yPoints[0], (int) width, (int) width);// in questo caso width e' il
-																						// diametro
-		}
-		if (this.tipo != "cerchio") {
-			// d.drawPolygon(xPoints, yPoints, nLati);
-			int[] xP = { 0, 0, 0, 0 };
-			int[] yP = { 0, 0, 0, 0 };
-			for (int i = 0; i < this.getNLati(); i++) {
-				xP[i] = (int) xPoints[i];
-				yP[i] = (int) yPoints[i];
-			}
-			p = new Polygon(xP, yP, nLati);
-			d.setColor(colore);
-			d.fillPolygon(p);
-			d.drawPolygon(p);
-		}
-	}
+	public void draw(Graphics g) { }
 
 	public boolean contains(Point test) {
-		if (this.tipo != "cerchio")
 			return p.contains(test);
-		else {
-			double xc = this.xPoints[0] + (this.width / 2);
-			double yc = this.yPoints[0] + (this.width / 2);
-			double quadratica = ((test.x - xc) * (test.x - xc)) + ((test.y - yc) * (test.y - yc));
-			double raggio2 = (this.width / 2) * (this.width / 2);
-			if (quadratica <= raggio2) { // disuguaglianza per vedere se il punto in cui ho clickato col mouse è
-											// all'interno (circorferenza compresa) nel cerchio disegnato
-				return true;
-			} else
-				return false;
-		}
-
 	}
 
 	public Float getVersione() {
@@ -236,6 +200,7 @@ public class Figura {
 		this.versione = versione;
 	}
 
+
 	public String getName() {
 		if (name.isEmpty())
 			return tipo;
@@ -244,6 +209,14 @@ public class Figura {
 
 	public String getFinalName() {
 		if (name.isEmpty())
+			return tipo;
+		String finalName = name + " " + versione;
+		return finalName;
+	}
+
+	@Override
+	public String toString() {
+		if(name.isEmpty())
 			return tipo;
 		String finalName = name + " " + versione;
 		return finalName;

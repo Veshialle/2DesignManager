@@ -17,8 +17,9 @@ new FormModel {
 				name: "scrollPane"
 				add( new FormComponent( "javax.swing.JList" ) {
 					name: "list1"
+					"selectionMode": 0
 					auxiliary() {
-						"JavaCodeGenerator.typeParameters": "String"
+						"JavaCodeGenerator.typeParameters": "Figura\n"
 					}
 				} )
 			} )

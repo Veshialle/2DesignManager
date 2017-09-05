@@ -51,4 +51,22 @@ public class Polygon extends Figura {
 
 		}
 	}
+
+
+	@Override
+	public void draw(Graphics g) {
+		Graphics2D d = (Graphics2D) g;
+		super.draw(g);
+		// d.drawPolygon(xPoints, yPoints, nLati);
+		int[] xP = { 0, 0, 0, 0 };
+		int[] yP = { 0, 0, 0, 0 };
+		for (int i = 0; i < this.getNLati(); i++) {
+			xP[i] = (int) xPoints[i];
+			yP[i] = (int) yPoints[i];
+		}
+		p = new java.awt.Polygon(xP, yP, nLati);
+		d.setColor(getColor());
+		d.fillPolygon(p);
+		d.drawPolygon(p);
+	}
 }

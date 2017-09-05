@@ -38,7 +38,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
 
-
+import com.intellij.ui.components.JBList;
 import org.xml.sax.SAXException;
 
 
@@ -66,34 +66,29 @@ public class Main {
 		window.pack();
 		window.validate();
 		window.setVisible(true);
-		DefaultListModel<String> model = new DefaultListModel<>(); // lista di stringhe
+		DefaultListModel<Figura> model = new DefaultListModel<>(); // lista di stringhe
 		// figura.tipo -> i.tipo
 		for (Figura i : fig)
-			model.addElement(i.getFinalName()); // aggiungo dentro la lista di stringhe "model" il tipo di figura ->
+			model.addElement(i); // aggiungo dentro la lista di stringhe "model" il tipo di figura ->
         window.list1 = new JList<>(model);
         window.scrollPane.setViewportView(window.list1);
 		window.canvas.paintImage();
 
 
 
-		window.btnSetX.addActionListener(new ActionListener() { // Imposta val X
-			public void actionPerformed(ActionEvent e) {
-				int firstSelIx = window.list1.getSelectedIndex();
-				Figura f = fig.get(firstSelIx);
-				f.setX((double) window.spinnerPos.getValue());
-				window.canvas.paintImage();
-			}
-		});
+
 
 		// Per poter settare la barra dell'angolo quando si seleziona tramite la lista
 		// (scrollPane)
+
 
 		window.list1.addListSelectionListener(new ListSelectionListener() {
 			@Override
 			public void valueChanged(ListSelectionEvent arg0) {
 				// TODO Auto-generated method stub
-				firstSelIx = window.list1.getSelectedIndex();
-				if (!model.isEmpty()) {
+				int firstSelIx = window.list1.getSelectedIndex();
+				System.out.print(firstSelIx);
+				if (firstSelIx >= 0) {
 					window.btnRemoveFig.setEnabled(true);
 					window.btnSaveFig.setEnabled(true);
 					window.btnDown.setEnabled(true);
@@ -109,7 +104,7 @@ public class Main {
 					window.btnRotation.setEnabled(true);
 					window.rotationBar.setEnabled(true);
 					window.rotationBar.setValue((int) fig.get(firstSelIx).getAngle());
-					if(model.getSize() >= 2){
+					if(window.list1.getSelectedIndices().length >= 2){
 						window.btnCompFig.setEnabled(true);
 						if(fig.get(firstSelIx).getClass() != Composite.class) window.checkboColorComp.setEnabled(true);
 						else window.checkboColorComp.setEnabled(false);
@@ -128,10 +123,13 @@ public class Main {
 					window.radioResize.setEnabled(false);
 					window.btnColor.setEnabled(false);
 					window.btnRotation.setEnabled(false);
+					window.rotationBar.setValue(0);
 					window.rotationBar.setEnabled(false);
 				}
 			}
 		});
+
+
 		window.btnSetY.addActionListener(new ActionListener() { // Imposta val Y
 			public void actionPerformed(ActionEvent e) {
 				int firstSelIx = window.list1.getSelectedIndex();
@@ -140,6 +138,16 @@ public class Main {
 				window.canvas.paintImage();
 			}
 		});
+
+		window.btnSetX.addActionListener(new ActionListener() { // Imposta val X
+			public void actionPerformed(ActionEvent e) {
+				int firstSelIx = window.list1.getSelectedIndex();
+				Figura f = fig.get(firstSelIx);
+				f.setX((double) window.spinnerPos.getValue());
+				window.canvas.paintImage();
+			}
+		});
+
 		window.btnRotation.addActionListener(new ActionListener() { // Riportare alla posizione iniziale (0 gradi)
 			public void actionPerformed(ActionEvent e) {
 				int firstSelIx = window.list1.getSelectedIndex();
@@ -150,14 +158,18 @@ public class Main {
 			}
 
 		});
+
 		window.rotationBar.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-                JSlider rotation = (JSlider) e.getSource();
-				double angle = (double) rotation.getValue();
-				Figura f = fig.get(firstSelIx);
-				f.rotate(angle, f.getCenterX(), f.getCenterY());
-				window.canvas.paintImage();
+				if(!model.isEmpty()) {
+					int firstSelIx = window.list1.getSelectedIndex();
+					JSlider rotation = (JSlider) e.getSource();
+					double angle = (double) rotation.getValue();
+					Figura f = fig.get(firstSelIx);
+					f.rotate(angle, f.getCenterX(), f.getCenterY());
+					window.canvas.paintImage();
+				}
 			}
 		});
 
@@ -187,16 +199,11 @@ public class Main {
 
 					fig.add(f); // aggiungi la figura appena creata f alla lista di Figure "fig"
 					window.canvas.paintImage(); // disegna
-
-					model.addElement(f.getFinalName()); // aggiungi alla lista di stringhe il tipo della nuova figura
+					model.addElement(f); // aggiungi alla lista di stringhe il tipo della nuova figura
+					// inserita
 					window.list1.setSelectedIndex(model.getSize() - 1);// seleziona nella lista output l'ultima figura
-																	// inserita
-					firstSelIx = window.list1.getSelectedIndex();
+					window.scrollPane.validate();
 					idFigura++;
-					window.rotationBar.setEnabled(!(fig.isEmpty()) || (fig.get(firstSelIx).getClass() != Circle.class));
-					window.rotationBar.setValue((int) fig.get(firstSelIx).getAngle());
-					if (!(model.isEmpty()))
-						window.btnRemoveFig.setEnabled(true);
 				}
 			} else {
 				JOptionPane.showMessageDialog(frame, "Hai annullato la creazione di una nuova figura");
@@ -204,26 +211,16 @@ public class Main {
 		});
 
 		window.btnRemoveFig.addActionListener(e -> { // Bottone rimuovi Figura
-
 			int firstSelIx = window.list1.getSelectedIndex(); // dammi l'indice della figura selezionata
+
+			System.out.print(fig.get(firstSelIx).getName());
+			model.removeElement(fig.get(firstSelIx));
+			//model.remove(firstSelIx);// rimuovi la stringa della figura nella lista dei tipi
 			fig.remove(firstSelIx); // rimuovi dalla lista di figure la figura con l'indice appena ricavato
-			model.remove(firstSelIx);// rimuovi la stringa della figura nella lista dei tipi
+
 			window.scrollPane.validate();
 			window.canvas.paintImage();// disegna di nuovo
-			window.list1.setSelectedIndex(model.getSize() - 1);
-			boolean enableRotationbar = true;
-			firstSelIx = window.list1.getSelectedIndex();
-
-			if (firstSelIx < 0) {
-				enableRotationbar = false;
-			}
-			window.rotationBar.setEnabled(enableRotationbar);
-
-			if (enableRotationbar) {
-				window.rotationBar.setValue((int) fig.get(firstSelIx).getAngle());
-			}
-			if (model.isEmpty())
-				window.btnRemoveFig.setEnabled(false);
+			if(!model.isEmpty()) window.list1.setSelectedIndex(model.getSize() - 1);
 
 		});
 
@@ -231,6 +228,7 @@ public class Main {
 
 		window.btnColor.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0){
+				int firstSelix = window.list1.getSelectedIndex();
 				Color newColor = JColorChooser.showDialog(null, "Choose a color", Color.RED);
 				fig.get(firstSelIx).setColor(newColor);
 				window.canvas.paintImage();
@@ -245,9 +243,10 @@ public class Main {
 		window.btnLeft.addActionListener(e -> { // bottone muovi a Sinistra
 			int firstSelIx = window.list1.getSelectedIndex(); // dammi l'indice della figura selezionata nella finestra di
 														// figure
-			if ((double) window.spinnerPos.getValue() >= 0) {// se il valore della finestra di input delle posizioni e'
+			if (!window.spinnerPos.getValue().equals(0)) {// se il valore della finestra di input delle posizioni e'
 														// positivo
-				double x1 = (-(double) window.spinnerPos.getValue());// prendi il valore negativo
+				double x1 = (Integer)window.spinnerPos.getValue();
+				//double x1 = (-(double) window.spinnerPos.getValue());// prendi il valore negativo
 				fig.get(firstSelIx).move(x1, 0); // muovi la figura selezionata del valore x1, y rimangono uguali
 			}
 			window.canvas.paintImage();// disegna di nuovo
@@ -257,8 +256,8 @@ public class Main {
 		// bottone Right
 		window.btnRight.addActionListener(e -> { // stessa cosa di prima, muovi a destra
 			int firstSelIx = window.list1.getSelectedIndex();
-			if ((double) window.spinnerPos.getValue() >= 0) {
-				double x1 = (+(double) window.spinnerPos.getValue());
+			if (!window.spinnerPos.getValue().equals(0)) {
+				double x1 = (+(Integer) window.spinnerPos.getValue());
 				fig.get(firstSelIx).move(x1, 0);
 
 			}
@@ -269,8 +268,8 @@ public class Main {
 		// bottone Down
 		window.btnDown.addActionListener(e -> { // stessa cosa di prima, muovi in giu'
 			int firstSelIx = window.list1.getSelectedIndex();
-			if ((double) window.spinnerPos.getValue() >= 0) {
-				double y1 = (+(double) window.spinnerPos.getValue());
+			if ( !window.spinnerPos.getValue().equals(0)) {
+				double y1 = (+(Integer) window.spinnerPos.getValue());
 				fig.get(firstSelIx).move(0, y1);
 
 			}
@@ -281,8 +280,8 @@ public class Main {
 		// bottone Up
 		window.btnUp.addActionListener(e -> { // stessa cosa di prima, muovi in su
 			int firstSelIx = window.list1.getSelectedIndex();
-			if ((double) window.spinnerPos.getValue() >= 0) {
-				double y1 = (-(double) window.spinnerPos.getValue());
+			if (!window.spinnerPos.getValue().equals(0)) {
+				double y1 = (-(Integer) window.spinnerPos.getValue());
 				fig.get(firstSelIx).move(0, y1);
 
 			}
@@ -356,7 +355,7 @@ public class Main {
 
 					window.canvas.paintImage(); // disegna
 
-					model.addElement(loadFig.get(loadSelIx).getFinalName()); // aggiungi alla lista di stringhe il tipo
+					model.addElement(loadFig.get(loadSelIx)); // aggiungi alla lista di stringhe il tipo
 																				// della nuova figura
 					window.list1.setSelectedIndex(model.getSize() - 1);// seleziona nella lista output l'ultima figura
 																	// inserita
@@ -381,7 +380,7 @@ public class Main {
 						isInside = true;
 						window.list1.setSelectedIndex(i);
 
-						firstSelIx = window.list1.getSelectedIndex();
+						int firstSelIx = window.list1.getSelectedIndex();
 						/*
 						if (fig.get(i).getClass() != Circle.class) {
 							window.rotationBar.setEnabled(true);
@@ -404,7 +403,7 @@ public class Main {
 			@Override
 			public void mouseDragged(MouseEvent e) {
 				if (isInside) {
-					firstSelIx = window.list1.getSelectedIndex();
+					int firstSelIx = window.list1.getSelectedIndex();
 					double dx = e.getX() - mousePt.x;
 					double dy = e.getY() - mousePt.y;
 					if (window.radioResize.isSelected()) {
@@ -436,29 +435,31 @@ public class Main {
 			Component frame = null;
 			Icon icon = null;
 			String choosed = null;
-
-			if (JOptionPane.showConfirmDialog(frame, "Are You sure to join the figures in the canvas?")
+			List<Figura> composition = new ArrayList<>();
+			if (JOptionPane.showConfirmDialog(frame, "Are You sure to join figures selected?")
 					== JOptionPane.YES_OPTION){
 				String name = JOptionPane.showInputDialog("Inserire nome della figura.", fig.get(firstSelIx).getName());
+				for(int k : window.list1.getSelectedIndices()) composition.add(fig.get(k));
 				Figura f;
 				f = new Composite(fig, true, name);
-				for(Figura i : fig){
+				window.list1.getSelectedIndices();
+				int firstSelIx;
+				for(Figura i : composition){
 					firstSelIx = window.list1.getSelectedIndex(); // dammi l'indice della figura selezionata
 					fig.remove(firstSelIx); // rimuovi dalla lista di figure la figura con l'indice appena ricavato
 					model.remove(firstSelIx);// rimuovi la stringa della figura nella lista
 					window.list1.setSelectedIndex(model.getSize() - 1);
-					firstSelIx = window.list1.getSelectedIndex();
-					window.rotationBar.setValue((int) fig.get(firstSelIx).getAngle());
 				}
 
 				window.scrollPane.validate();
 				fig.add(f); // aggiungi la figura appena creata f alla lista di Figure "fig"
-				model.addElement(f.getFinalName()); // aggiungi alla lista di stringhe il tipo della nuova figura
+				model.addElement(f); // aggiungi alla lista di stringhe il tipo della nuova figura
 				window.list1.setSelectedIndex(model.getSize() - 1);// seleziona nella lista output l'ultima figura
+				window.scrollPane.validate();
 				// inserita
 				firstSelIx = window.list1.getSelectedIndex();
 				idFigura++;
-				window.rotationBar.setEnabled(!(fig.isEmpty()) || (fig.get(firstSelIx).getClass() != Circle.class));
+				window.rotationBar.setEnabled(!(fig.isEmpty()));
 				window.rotationBar.setValue((int) fig.get(firstSelIx).getAngle());
 				window.canvas.paintImage();
 			}

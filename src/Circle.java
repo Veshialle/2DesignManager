@@ -19,6 +19,14 @@ public class Circle extends Figura {
 	}
 
 	@Override
+	public void draw(Graphics g) {
+		Graphics2D d = (Graphics2D) g;
+		super.draw(g);
+		d.setColor(getColor());
+		d.fillOval((int) xPoints[0], (int) yPoints[0], (int) width, (int) width);
+	}
+
+	@Override
 	public double getCenterX() {
 		double center;
 		center = this.xPoints[0];
@@ -45,5 +53,24 @@ public class Circle extends Figura {
 			this.setXPoints(centerCircleX);
 			this.setYPoints(centerCircleY);
 		}
+	}
+
+	@Override
+	public void resize(double scale) {
+		super.resize(scale);
+
+	}
+
+	@Override
+	public boolean contains(Point test) {
+		double xc = this.xPoints[0] + (this.width / 2);
+		double yc = this.yPoints[0] + (this.width / 2);
+		double quadratica = ((test.x - xc) * (test.x - xc)) + ((test.y - yc) * (test.y - yc));
+		double raggio2 = (this.width / 2) * (this.width / 2);
+		if (quadratica <= raggio2) { // disuguaglianza per vedere se il punto in cui ho clickato col mouse è
+			// all'interno (circorferenza compresa) nel cerchio disegnato
+			return true;
+		} else
+			return false;
 	}
 }

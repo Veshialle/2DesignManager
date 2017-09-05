@@ -34,11 +34,6 @@ public class MyCanvas extends JComponent{
     public void paintImage() {
         Graphics d = getGraphics();
         d.clearRect(0, 0, this.getWidth(), this.getHeight()); // pulisce il canvas
-        for (Figura i : this.getArray()) { // per ogni figura nella lista di figure
-            if (i.visibile == true) {// se la figura e' visibile
-                i.draw(d);// chiama il metodo "disegna" della figura
-            }
-        }
         if(this.getGridFlag()){
             int k;
             int dimCell = 20;
@@ -51,11 +46,15 @@ public class MyCanvas extends JComponent{
             int rows = (height / dimCell) + carryR;
             for (k = 0; k < rows; k++)
                 d.drawLine(0, k * dimCell , width, k * dimCell );
-
             for (k = 0; k < columns; k++)
                 d.drawLine(k*dimCell , 0, k*dimCell , height);
             // Nel caso si voglia fare una cosa piu` bella esteticamente, basta partire dal centro con la costruzione
             // della griglia e non dall'angolo in alto a sinistra
+        }
+        for (Figura i : this.getArray()) { // per ogni figura nella lista di figure
+            if (i.visibile == true) {// se la figura e' visibile
+                i.draw(d);// chiama il metodo "disegna" della figura
+            }
         }
         this.validate();
     }

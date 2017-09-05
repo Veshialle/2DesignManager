@@ -1,5 +1,6 @@
 
 // import java.awt.geom.AffineTransform;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,6 +84,13 @@ public class Composite extends Figura {
 
 			// }
 
+		}
+	}
+
+	@Override
+	public void draw(Graphics g) {
+		for(Figura i : this.Composition){
+			i.draw(g);
 		}
 	}
 }
