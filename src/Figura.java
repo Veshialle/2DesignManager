@@ -1,8 +1,8 @@
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
+import org.apache.commons.io.IOUtils;
+
+import java.awt.*;
 import java.awt.Polygon;
+import java.io.*;
 //import java.awt.geom.AffineTransform;
 
 /**
@@ -15,7 +15,7 @@ import java.awt.Polygon;
  */
 
 // INIZIO CLASSE FIGURA
-public class Figura {
+public class Figura implements java.io.Serializable{
 	protected int idFigura;
 	protected double x, y, width, height;
 	protected int nLati;
@@ -24,16 +24,19 @@ public class Figura {
 	protected double angle;
 	private Float versione = 0.0f;
 	protected double[] xPoints = new double[] { 0, 0, 0, 0 };
+
 	protected double[] yPoints = new double[] { 0, 0, 0, 0 };
 	protected String tipo;
 	private String name;
 	protected Polygon p;
+	protected File description;
 
 	public Figura() {
 		super();
 		this.idFigura = -1;
 		this.tipo = "";
 		this.setName("");
+
 	}
 
 	public Figura(String name, String tipo, int idFigura, double x, double y, double width, double height) {
@@ -43,6 +46,8 @@ public class Figura {
 		this.width = width;
 		this.height = height;
 		this.init(x, y, width, height); // inizializza i punti della figura
+
+		this.description  = new File("save/", this.getFinalName() + "." + this.getClass()  + ".txt");
 	}
 
 	// mossa azzardata, let's see what happen
@@ -57,6 +62,9 @@ public class Figura {
 		this.angle = angle;
 		this.colore = colore;
 		this.setVersione(versione);
+
+
+		this.description  = new File("save/", this.getFinalName() + "." + this.getClass()  + ".obj");
 	}
 
 	public void init(double x, double y, double width, double height) { // inizializza i punti della figura
@@ -86,6 +94,7 @@ public class Figura {
 			yPoints = new double[] { y, 0, 0, 0 };
 			this.colore = Color.BLUE;
 		}
+		this.description  = new File("save/", this.getFinalName() + "." + this.getClass()  + ".obj");
 
 	}
 
@@ -144,7 +153,7 @@ public class Figura {
 		this.width = width;
 	}
 
-	public void resize(double scale) {	};
+	public void resize(double scaleX, double scaleY, double centerX, double centerY) {	};
 
 	public void setHeight(double d) {
 		this.height = d;
@@ -189,7 +198,7 @@ public class Figura {
 	public void draw(Graphics g) { }
 
 	public boolean contains(Point test) {
-			return p.contains(test);
+		return p.contains(test);
 	}
 
 	public Float getVersione() {
@@ -210,7 +219,7 @@ public class Figura {
 	public String getFinalName() {
 		if (name.isEmpty())
 			return tipo;
-		String finalName = name + " " + versione;
+		String finalName = name + "." + versione;
 		return finalName;
 	}
 
@@ -241,4 +250,41 @@ public class Figura {
 	public Color getColor() {
 		return colore;
 	}
+
+	public File getDescription() { return description; }
+
+	public String getStringDescription(){
+		FileInputStream inputStream = null;
+		Reader inputReader = null;
+		try {
+			inputStream = new FileInputStream("foo.txt");
+			String everything = IOUtils.toString(inputStream, "UTF-8");
+			return everything;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				inputStream.close();
+			} catch (Exception e){ }
+		}
+		return null;
+	}
+
+	public void setDescription (String description){
+		BufferedWriter writer = null;
+		try {
+			writer = new BufferedWriter(new FileWriter(getDescription()));
+			writer.write(description);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// Close the writer regardless of what happens...
+				writer.close();
+			} catch (Exception e) {
+			}
+		}
+
+	}
+
 }

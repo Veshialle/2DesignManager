@@ -56,8 +56,8 @@ public class Circle extends Figura {
 	}
 
 	@Override
-	public void resize(double scale) {
-		super.resize(scale);
+	public void resize(double scaleX, double scaleY, double centerX, double centerY) {
+		super.resize(scaleX, scaleY, centerX, centerY);
 
 	}
 

@@ -1,45 +1,29 @@
-import java.awt.Cursor;
+import org.xml.sax.SAXException;
 
-//import java.awt.Dimension;
-//import java.awt.Graphics2D;
-import java.awt.Point;
-//import java.awt.Polygon;
-import java.awt.event.*;
-import java.beans.PropertyChangeEvent;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JFrame;
-
-//import java.awt.BorderLayout;
-import java.awt.Component;
-
-import javax.swing.DefaultListModel;
-import javax.swing.Icon;
-import javax.swing.JList;
-//import javax.swing.JTextField;
-//import javax.swing.JMenuBar;
-import javax.swing.JOptionPane;
-//import javax.swing.JRadioButtonMenuItem;
-//import javax.swing.JMenu;
-import javax.swing.JList;
-import javax.swing.JSlider;
-import javax.swing.JColorChooser;
-import java.awt.Color;
-
-//import java.awt.geom.AffineTransform;
-//import java.io.File;
-import java.io.IOException;
+import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-
-import com.intellij.ui.components.JBList;
-import org.xml.sax.SAXException;
+//import java.awt.Dimension;
+//import java.awt.Graphics2D;
+//import java.awt.Polygon;
+//import java.awt.BorderLayout;
+//import javax.swing.JTextField;
+//import javax.swing.JMenuBar;
+//import javax.swing.JRadioButtonMenuItem;
+//import javax.swing.JMenu;
+//import java.awt.geom.AffineTransform;
+//import java.io.File;
 
 
 public class Main {
@@ -73,6 +57,8 @@ public class Main {
         window.list1 = new JList<>(model);
         window.scrollPane.setViewportView(window.list1);
 		window.canvas.paintImage();
+
+		System.out.println(Figura.class.getSimpleName());
 
 
 
@@ -297,6 +283,7 @@ public class Main {
 			} else {
 				try {
 					XMLManager.savePolygon(fig.get(firstSelIx));
+					Manager.saveObj(fig.get(firstSelIx));
 					JOptionPane.showMessageDialog(frame, "Figure saved!");
 				} catch (ParserConfigurationException | IOException | SAXException | TransformerException e1) {
 					// TODO Auto-generated catch block
@@ -310,6 +297,14 @@ public class Main {
 			List<Figura> loadFig = new ArrayList<Figura>();
 			int L;
 			int loadSelIx = 0;
+			File fail = null;
+			Figura ciao = null;
+			try{
+				ciao = Manager.loadObj(fail);
+			} catch (IOException all){
+				all.printStackTrace();
+			}
+			/*
 			try {
 				loadFig = XMLManager.loadPolygon();
 			} catch (ParserConfigurationException | SAXException | IOException all) {
@@ -350,7 +345,7 @@ public class Main {
 					 * loadFig.get(loadSelIx).getName() + "!"); System.out.println(
 					 * "Prendo il primo punto per GUI_2DM: " + loadFig.get(loadSelIx).getxPoint(0)+
 					 * " , "+ loadFig.get(loadSelIx).getyPoint(0)+ " !");
-					 */
+					 */ /*
 					fig.add(loadFig.get(loadSelIx)); // aggiungi la figura appena creata f alla lista di Figure "fig"
 
 					window.canvas.paintImage(); // disegna
@@ -368,6 +363,7 @@ public class Main {
 				if (!(model.isEmpty()))
 					window.btnRemoveFig.setEnabled(true);
 			}
+			*/
 		});
 		// mouse listener
 		window.canvas.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -409,7 +405,9 @@ public class Main {
 					if (window.radioResize.isSelected()) {
 						double xVar = (e.getX() - mousePt.x) / (fig.get(firstSelIx).getCenterX() - mousePt.x);
 						double scaleX = (-xVar * 8 / 10) + 1.0; // era troppo veloce a ingrandire
-						fig.get(firstSelIx).resize(scaleX);
+						double yVar = (e.getY() - mousePt.y) / (fig.get(firstSelIx).getCenterY() - mousePt.y);
+						double scaleY = (-yVar * 8 / 10) + 1.0; // era troppo veloce a ingrandire
+						fig.get(firstSelIx).resize(scaleX, scaleX, fig.get(firstSelIx).getCenterX(), fig.get(firstSelIx).getCenterY());
 					} else {
 						fig.get(firstSelIx).move(dx, dy);
 					}
@@ -441,7 +439,7 @@ public class Main {
 				String name = JOptionPane.showInputDialog("Inserire nome della figura.", fig.get(firstSelIx).getName());
 				for(int k : window.list1.getSelectedIndices()) composition.add(fig.get(k));
 				Figura f;
-				f = new Composite(fig, true, name);
+				f = new Composite(composition, true, name);
 				window.list1.getSelectedIndices();
 				int firstSelIx;
 				for(Figura i : composition){

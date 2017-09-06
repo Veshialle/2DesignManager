@@ -1,7 +1,6 @@
 import java.awt.Color;
 import java.awt.Component;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,6 +60,7 @@ public class XMLManager {
 		fileName = fig.getName() + ".xml";
 		// File file = new File(fileName);
 		File file = new File(path, fileName);
+		File file2 = new File(path, fig.getFinalName() + ".obj");
 		docBuilder = docFactory.newDocumentBuilder();
 		doc = null;
 		rootElement = null;
@@ -89,6 +89,23 @@ public class XMLManager {
 			// System.out.println("La nuova versione salvata è la: " +newVersione);
 			fig.setVersione(newVersione);
 		}
+
+
+
+		// test
+		FileOutputStream fos = new FileOutputStream(file2);
+		ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+		oos.writeObject(fig);
+
+
+
+
+		// fine test
+
+
+
+
 		Element versione = doc.createElement("versione");
 		String strVersione = String.valueOf(fig.getVersione());
 		versione.setAttribute("versione", strVersione);

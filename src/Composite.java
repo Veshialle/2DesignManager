@@ -63,14 +63,10 @@ public class Composite extends Figura {
 		this.angle = angle;
 	}
 
-	public void rotate(double angle) {
-		double[] center = new double[] { 0, 0 };
+	public void rotate(double angle, double centerX, double centerY) {
 		double rotationAngle = angle - getAngle();
-		this.setAngle(angle);
-		center[0] = this.getCenterX();
-		center[1] = this.getCenterY();
 		for (Figura i : Composition) {
-			i.rotate(rotationAngle, center[0], center[1]);
+			i.rotate(rotationAngle, centerX, centerY);
 			/*
 			 * 
 			 * for(int j=0;j<this.nLati;j++){ double[] pt = {i.xPoints[j], i.yPoints[j]};
@@ -92,5 +88,26 @@ public class Composite extends Figura {
 		for(Figura i : this.Composition){
 			i.draw(g);
 		}
+	}
+
+	@Override
+	public void move(double x, double y) {
+		super.move(x, y);
+		for(Figura i: this.Composition){
+			i.move(x, y);
+		}
+	}
+
+	@Override
+	public void setColor(Color color) {
+		super.setColor(color);
+	}
+
+	@Override
+	public boolean contains(Point test) {
+		for(Figura i: this.Composition){
+			if(i.contains(test)) return true;
+		}
+		return false;
 	}
 }

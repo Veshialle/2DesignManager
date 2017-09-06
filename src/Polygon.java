@@ -40,14 +40,18 @@ public class Polygon extends Figura {
 		}
 	}
 
-	public void resize(double scale) {
-		double cx = this.getCenterX();
-		double cy = this.getCenterY();
+	public void resize(double scaleX, double scaleY, double centerX, double centerY) {
 		for (int i = 0; i < this.nLati; i++) {
-			double[] pt = { xPoints[i] - cx, yPoints[i] - cy };
-			AffineTransform.getScaleInstance(scale, scale).transform(pt, 0, pt, 0, 1);
-			xPoints[i] = pt[0] + cx;
-			yPoints[i] = pt[1] + cy;
+			double[] pt = { xPoints[i] - centerX, yPoints[i] - centerY };
+			AffineTransform.getScaleInstance(scaleX, scaleY).transform(pt, 0, pt, 0, 1);
+			//if(pt[0] < centerX +2 || centerX > pt[0] - 2)
+				xPoints[i] = pt[0] + centerX;
+			//else
+			//	xPoints[i] = pt[0] + 3;
+			//if(pt[1] < centerY + 2 && centerY > pt[1] - 2)
+				yPoints[i] = pt[1] + centerY;
+			//else
+			//	yPoints[i] = pt[1] + 3;
 
 		}
 	}
@@ -68,5 +72,10 @@ public class Polygon extends Figura {
 		d.setColor(getColor());
 		d.fillPolygon(p);
 		d.drawPolygon(p);
+	}
+
+	@Override
+	public boolean contains(Point test) {
+		return super.contains(test);
 	}
 }

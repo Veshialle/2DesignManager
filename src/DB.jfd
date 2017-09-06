@@ -1,0 +1,75 @@
+JFDML JFormDesigner: "6.0.2.0.116" Java: "1.8.0_144" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class info.clearthought.layout.TableLayout ) {
+			"$columnSpecs": "650.0, 97.0, 98.0"
+			"$rowSpecs": "41.0, 38.0, pref"
+			"hGap": 7
+			"vGap": 7
+		} ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane1"
+				add( new FormComponent( "javax.swing.JTable" ) {
+					name: "tableDB"
+					"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector, new java.util.Vector {
+						add( "Name" )
+						add( "Version" )
+						add( "Type" )
+						add( "Number of sides/figures" )
+						add( "File Name" )
+						add( "Annotations" )
+					}, new java.util.Vector {
+						add( null )
+						add( null )
+						add( null )
+						add( null )
+						add( null )
+						add( null )
+					}, new java.util.Vector {
+						add( null )
+						add( null )
+						add( null )
+						add( null )
+						add( null )
+						add( null )
+					}, new java.util.Vector {
+						add( null )
+						add( null )
+						add( null )
+						add( null )
+						add( null )
+						add( null )
+					} )
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.TableConstraints ) {
+				"gridHeight": 3
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btnLoad"
+				"text": "Load"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.TableConstraints ) {
+				"gridX": 1
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btnRemove"
+				"text": "Remove"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.TableConstraints ) {
+				"gridX": 2
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btnDescription"
+				"text": "Show Description Extended"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.TableConstraints ) {
+				"gridX": 1
+				"gridY": 1
+				"gridWidth": 2
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 25 )
+			"size": new java.awt.Dimension( 875, 500 )
+		} )
+	}
+}
