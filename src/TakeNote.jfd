@@ -1,0 +1,36 @@
+JFDML JFormDesigner: "6.0.2.0.116" Java: "1.8.0_144" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		auxiliary() {
+			"JavaCodeGenerator.defaultVariableModifiers": 4
+		}
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class info.clearthought.layout.TableLayout ) {
+			"$columnSpecs": "212.0, 122.0, 138.0"
+			"$rowSpecs": "251.0, 43.0"
+			"hGap": 5
+			"vGap": 5
+		} ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane1"
+				add( new FormComponent( "javax.swing.JTextArea" ) {
+					name: "textArea1"
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.TableConstraints ) {
+				"gridWidth": 3
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btnSaveNote"
+				"text": "Save"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.TableConstraints ) {
+				"gridX": 2
+				"gridY": 1
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 485, 330 )
+		} )
+	}
+}

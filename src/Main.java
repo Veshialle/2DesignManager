@@ -1,13 +1,9 @@
-import org.xml.sax.SAXException;
-
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -38,9 +34,8 @@ public class Main {
 	private static Point mousePt;
 	private static int firstSelIx;
 	private static boolean isInside;
-	private static int idFigura = XMLManager.countFigure();
+	private static int idFigura = (Manager.countFigure()-1)/2;
 	private static List<Figura> fig = new ArrayList<>(); // fig e' una lista di oggetti Figura
-
 
 	public static void main(String[] a) {
 
@@ -59,7 +54,6 @@ public class Main {
         window.scrollPane.setViewportView(window.list1);
 		window.canvas.paintImage();
 
-		System.out.println(Figura.class.getSimpleName());
 
 
 
@@ -277,16 +271,29 @@ public class Main {
 		});
 		// bottone Save
 		window.btnSaveFig.addActionListener(e -> {
-			int firstSelIx = window.list1.getSelectedIndex();
 			Component frame = null;
 			if (fig.isEmpty()) {
 				JOptionPane.showMessageDialog(frame, "Error, first create or load a figure\n");
 			} else {
 				try {
-					XMLManager.savePolygon(fig.get(firstSelIx));
+					//XMLManager.savePolygon(fig.get(firstSelIx));
+					if(JOptionPane.showConfirmDialog(null, "Do you want to take a note of the Figure saved?") == JOptionPane.YES_OPTION){
+						TakeNote note = new TakeNote();
+						note.pack();
+						note.validate();
+						note.setVisible(true);
+						note.btnSaveNote.addActionListener(acl ->{
+							if(note.textArea1.getText().isEmpty()){
+								JOptionPane.showMessageDialog(null, "Note is empty");
+							} else {
+								fig.get(window.list1.getSelectedIndex()).setDescription(note.textArea1.getText());
+								JOptionPane.showMessageDialog(frame, "Figure saved!");
+							}
+						});
+					}
+					System.out.println(fig.get(firstSelIx).getDescription().getName());
 					Manager.saveObj(fig.get(firstSelIx));
-					JOptionPane.showMessageDialog(frame, "Figure saved!");
-				} catch (ParserConfigurationException | IOException | SAXException | TransformerException e1) {
+				} catch ( IOException  e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 					JOptionPane.showMessageDialog(frame, "Error saving the Figure!");
@@ -329,7 +336,26 @@ public class Main {
 				if(table.tableDB.getSelectedRow() < 0){
 					JOptionPane.showMessageDialog(null, "Select a Figure to show description");
 				} else {
-					JOptionPane.showMessageDialog(null, m.getStringDescription(table.tableDB.getSelectedRow()));
+					TakeNote note = new TakeNote();
+					note.btnSaveNote.setText("Change");
+					note.textArea1.setText(m.getStringDescription(table.tableDB.getSelectedRow()));
+					note.pack();
+					note.validate();
+					note.setVisible(true);
+					note.btnSaveNote.addActionListener(last ->{
+						if(note.textArea1.getText().isEmpty()){
+							JOptionPane.showMessageDialog(null, "Note is empty");
+						} else {
+							System.out.println(note.textArea1.getText());
+							fig.get(window.list1.getSelectedIndex()).setDescription(note.textArea1.getText());
+						}
+					});
+					/*
+					if(JOptionPane.showConfirmDialog(null, m.getStringDescription(table.tableDB.getSelectedRow()) + "\n" + "Modificare?")== JOptionPane.YES_OPTION){
+						TakeNote note = new TakeNote();
+
+					}
+					*/
 				}
 			});
 

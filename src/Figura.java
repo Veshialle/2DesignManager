@@ -62,7 +62,7 @@ public class Figura implements java.io.Serializable{
 		this.setVersione(versione);
 
 
-		this.description  = new File("save/", this.getFinalName() + "." + this.getClass()  + ".obj");
+		this.description  = new File("save/", this.getFinalName() + "." + this.getClass()  + ".txt");
 	}
 
 	public void init(double x, double y, double width, double height) { // inizializza i punti della figura
@@ -92,7 +92,7 @@ public class Figura implements java.io.Serializable{
 			yPoints = new double[] { y, 0, 0, 0 };
 			this.colore = Color.BLUE;
 		}
-		this.description  = new File("save/", this.getFinalName() + "." + this.getClass()  + ".obj");
+		this.description  = new File("save/", this.getFinalName() + "." + this.getClass()  + ".txt                                                                                                                                                                                                                                                                                                         ");
 
 	}
 
@@ -250,15 +250,21 @@ public class Figura implements java.io.Serializable{
 	}
 
 	public File getDescription() {
-		if(description.exists()) return description;
-		else return null;
+		if(!description.exists()) try{
+			description.createNewFile();
+		} catch (IOException ioe){
+			ioe.printStackTrace();
+		}
+		return description;
 	}
 
 
 
 	public void setDescription (String description){
+		System.out.println(description);
 		BufferedWriter writer = null;
 		try {
+			if(!getDescription().exists()) getDescription().createNewFile();
 			writer = new BufferedWriter(new FileWriter(getDescription()));
 			writer.write(description);
 		} catch (Exception e) {
