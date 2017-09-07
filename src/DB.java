@@ -36,10 +36,11 @@ public class DB extends JFrame {
         btnDescription = new JButton();
 
         //======== this ========
+        setTitle("Database");
         Container contentPane = getContentPane();
         contentPane.setLayout(new TableLayout(new double[][] {
-            {650, 97, 98},
-            {41, 38, TableLayout.PREFERRED}}));
+            {766, 97, 98},
+            {41, 38, 36, TableLayout.PREFERRED}}));
         ((TableLayout)contentPane.getLayout()).setHGap(7);
         ((TableLayout)contentPane.getLayout()).setVGap(7);
 
@@ -56,7 +57,7 @@ public class DB extends JFrame {
             ));
             scrollPane1.setViewportView(tableDB);
         }
-        contentPane.add(scrollPane1, new TableLayoutConstraints(0, 0, 0, 2, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
+        contentPane.add(scrollPane1, new TableLayoutConstraints(0, 0, 0, 3, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
 
         //---- btnLoad ----
         btnLoad.setText("Load");
@@ -67,19 +68,18 @@ public class DB extends JFrame {
         contentPane.add(btnRemove, new TableLayoutConstraints(2, 0, 2, 0, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
 
         //---- btnDescription ----
-        btnDescription.setText("Show Description Extended");
+        btnDescription.setText("Read Description");
         contentPane.add(btnDescription, new TableLayoutConstraints(1, 1, 2, 1, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
-        pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - Matteo Gruppi
-    private JScrollPane scrollPane1;
-    private JTable tableDB;
-    private JButton btnLoad;
-    private JButton btnRemove;
-    private JButton btnDescription;
+    protected JScrollPane scrollPane1;
+    protected JTable tableDB;
+    protected JButton btnLoad;
+    protected JButton btnRemove;
+    protected JButton btnDescription;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

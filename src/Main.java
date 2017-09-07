@@ -5,14 +5,15 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 
 //import java.awt.Dimension;
 //import java.awt.Graphics2D;
@@ -293,17 +294,49 @@ public class Main {
 			}
 		});
 
-		window.btnLoadFig.addActionListener(e -> {
-			List<Figura> loadFig = new ArrayList<Figura>();
-			int L;
-			int loadSelIx = 0;
-			File fail = null;
-			Figura ciao = null;
-			try{
-				ciao = Manager.loadObj(fail);
-			} catch (IOException all){
-				all.printStackTrace();
-			}
+		window.btnDB.addActionListener(e -> {
+			Manager m = new Manager();
+			DB table = new DB();
+			DefaultTableModel modelElement;
+			String[] columns = {"Name", "Version", "Class", "Number of Fields", "File Name", "Description"};
+			modelElement = new DefaultTableModel(m.loadModelDB(), columns);
+			table.setSize(980, 465);
+			table.pack();
+			table.validate();
+			table.setLocationRelativeTo(null);
+			table.tableDB.setModel(modelElement);
+			table.setVisible(true);
+			table.btnLoad.addActionListener(acl -> {
+				if(table.tableDB.getSelectedRow() < 0){
+					JOptionPane.showMessageDialog(null, "Select a Figure to load");
+				} else {
+					try {
+						Figura newFig = m.loadObj(table.tableDB.getSelectedRow());
+					} catch (IOException ioe){
+						ioe.printStackTrace();
+					}
+				}
+			});
+			table.btnRemove.addActionListener(acl ->{
+				if(table.tableDB.getSelectedRow() < 0){
+					JOptionPane.showMessageDialog(null, "Select a Figure to remove");
+				} else {
+					m.rmvFig(table.tableDB.getSelectedRow());
+				}
+			});
+
+			table.btnDescription.addActionListener(acl ->{
+				if(table.tableDB.getSelectedRow() < 0){
+					JOptionPane.showMessageDialog(null, "Select a Figure to show description");
+				} else {
+					JOptionPane.showMessageDialog(null, m.getStringDescription(table.tableDB.getSelectedRow()));
+				}
+			});
+
+
+
+			//List<Figura> loadFig = new ArrayList<Figura>();
+			//Figura newLoadedFigure = Manager.loadFig();
 			/*
 			try {
 				loadFig = XMLManager.loadPolygon();
@@ -312,7 +345,6 @@ public class Main {
 				all.printStackTrace();
 			}
 			if (loadFig == null) {
-				Component frame = null;
 				JOptionPane.showMessageDialog(frame, "Error, first save a figure");
 			} else {
 				L = loadFig.size();

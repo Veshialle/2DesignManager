@@ -7,12 +7,13 @@ new FormModel {
 			"JavaCodeGenerator.defaultVariableModifiers": 4
 		}
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq {space :::p, comp scrollPane:::p:127:p, space u:p::p, par l:::p {comp btnAddFig:3:t::104:x, comp btnSaveFig:3:t::104:x, comp btnColor::t:::x}, par l {seq l {space :p:15:p, par l:::p {comp btnRemoveFig:3::::x, comp btnLoadFig:3::p:109:p}, space u:::p, par l {seq l {comp radioMove:::p::p, space :p:33:p, comp sliderLabel:::p::p, space :p:30:p, comp btnRotation:::p::p}, seq l {comp radioResize:::p::p, space u:::p, comp rotationBar:::p::p}}, space :p:6:p, comp btnRight:1::p::p, space :0:0:p, par l {comp btnUp:1:l:p::p, seq l {comp btnDown:1::p::p, space :0:0:p, comp btnLeft:1::p::p}}}, seq l {space :::p, par l {seq t {space :p:307:p, comp btnSetX:::p::p, space :::p, comp btnSetY:::p::p, space u:::p, comp spinnerPos:::p:67:p}, seq l {comp btnCompFig:::p::p, space :::p, comp checkboColorComp:::p::p, space :p:267:p}}, space s:::p, comp checkGrid:::p::p}}, space ::338:x}, comp canvas::l::1198:x}"
-			"$verticalGroup": "par l {seq t {space :p::p, par l {comp scrollPane:::p:105:p, seq {space :9:9:p, par l {seq l {par l {comp btnRemoveFig:4::p:24:p, comp btnAddFig:4:t:p:24:p}, space :::p, par l {comp btnLoadFig:4::p:24:p, comp btnSaveFig:4::p:24:p}, space u:::p, par b {comp btnCompFig::b:p:24:p, comp checkboColorComp::b:p:24:p, comp btnColor::b:p:24:p}}, seq l {par l {par b {comp radioMove::b:p:24:p, comp btnRotation::b:p:24:p}, comp sliderLabel::t:p::p}, space :::p, par l {seq {comp radioResize:::p:24:p, space :p:12:p}, seq t {comp rotationBar:::p:24:p, space :::p}}, par b {comp spinnerPos::b:p:24:p, comp btnSetY::b:p:24:p, comp btnSetX::b:p:24:p, comp checkGrid::b:p::p}}}}, seq l {comp btnUp:2::p::p, space :0:0:p, par b {comp btnDown:2:b:p::p, comp btnRight:2:b:p::p, comp btnLeft:2:b:p::p}}}, space :::p, comp canvas::::704:x}}"
+			"$horizontalGroup": "par l {seq {space :::p, comp scrollPane:::p:127:p, space u:p::p, par l:::p {comp btnAddFig:3:t::104:x, comp btnSaveFig:3:t::104:x, comp btnColor::t:::x}, par l {seq l {space :p:15:p, par l:::p {comp btnRemoveFig:3::::x, comp btnDB:3::p:109:p}, space u:::p, par l {seq l {comp radioMove:::p::p, space :p:33:p, comp sliderLabel:::p::p, space :p:30:p, comp btnRotation:::p::p}, seq l {comp radioResize:::p::p, space u:::p, comp rotationBar:::p::p}}, space :p:6:p, comp btnRight:1::p::p, space :0:0:p, par l {comp btnUp:1:l:p::p, seq l {comp btnDown:1::p::p, space :0:0:p, comp btnLeft:1::p::p}}}, seq l {space :::p, par l {seq t {space :p:307:p, comp btnSetX:::p::p, space :::p, comp btnSetY:::p::p, space u:::p, comp spinnerPos:::p:67:p}, seq l {comp btnCompFig:::p::p, space :::p, comp checkboColorComp:::p::p, space :p:267:p}}, space s:::p, comp checkGrid:::p::p}}, space ::338:x}, comp canvas::l::1198:x}"
+			"$verticalGroup": "par l {seq t {space :p::p, par l {comp scrollPane:::p:105:p, seq {space :9:9:p, par l {seq l {par l {comp btnRemoveFig:4::p:24:p, comp btnAddFig:4:t:p:24:p}, space :::p, par l {comp btnDB:4::p:24:p, comp btnSaveFig:4::p:24:p}, space u:::p, par b {comp btnCompFig::b:p:24:p, comp checkboColorComp::b:p:24:p, comp btnColor::b:p:24:p}}, seq l {par l {par b {comp radioMove::b:p:24:p, comp btnRotation::b:p:24:p}, comp sliderLabel::t:p::p}, space :::p, par l {seq {comp radioResize:::p:24:p, space :p:12:p}, seq t {comp rotationBar:::p:24:p, space :::p}}, par b {comp spinnerPos::b:p:24:p, comp btnSetY::b:p:24:p, comp btnSetX::b:p:24:p, comp checkGrid::b:p::p}}}}, seq l {comp btnUp:2::p::p, space :0:0:p, par b {comp btnDown:2:b:p::p, comp btnRight:2:b:p::p, comp btnLeft:2:b:p::p}}}, space :::p, comp canvas::::704:x}}"
 		} ) {
 			name: "this"
 			"minimumSize": new java.awt.Dimension( 1000, 738 )
 			"iconImage": new com.jformdesigner.model.SwingIcon( 1, "/home/veshialle/2DesignManager/src/2DMIcon.png" )
+			"title": "2DesignManager"
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane"
 				add( new FormComponent( "javax.swing.JList" ) {
@@ -53,8 +54,8 @@ new FormModel {
 				"enabled": false
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "btnLoadFig"
-				"text": "Load Figure"
+				name: "btnDB"
+				"text": "DataBase"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnSaveFig"

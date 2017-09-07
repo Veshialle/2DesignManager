@@ -1,5 +1,3 @@
-import org.apache.commons.io.IOUtils;
-
 import java.awt.*;
 import java.awt.Polygon;
 import java.io.*;
@@ -251,24 +249,12 @@ public class Figura implements java.io.Serializable{
 		return colore;
 	}
 
-	public File getDescription() { return description; }
-
-	public String getStringDescription(){
-		FileInputStream inputStream = null;
-		Reader inputReader = null;
-		try {
-			inputStream = new FileInputStream("foo.txt");
-			String everything = IOUtils.toString(inputStream, "UTF-8");
-			return everything;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				inputStream.close();
-			} catch (Exception e){ }
-		}
-		return null;
+	public File getDescription() {
+		if(description.exists()) return description;
+		else return null;
 	}
+
+
 
 	public void setDescription (String description){
 		BufferedWriter writer = null;

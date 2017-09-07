@@ -26,7 +26,7 @@ public class GUI_2DM extends JFrame {
         btnRotation = new JButton();
         btnCompFig = new JButton();
         btnColor = new JButton();
-        btnLoadFig = new JButton();
+        btnDB = new JButton();
         btnSaveFig = new JButton();
         btnRemoveFig = new JButton();
         radioMove = new JRadioButton();
@@ -45,6 +45,7 @@ public class GUI_2DM extends JFrame {
         //======== this ========
         setMinimumSize(new Dimension(1000, 738));
         setIconImage(new ImageIcon("/home/veshialle/2DesignManager/src/2DMIcon.png").getImage());
+        setTitle("2DesignManager");
         Container contentPane = getContentPane();
 
         //======== scrollPane ========
@@ -78,8 +79,8 @@ public class GUI_2DM extends JFrame {
         btnColor.setText("Choice Color");
         btnColor.setEnabled(false);
 
-        //---- btnLoadFig ----
-        btnLoadFig.setText("Load Figure");
+        //---- btnDB ----
+        btnDB.setText("DataBase");
 
         //---- btnSaveFig ----
         btnSaveFig.setText("Save Figure");
@@ -156,7 +157,7 @@ public class GUI_2DM extends JFrame {
                             .addGap(15, 15, 15)
                             .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                 .addComponent(btnRemoveFig, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnLoadFig, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnDB, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE))
                             .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(contentPaneLayout.createParallelGroup()
                                 .addGroup(contentPaneLayout.createSequentialGroup()
@@ -199,7 +200,7 @@ public class GUI_2DM extends JFrame {
                 .addComponent(canvas, GroupLayout.DEFAULT_SIZE, 1198, Short.MAX_VALUE)
         );
         contentPaneLayout.linkSize(SwingConstants.HORIZONTAL, new Component[] {btnDown, btnLeft, btnRight, btnUp});
-        contentPaneLayout.linkSize(SwingConstants.HORIZONTAL, new Component[] {btnAddFig, btnLoadFig, btnRemoveFig, btnSaveFig});
+        contentPaneLayout.linkSize(SwingConstants.HORIZONTAL, new Component[] {btnAddFig, btnDB, btnRemoveFig, btnSaveFig});
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
@@ -215,7 +216,7 @@ public class GUI_2DM extends JFrame {
                                         .addComponent(btnAddFig, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(contentPaneLayout.createParallelGroup()
-                                        .addComponent(btnLoadFig, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnDB, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(btnSaveFig, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
@@ -252,7 +253,7 @@ public class GUI_2DM extends JFrame {
                     .addComponent(canvas, GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE))
         );
         contentPaneLayout.linkSize(SwingConstants.VERTICAL, new Component[] {btnDown, btnLeft, btnRight, btnUp});
-        contentPaneLayout.linkSize(SwingConstants.VERTICAL, new Component[] {btnAddFig, btnLoadFig, btnRemoveFig, btnSaveFig});
+        contentPaneLayout.linkSize(SwingConstants.VERTICAL, new Component[] {btnAddFig, btnDB, btnRemoveFig, btnSaveFig});
         pack();
         setLocationRelativeTo(getOwner());
 
@@ -274,7 +275,7 @@ public class GUI_2DM extends JFrame {
     protected JButton btnRotation;
     protected JButton btnCompFig;
     protected JButton btnColor;
-    protected JButton btnLoadFig;
+    protected JButton btnDB;
     protected JButton btnSaveFig;
     protected JButton btnRemoveFig;
     protected JRadioButton radioMove;

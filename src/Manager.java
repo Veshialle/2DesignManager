@@ -5,9 +5,7 @@
  * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
-
-import com.opencsv.CSVReader;
-import com.opencsv.CSVReaderBuilder;
+import com.opencsv.*;
 
 import java.io.*;
 import java.util.*;
@@ -19,14 +17,14 @@ class dbElement{
     private String Class;
     private String Number;
     private String fileName;
-    private String Description;
+    private String FileNote;
     dbElement(String[] fields){
         this.Name = fields[0];
         this.Version = fields[1];
         this.Class = fields[2];
         this.Number = fields[3];
         this.fileName = fields[4];
-        this.Description = fields[5];
+        this.FileNote = fields[5];
     }
     public String getName(){
         return Name;
@@ -37,8 +35,8 @@ class dbElement{
     public String getC(){
         return Class;
     }
-    public String getDescription(){
-        return Description;
+    public String getFileNote(){
+        return FileNote;
     }
 
     public String getNumber() {
@@ -69,8 +67,8 @@ class dbElement{
         Class = aClass;
     }
 
-    public void setDescription(String description) {
-        Description = description;
+    public void setFileNote(String FileNote) {
+        FileNote = FileNote;
     }
 }
 
@@ -107,12 +105,39 @@ public class Manager {
     static private String pathName = "save/";
     static private File path = new File(pathName);
     static private File db;
+    private List<dbElement> whole = new ArrayList<dbElement>();
 
     static {
         db = new File(path, "db.csv");
     }
 
-    public Manager() {
+    public Manager(){
+        try {
+            loadCSV();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    public List<dbElement> loadCSV() throws Exception{
+        //Start reading from line number 2 (line numbers start from zero)
+        if(!db.exists()) {
+            saveWhole();
+            return null;
+        }
+        CSVParser parser = new CSVParserBuilder().withSeparator(',').withIgnoreQuotations(true).build();
+        CSVReader reader = new CSVReaderBuilder(new FileReader(db)).build();
+        //CSVReader reader = new CSVReaderBuilder(new FileReader(db)).build();
+        //Read CSV line by line and use the string array as you want
+        String[] nextLine;
+        while ((nextLine = reader.readNext()) != null) {
+            if (nextLine != null) {
+                //Verifying the read data here
+                System.out.println(Arrays.toString(nextLine));
+                getWhole().add(new dbElement(nextLine));
+            }
+        }
+        Collections.sort(getWhole(), new dbElementComparator());
+        return getWhole();
     }
 
     public static void initializationDir() {
@@ -120,6 +145,16 @@ public class Manager {
             path.mkdir();
         }
     }
+
+    public List<dbElement> getWhole(){
+        return this.whole;
+    }
+
+    public void setWhole(List<dbElement> newWhole){
+        this.whole = newWhole;
+    }
+
+
     public static void saveObj(Figura fig) throws java.io.IOException {
         File file = new File(path, fig.getFinalName() + "." + fig.getClass().getName()  + ".obj");
 
@@ -130,10 +165,22 @@ public class Manager {
 
         oos.writeObject(fig);
 
+        CSVWriter writer = new CSVWriter(new FileWriter(db, true));
+
+        String [] newRecord = {
+                fig.getName(),
+                String.valueOf(fig.getVersione()),
+                String.valueOf(fig.getClass()),
+                String.valueOf(fig.getNLati()),
+                String.valueOf(file.getName()),
+                fig.getDescription().getName()
+        };
+        writer.writeNext(newRecord);
+        writer.close();
     }
 
-    public static Figura loadObj(File file) throws java.io.IOException{
-        file = new File("save/", "gianconsquaqquero.1.0.Polygon.obj");
+    public Figura loadObj(int i) throws java.io.IOException{
+        File file = new File(path, whole.get(i).getFileName());
         Figura fig;
         if(!file.exists()) return null;
         else {
@@ -173,22 +220,81 @@ public class Manager {
         return path.listFiles().length;
     }
 
-    public static List<dbElement> loadCSV() throws Exception
-    {
-        //Start reading from line number 2 (line numbers start from zero)
-        if(!db.exists()) return null;
-        CSVReader reader = new CSVReaderBuilder(new FileReader(db)).build();
-        //Read CSV line by line and use the string array as you want
-        String[] nextLine;
-        List<dbElement> whole = new ArrayList<dbElement>();
-        while ((nextLine = reader.readNext()) != null) {
-            if (nextLine != null) {
-                //Verifying the read data here
-                System.out.println(Arrays.toString(nextLine));
-                whole.add(new dbElement(nextLine));
+
+
+
+    public String[][] loadModelDB() {
+        try {
+            //ciao = Manager.loadObj(fail);
+            setWhole(loadCSV());
+            int nFigure = whole.size();
+            if (!whole.isEmpty()) {
+                String[][] modelGrid = new String[nFigure][6];
+                int k = 0;
+                for (dbElement dbe : whole) {
+                    modelGrid[k][0] = dbe.getName();
+                    modelGrid[k][1] = dbe.getVersion();
+                    modelGrid[k][2] = dbe.getC();
+                    modelGrid[k][3] = dbe.getNumber();
+                    modelGrid[k][4] = dbe.getFileName();
+                    modelGrid[k][5] = dbe.getFileNote();
+                }
+                return modelGrid;
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        Collections.sort(whole, new dbElementComparator());
-        return whole;
+        return null;
+    }
+
+    public void rmvFig(int i){
+        File file = new File(path, getWhole().get(i).getFileName());
+        file.delete();
+        db.delete();
+        whole.remove(i);
+        saveWhole();
+    }
+
+    public void saveWhole() {
+        try {
+            if(!db.exists()) {
+                db.createNewFile();
+                CSVWriter writer = new CSVWriter(new FileWriter(db, true));
+                String[] newRecord = {"Name","Version","Class","Number of Fields","File Name","Note File"};
+                writer.writeNext(newRecord);
+                writer.close();
+            }
+            for(dbElement k : getWhole()){
+                CSVWriter writer = new CSVWriter(new FileWriter(db, true));
+                String[] newRecord = {k.getName(), k.getVersion(), k.getClass().getCanonicalName(), k.getNumber(), k.getFileName(), k.getFileNote()};
+                writer.writeNext(newRecord);
+                writer.close();
+            }
+            } catch (IOException e){
+                e.printStackTrace();
+        }
+    }
+    public String getStringDescription(int i){
+        File fileDescription = new File(path, whole.get(i).getFileName());
+        BufferedReader buffR = null;
+        Reader inputReader = null;
+        try {
+            buffR = new BufferedReader((new FileReader(fileDescription)));
+            StringBuilder stringB = new StringBuilder();
+            String line = buffR.readLine();
+            while(line != null){
+                stringB.append(line);
+                stringB.append(System.lineSeparator());
+                line = buffR.readLine();
+            }
+            return stringB.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                buffR.close();
+            } catch (Exception e){ }
+        }
+        return null;
     }
 }
