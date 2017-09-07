@@ -20,13 +20,30 @@ new FormModel {
 				name: "scrollPane1"
 				add( new FormComponent( "javax.swing.JTable" ) {
 					name: "tableDB"
-					"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector, new java.util.Vector {
+					"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector {
+						add( new java.util.Vector {
+							add( null )
+							add( null )
+							add( null )
+							add( null )
+							add( null )
+							add( null )
+						} )
+						add( new java.util.Vector {
+							add( null )
+							add( null )
+							add( null )
+							add( null )
+							add( null )
+							add( null )
+						} )
+					}, new java.util.Vector {
 						add( "Name" )
 						add( "Version" )
 						add( "Type" )
 						add( "Number of sides/figures" )
 						add( "File Name" )
-						add( "Annotations" )
+						add( "Note File" )
 					}, new java.util.Vector {
 						add( null )
 						add( null )
@@ -49,6 +66,7 @@ new FormModel {
 						add( null )
 						add( null )
 					} )
+					"autoCreateRowSorter": true
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.TableConstraints ) {
 				"gridHeight": 4

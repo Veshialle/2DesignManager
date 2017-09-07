@@ -50,11 +50,14 @@ public class DB extends JFrame {
             //---- tableDB ----
             tableDB.setModel(new DefaultTableModel(
                 new Object[][] {
+                    {null, null, null, null, null, null},
+                    {null, null, null, null, null, null},
                 },
                 new String[] {
-                    "Name", "Version", "Type", "Number of sides/figures", "File Name", "Annotations"
+                    "Name", "Version", "Type", "Number of sides/figures", "File Name", "Note File"
                 }
             ));
+            tableDB.setAutoCreateRowSorter(true);
             scrollPane1.setViewportView(tableDB);
         }
         contentPane.add(scrollPane1, new TableLayoutConstraints(0, 0, 0, 3, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));

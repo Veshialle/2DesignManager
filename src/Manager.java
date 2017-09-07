@@ -125,14 +125,13 @@ public class Manager {
             return null;
         }
         CSVParser parser = new CSVParserBuilder().withSeparator(',').withIgnoreQuotations(true).build();
-        CSVReader reader = new CSVReaderBuilder(new FileReader(db)).build();
+        CSVReader reader = new CSVReaderBuilder(new FileReader(db)).withSkipLines(1).build();
         //CSVReader reader = new CSVReaderBuilder(new FileReader(db)).build();
         //Read CSV line by line and use the string array as you want
         String[] nextLine;
         while ((nextLine = reader.readNext()) != null) {
             if (nextLine != null) {
                 //Verifying the read data here
-                System.out.println(Arrays.toString(nextLine));
                 getWhole().add(new dbElement(nextLine));
             }
         }
@@ -166,7 +165,7 @@ public class Manager {
         oos.writeObject(fig);
 
         CSVWriter writer = new CSVWriter(new FileWriter(db, true));
-
+        System.out.println(fig.getDescription().getName());
         String [] newRecord = {
                 fig.getName(),
                 String.valueOf(fig.getVersione()),
@@ -186,12 +185,9 @@ public class Manager {
         else {
             FileInputStream fis = new FileInputStream(file);
             ObjectInputStream ois = new ObjectInputStream(fis);
-            System.out.println(ois.getClass());
 
             String fileName = file.getName();
             String[] tokens = fileName.split(".");
-            for (String t : tokens)
-                System.out.println(t);
             try {
                 switch(tokens[3]){
                     case "Polygon":
@@ -275,10 +271,12 @@ public class Manager {
         }
     }
     public String getStringDescription(int i){
-        File fileDescription = new File(path, whole.get(i).getFileName());
+        File fileDescription = new File(path, whole.get(i).getFileNote());
         BufferedReader buffR = null;
         Reader inputReader = null;
         try {
+            System.out.println(whole.size());
+            System.out.println(fileDescription.getName());
             buffR = new BufferedReader((new FileReader(fileDescription)));
             StringBuilder stringB = new StringBuilder();
             String line = buffR.readLine();
