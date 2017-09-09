@@ -1,6 +1,10 @@
 import java.awt.*;
 import java.awt.Polygon;
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 //import java.awt.geom.AffineTransform;
 
 /**
@@ -18,40 +22,36 @@ public class Figura implements java.io.Serializable{
 	protected double x, y, width, height;
 	protected int nLati;
 	public boolean visibile = true;
-	private Color colore;
+	protected Color colore;
 	protected double angle;
-	private Float versione = 0.0f;
-	protected double[] xPoints = new double[] { 0, 0, 0, 0 };
-
-	protected double[] yPoints = new double[] { 0, 0, 0, 0 };
-	protected String tipo;
-	private String name;
+	protected Float versione = 0.0f;
+	protected ArrayList<Double> xPoints = new ArrayList<Double>();
+	protected ArrayList<Double> yPoints = new ArrayList<Double>();
+	protected double[] angleToGenerate = new double[] {60, 90, 108, 120, 128.57, 135, 140, 144};
+	protected String name;
 	protected Polygon p;
 	protected File description;
 
 	public Figura() {
 		super();
 		this.idFigura = -1;
-		this.tipo = "";
-		this.setName("");
+		this.setName("createdRandom");
 
 	}
 
-	public Figura(String name, String tipo, int idFigura, double x, double y, double width, double height) {
-		this.idFigura = idFigura;
-		this.tipo = tipo;
+	public Figura(String name, int nLati, int idFigura, double x, double y, double width, double height) {
 		this.setName(name);
+		this.idFigura = idFigura;
+		this.nLati = nLati;
 		this.width = width;
 		this.height = height;
-		this.init(x, y, width, height); // inizializza i punti della figura
-
+		this.setColor(Color.BLACK);
 		this.description  = new File("save/", this.getFinalName() + "." + this.getClass()  + ".txt");
 	}
 
 	// mossa azzardata, let's see what happen
-	public Figura(String name, Float versione, String tipo, int idFigura, int nLati, double[] xPoints, double[] yPoints,
+	public Figura(String name, Float versione, String tipo, int idFigura, int nLati, ArrayList<Double> xPoints, ArrayList<Double> yPoints,
 			double angle, Color colore) {
-		this.tipo = tipo;
 		this.setName(name);
 		this.nLati = nLati;
 		this.idFigura = idFigura;
@@ -60,46 +60,13 @@ public class Figura implements java.io.Serializable{
 		this.angle = angle;
 		this.colore = colore;
 		this.setVersione(versione);
-
-
 		this.description  = new File("save/", this.getFinalName() + "." + this.getClass()  + ".txt");
 	}
 
-	public void init(double x, double y, double width, double height) { // inizializza i punti della figura
-		if (this.tipo == "rettangolo") {
-			this.nLati = 4;
-			xPoints = new double[] { x, x + width, x + width, x };
-			yPoints = new double[] { y, y, y + height, y + height };
-			this.colore = Color.BLACK;
-		} else if (this.tipo == "triangolo") {
-			this.nLati = 3;
-			xPoints = new double[] { x, x + (width / 2), x + width, 0 };
-			yPoints = new double[] { y, y - height, y, 0 };
-			this.colore = Color.ORANGE;
-		} else if (this.tipo == "quadrato") {
-			this.nLati = 4;
-			xPoints = new double[] { x, x + width, x + width, x };
-			yPoints = new double[] { y, y, y + width, y + width };
-			this.colore = Color.GREEN;
-		} else if (this.tipo == "rombo") {
-			this.nLati = 4;
-			xPoints = new double[] { x, x + (width / 2), x + width, x + (width / 2) };
-			yPoints = new double[] { y, y - (height / 2), y, y + (height / 2) };
-			this.colore = Color.YELLOW;
-		} else if (this.tipo == "cerchio") {
-			this.nLati = 1;
-			xPoints = new double[] { x, 0, 0, 0 };
-			yPoints = new double[] { y, 0, 0, 0 };
-			this.colore = Color.BLUE;
-		}
-		this.description  = new File("save/", this.getFinalName() + "." + this.getClass()  + ".txt                                                                                                                                                                                                                                                                                                         ");
-
-	}
-
 	public void move(double x, double y) { // muovi tutti i punti della figura
-		for (int i = 0; i < this.nLati; i++) {
-			xPoints[i] = xPoints[i] + x;
-			yPoints[i] = yPoints[i] + y;
+		for (int i = 0; i < this.xPoints.size(); i++) {
+			xPoints.set(i, xPoints.get(i) + x);
+			yPoints.set(i, yPoints.get(i) + y);
 		}
 
 	}
@@ -112,7 +79,7 @@ public class Figura implements java.io.Serializable{
 	};
 
 	public void setX(double x) {
-		this.move(x - this.xPoints[0], 0);
+		this.move(x - this.xPoints.get(0), 0);
 	}
 
 	/*
@@ -124,15 +91,15 @@ public class Figura implements java.io.Serializable{
 	}
 
 	public double getxPoint(int i) {
-		return this.xPoints[i];
+		return this.xPoints.get(i);
 	}
 
 	public double getyPoint(int i) {
-		return this.yPoints[i];
+		return this.yPoints.get(i);
 	}
 
 	public void setY(double y) {
-		this.move(0, y - this.yPoints[0]);
+		this.move(0, y - this.yPoints.get(0));
 	}
 
 	public int getNLati() {
@@ -166,31 +133,11 @@ public class Figura implements java.io.Serializable{
 	}
 
 	public double getCenterX() {
-		double center = 0;
-		if (this.tipo != "cerchio") {
-			for (int i = 0; i < nLati; i++) {
-				center += this.xPoints[i];
-			}
-			center /= nLati;
-		} else {
-			center = this.xPoints[0];
-			center += this.width / 2;
-		}
-		return center;
+		return 0;
 	}
 
 	public double getCenterY() {
-		double center = 0;
-		if (this.tipo != "cerchio") {
-			for (int i = 0; i < nLati; i++) {
-				center += this.yPoints[i];
-			}
-			center /= nLati;
-		} else {
-			center = this.yPoints[0];
-			center += this.width / 2;
-		}
-		return center;
+		return 0;
 	}
 
 	public void draw(Graphics g) { }
@@ -210,13 +157,13 @@ public class Figura implements java.io.Serializable{
 
 	public String getName() {
 		if (name.isEmpty())
-			return tipo;
+			return null;
 		return name;
 	}
 
 	public String getFinalName() {
 		if (name.isEmpty())
-			return tipo;
+			return null;
 		String finalName = name + "." + versione;
 		return finalName;
 	}
@@ -224,21 +171,13 @@ public class Figura implements java.io.Serializable{
 	@Override
 	public String toString() {
 		if(name.isEmpty())
-			return tipo;
+			return null;
 		String finalName = name + " " + versione;
 		return finalName;
 	}
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String name) {
-		this.tipo = name;
 	}
 
 	public void setColor(Color color) {

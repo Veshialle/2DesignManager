@@ -30,12 +30,12 @@ public class Main {
 	 * getClass().getResource(strPath); if(imgURL != null) return new
 	 * ImageIcon(imgURL); else return null; }
 	 */
-
 	private static Point mousePt;
-	private static int firstSelIx;
 	private static boolean isInside;
 	private static int idFigura = (Manager.countFigure()-1)/2;
 	private static List<Figura> fig = new ArrayList<>(); // fig e' una lista di oggetti Figura
+
+
 
 	public static void main(String[] a) {
 
@@ -67,9 +67,7 @@ public class Main {
 			@Override
 			public void valueChanged(ListSelectionEvent arg0) {
 				// TODO Auto-generated method stub
-				int firstSelIx = window.list1.getSelectedIndex();
-				System.out.print(firstSelIx);
-				if (firstSelIx >= 0) {
+				if (window.list1.getSelectedIndex() >= 0) {
 					window.btnRemoveFig.setEnabled(true);
 					window.btnSaveFig.setEnabled(true);
 					window.btnDown.setEnabled(true);
@@ -84,10 +82,10 @@ public class Main {
 					window.btnColor.setEnabled(true);
 					window.btnRotation.setEnabled(true);
 					window.rotationBar.setEnabled(true);
-					window.rotationBar.setValue((int) fig.get(firstSelIx).getAngle());
+					window.rotationBar.setValue((int) fig.get(window.list1.getSelectedIndex()).getAngle());
 					if(window.list1.getSelectedIndices().length >= 2){
 						window.btnCompFig.setEnabled(true);
-						if(fig.get(firstSelIx).getClass() != Composite.class) window.checkboColorComp.setEnabled(true);
+						if(fig.get(window.list1.getSelectedIndex()).getClass() != Composite.class) window.checkboColorComp.setEnabled(true);
 						else window.checkboColorComp.setEnabled(false);
 					} else window.btnCompFig.setEnabled(false);
 				} else {
@@ -113,8 +111,7 @@ public class Main {
 
 		window.btnSetY.addActionListener(new ActionListener() { // Imposta val Y
 			public void actionPerformed(ActionEvent e) {
-				int firstSelIx = window.list1.getSelectedIndex();
-				Figura f = fig.get(firstSelIx);
+				Figura f = fig.get(window.list1.getSelectedIndex());
 				f.setY((double) window.spinnerPos.getValue());
 				window.canvas.paintImage();
 			}
@@ -122,8 +119,7 @@ public class Main {
 
 		window.btnSetX.addActionListener(new ActionListener() { // Imposta val X
 			public void actionPerformed(ActionEvent e) {
-				int firstSelIx = window.list1.getSelectedIndex();
-				Figura f = fig.get(firstSelIx);
+				Figura f = fig.get(window.list1.getSelectedIndex());
 				f.setX((double) window.spinnerPos.getValue());
 				window.canvas.paintImage();
 			}
@@ -131,8 +127,7 @@ public class Main {
 
 		window.btnRotation.addActionListener(new ActionListener() { // Riportare alla posizione iniziale (0 gradi)
 			public void actionPerformed(ActionEvent e) {
-				int firstSelIx = window.list1.getSelectedIndex();
-				Figura f = fig.get(firstSelIx);
+				Figura f = fig.get(window.list1.getSelectedIndex());
 				f.rotate(0.0, f.getCenterX(), f.getCenterY());
 				window.rotationBar.setValue((int) f.getAngle());
 				window.canvas.paintImage();
@@ -144,10 +139,9 @@ public class Main {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				if(!model.isEmpty()) {
-					int firstSelIx = window.list1.getSelectedIndex();
 					JSlider rotation = (JSlider) e.getSource();
 					double angle = (double) rotation.getValue();
-					Figura f = fig.get(firstSelIx);
+					Figura f = fig.get(window.list1.getSelectedIndex());
 					f.rotate(angle, f.getCenterX(), f.getCenterY());
 					window.canvas.paintImage();
 				}
@@ -158,23 +152,24 @@ public class Main {
 
 			// --------------------------------------------------------- Grazie google
 
-			Object[] possibilities = { "rettangolo", "quadrato", "triangolo", "rombo", "cerchio" };
+			Object[] possibilities = { "3", "4", "5", "6", "7", "8", "9", "10", "0" };
 			Component frame = null;
 			Icon icon = null;
-			String s = (String) JOptionPane.showInputDialog(frame, "Select fig type:\n", "Customized Dialog",
-					JOptionPane.PLAIN_MESSAGE, icon, possibilities, "rettangolo");
+			String s = (String) JOptionPane.showInputDialog(frame, "Select Number of sides:\n", "Customized Dialog",
+					JOptionPane.PLAIN_MESSAGE, icon, possibilities, "3");
 
 			// If a string was returned, say so.
 			if ((s != null) && (s.length() > 0)) {
+				int nLati = Integer.valueOf(s);
 				String name = JOptionPane.showInputDialog("Inserire nome della figura.", s);
 				Figura f;
 				if (name != null && name.length() > 0) {
-					if (s == "cerchio")
-						f = new Circle(name, s, idFigura, 200, 200, 200, 100); // inizializzo/creo la Figura(s=tipo di
+					if (nLati == 0)
+						f = new Circle(name, nLati, idFigura, 200, 200, 200, 100); // inizializzo/creo la Figura(s=tipo di
 																				// figura, x=0, y=0, larghezza,
 																				// altezza);
 					else
-						f = new Polygon(name, s, idFigura, 200, 200, 200, 100); // inizializzo/creo la Figura(s=tipo di
+						f = new Polygon(name, nLati, idFigura, 200, 200, 200, 100); // inizializzo/creo la Figura(s=tipo di
 																				// figura, x=0, y=0, larghezza,
 																				// altezza);
 
@@ -192,13 +187,12 @@ public class Main {
 		});
 
 		window.btnRemoveFig.addActionListener(e -> { // Bottone rimuovi Figura
-			int firstSelIx = window.list1.getSelectedIndex(); // dammi l'indice della figura selezionata
+			// dammi l'indice della figura selezionata
 
-			System.out.print(fig.get(firstSelIx).getName());
-			model.removeElement(fig.get(firstSelIx));
-			//model.remove(firstSelIx);// rimuovi la stringa della figura nella lista dei tipi
-			fig.remove(firstSelIx); // rimuovi dalla lista di figure la figura con l'indice appena ricavato
-
+			System.out.print(fig.get(window.list1.getSelectedIndex()).getName());
+			//model.remove(window.list1.getSelectedIndex());// rimuovi la stringa della figura nella lista dei tipi
+			fig.remove(window.list1.getSelectedIndex()); // rimuovi dalla lista di figure la figura con l'indice appena ricavato
+			model.removeElement(fig.get(window.list1.getSelectedIndex()));
 			window.scrollPane.validate();
 			window.canvas.paintImage();// disegna di nuovo
 			if(!model.isEmpty()) window.list1.setSelectedIndex(model.getSize() - 1);
@@ -209,9 +203,8 @@ public class Main {
 
 		window.btnColor.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0){
-				int firstSelix = window.list1.getSelectedIndex();
 				Color newColor = JColorChooser.showDialog(null, "Choose a color", Color.RED);
-				fig.get(firstSelIx).setColor(newColor);
+				fig.get(window.list1.getSelectedIndex()).setColor(newColor);
 				window.canvas.paintImage();
 			}
 		});
@@ -222,13 +215,13 @@ public class Main {
 
 		// bottone Left
 		window.btnLeft.addActionListener(e -> { // bottone muovi a Sinistra
-			int firstSelIx = window.list1.getSelectedIndex(); // dammi l'indice della figura selezionata nella finestra di
+			// dammi l'indice della figura selezionata nella finestra di
 														// figure
 			if (!window.spinnerPos.getValue().equals(0)) {// se il valore della finestra di input delle posizioni e'
 														// positivo
 				double x1 = (Integer)window.spinnerPos.getValue();
 				//double x1 = (-(double) window.spinnerPos.getValue());// prendi il valore negativo
-				fig.get(firstSelIx).move(x1, 0); // muovi la figura selezionata del valore x1, y rimangono uguali
+				fig.get(window.list1.getSelectedIndex()).move(x1, 0); // muovi la figura selezionata del valore x1, y rimangono uguali
 			}
 			window.canvas.paintImage();// disegna di nuovo
 
@@ -236,10 +229,9 @@ public class Main {
 
 		// bottone Right
 		window.btnRight.addActionListener(e -> { // stessa cosa di prima, muovi a destra
-			int firstSelIx = window.list1.getSelectedIndex();
 			if (!window.spinnerPos.getValue().equals(0)) {
 				double x1 = (+(Integer) window.spinnerPos.getValue());
-				fig.get(firstSelIx).move(x1, 0);
+				fig.get(window.list1.getSelectedIndex()).move(x1, 0);
 
 			}
 			window.canvas.paintImage();
@@ -248,10 +240,9 @@ public class Main {
 
 		// bottone Down
 		window.btnDown.addActionListener(e -> { // stessa cosa di prima, muovi in giu'
-			int firstSelIx = window.list1.getSelectedIndex();
 			if ( !window.spinnerPos.getValue().equals(0)) {
 				double y1 = (+(Integer) window.spinnerPos.getValue());
-				fig.get(firstSelIx).move(0, y1);
+				fig.get(window.list1.getSelectedIndex()).move(0, y1);
 
 			}
 			window.canvas.paintImage();
@@ -260,10 +251,9 @@ public class Main {
 
 		// bottone Up
 		window.btnUp.addActionListener(e -> { // stessa cosa di prima, muovi in su
-			int firstSelIx = window.list1.getSelectedIndex();
 			if (!window.spinnerPos.getValue().equals(0)) {
 				double y1 = (-(Integer) window.spinnerPos.getValue());
-				fig.get(firstSelIx).move(0, y1);
+				fig.get(window.list1.getSelectedIndex()).move(0, y1);
 
 			}
 			window.canvas.paintImage();
@@ -276,7 +266,7 @@ public class Main {
 				JOptionPane.showMessageDialog(frame, "Error, first create or load a figure\n");
 			} else {
 				try {
-					//XMLManager.savePolygon(fig.get(firstSelIx));
+					//XMLManager.savePolygon(fig.get(window.list1.getSelectedIndex()));
 					if(JOptionPane.showConfirmDialog(null, "Do you want to take a note of the Figure saved?") == JOptionPane.YES_OPTION){
 						TakeNote note = new TakeNote();
 						note.pack();
@@ -291,8 +281,8 @@ public class Main {
 							}
 						});
 					}
-					System.out.println(fig.get(firstSelIx).getDescription().getName());
-					Manager.saveObj(fig.get(firstSelIx));
+					System.out.println(fig.get(window.list1.getSelectedIndex()).getDescription().getName());
+					Manager.saveObj(fig.get(window.list1.getSelectedIndex()));
 				} catch ( IOException  e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -359,69 +349,6 @@ public class Main {
 				}
 			});
 
-
-
-			//List<Figura> loadFig = new ArrayList<Figura>();
-			//Figura newLoadedFigure = Manager.loadFig();
-			/*
-			try {
-				loadFig = XMLManager.loadPolygon();
-			} catch (ParserConfigurationException | SAXException | IOException all) {
-				// TODO Auto-generated catch block
-				all.printStackTrace();
-			}
-			if (loadFig == null) {
-				JOptionPane.showMessageDialog(frame, "Error, first save a figure");
-			} else {
-				L = loadFig.size();
-				Object[] loadedChoose = new Object[L];
-				for (int i = 0; i < L; i++) {
-					loadedChoose[i] = "Versione numero: " + loadFig.get(i).getVersione();
-					// System.out.println( "Prendo il primo punto della figura " + i + " versione :"
-					// + loadFig.get(i).getVersione() + " per GUI_2DM: " + loadFig.get(i).getxPoint(0)+
-					// " , "+ loadFig.get(i).getyPoint(0)+ " !");
-				}
-				Component frame = null;
-				Icon icon = null;
-				String choosed = null;
-				choosed = (String) JOptionPane.showInputDialog(frame, "Select figure:\n", "Load",
-						JOptionPane.PLAIN_MESSAGE, icon, loadedChoose, loadedChoose[0]);
-
-				// If a string was returned, say so.
-				if ((choosed != null) && (choosed.length() > 0)) {
-					// System.out.println(choosed);
-					String[] parts = choosed.split(": ");
-					Float versione = Float.valueOf(parts[1]);
-					for (int i = 0; i < L; i++) {
-						if (Float.compare(versione, loadFig.get(i).getVersione()) == 0) {
-							loadSelIx = i;
-						}
-					}
-					/*
-					 * GUI_2DM System.out.println("Verra' caricata la versione " +
-					 * loadFig.get(loadSelIx).getVersione() +" della figura: " +
-					 * loadFig.get(loadSelIx).getName() + "!"); System.out.println(
-					 * "Prendo il primo punto per GUI_2DM: " + loadFig.get(loadSelIx).getxPoint(0)+
-					 * " , "+ loadFig.get(loadSelIx).getyPoint(0)+ " !");
-					 */ /*
-					fig.add(loadFig.get(loadSelIx)); // aggiungi la figura appena creata f alla lista di Figure "fig"
-
-					window.canvas.paintImage(); // disegna
-
-					model.addElement(loadFig.get(loadSelIx)); // aggiungi alla lista di stringhe il tipo
-																				// della nuova figura
-					window.list1.setSelectedIndex(model.getSize() - 1);// seleziona nella lista output l'ultima figura
-																	// inserita
-					firstSelIx = window.list1.getSelectedIndex();
-					idFigura++;
-					window.rotationBar.setValue((int) fig.get(firstSelIx).getAngle());
-				} else {
-					JOptionPane.showMessageDialog(frame, "Hai annullato il caricamento di una nuova figura");
-				}
-				if (!(model.isEmpty()))
-					window.btnRemoveFig.setEnabled(true);
-			}
-			*/
 		});
 		// mouse listener
 		window.canvas.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -434,12 +361,11 @@ public class Main {
 						isInside = true;
 						window.list1.setSelectedIndex(i);
 
-						int firstSelIx = window.list1.getSelectedIndex();
 						/*
 						if (fig.get(i).getClass() != Circle.class) {
 							window.rotationBar.setEnabled(true);
 							window.btnRotation.setEnabled(true);
-							window.rotationBar.setValue((int) fig.get(firstSelIx).getAngle());
+							window.rotationBar.setValue((int) fig.get(window.list1.getSelectedIndex()).getAngle());
 						} else {
 							window.rotationBar.setEnabled(false);
 							window.btnRotation.setEnabled(false);
@@ -457,17 +383,16 @@ public class Main {
 			@Override
 			public void mouseDragged(MouseEvent e) {
 				if (isInside) {
-					int firstSelIx = window.list1.getSelectedIndex();
 					double dx = e.getX() - mousePt.x;
 					double dy = e.getY() - mousePt.y;
 					if (window.radioResize.isSelected()) {
-						double xVar = (e.getX() - mousePt.x) / (fig.get(firstSelIx).getCenterX() - mousePt.x);
+						double xVar = (e.getX() - mousePt.x) / (fig.get(window.list1.getSelectedIndex()).getCenterX() - mousePt.x);
 						double scaleX = (-xVar * 8 / 10) + 1.0; // era troppo veloce a ingrandire
-						double yVar = (e.getY() - mousePt.y) / (fig.get(firstSelIx).getCenterY() - mousePt.y);
+						double yVar = (e.getY() - mousePt.y) / (fig.get(window.list1.getSelectedIndex()).getCenterY() - mousePt.y);
 						double scaleY = (-yVar * 8 / 10) + 1.0; // era troppo veloce a ingrandire
-						fig.get(firstSelIx).resize(scaleX, scaleX, fig.get(firstSelIx).getCenterX(), fig.get(firstSelIx).getCenterY());
+						fig.get(window.list1.getSelectedIndex()).resize(scaleX, scaleX, fig.get(window.list1.getSelectedIndex()).getCenterX(), fig.get(window.list1.getSelectedIndex()).getCenterY());
 					} else {
-						fig.get(firstSelIx).move(dx, dy);
+						fig.get(window.list1.getSelectedIndex()).move(dx, dy);
 					}
 					window.canvas.paintImage();
 					mousePt = e.getPoint();
@@ -494,16 +419,14 @@ public class Main {
 			List<Figura> composition = new ArrayList<>();
 			if (JOptionPane.showConfirmDialog(frame, "Are You sure to join figures selected?")
 					== JOptionPane.YES_OPTION){
-				String name = JOptionPane.showInputDialog("Inserire nome della figura.", fig.get(firstSelIx).getName());
+				String name = JOptionPane.showInputDialog("Inserire nome della figura.", fig.get(window.list1.getSelectedIndex()).getName());
 				for(int k : window.list1.getSelectedIndices()) composition.add(fig.get(k));
 				Figura f;
 				f = new Composite(composition, true, name);
 				window.list1.getSelectedIndices();
-				int firstSelIx;
 				for(Figura i : composition){
-					firstSelIx = window.list1.getSelectedIndex(); // dammi l'indice della figura selezionata
-					fig.remove(firstSelIx); // rimuovi dalla lista di figure la figura con l'indice appena ricavato
-					model.remove(firstSelIx);// rimuovi la stringa della figura nella lista
+					fig.remove(window.list1.getSelectedIndex()); // rimuovi dalla lista di figure la figura con l'indice appena ricavato
+					model.remove(window.list1.getSelectedIndex());// rimuovi la stringa della figura nella lista
 					window.list1.setSelectedIndex(model.getSize() - 1);
 				}
 
@@ -513,10 +436,10 @@ public class Main {
 				window.list1.setSelectedIndex(model.getSize() - 1);// seleziona nella lista output l'ultima figura
 				window.scrollPane.validate();
 				// inserita
-				firstSelIx = window.list1.getSelectedIndex();
+
 				idFigura++;
 				window.rotationBar.setEnabled(!(fig.isEmpty()));
-				window.rotationBar.setValue((int) fig.get(firstSelIx).getAngle());
+				window.rotationBar.setValue((int) fig.get(window.list1.getSelectedIndex()).getAngle());
 				window.canvas.paintImage();
 			}
 

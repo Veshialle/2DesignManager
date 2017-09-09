@@ -44,10 +44,14 @@ public class MyCanvas extends JComponent{
             int columns = (width / dimCell) + carryC;
             if(height % dimCell != 0) carryR = 1;
             int rows = (height / dimCell) + carryR;
-            for (k = 0; k < rows; k++)
-                d.drawLine(0, k * dimCell , width, k * dimCell );
-            for (k = 0; k < columns; k++)
-                d.drawLine(k*dimCell , 0, k*dimCell , height);
+            for (k = rows/2; k < rows; k++)
+                d.drawLine(-1, k * dimCell , width+1, k * dimCell );
+            for (k = rows/2; k > -dimCell ; k--)
+                d.drawLine(-1, k * dimCell , width+1, k * dimCell );
+            for (k = columns/2; k < columns; k++)
+                d.drawLine(k*dimCell , -1, k*dimCell , height+1);
+            for (k = columns/2; k > -dimCell; k--)
+                d.drawLine(k*dimCell , -1, k*dimCell , height+1);
             // Nel caso si voglia fare una cosa piu` bella esteticamente, basta partire dal centro con la costruzione
             // della griglia e non dall'angolo in alto a sinistra
         }

@@ -1,21 +1,25 @@
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Circle extends Figura {
-	public Circle(String name, String tipo, int idFigura, double x, double y, double width, double height) {
-		super(name, tipo, idFigura, x, y, width, height);
+	public Circle(String name, int nLati, int idFigura, double x, double y, double width, double height) {
+		super(name, nLati, idFigura, x, y, width, height);
+		xPoints.add(x);
+		yPoints.add(y);
+		this.colore = Color.BLACK;
 	}
 
-	public Circle(String name, Float versione, String tipo, int idFigura, int nLati, double[] xPoints, double[] yPoints,
+	public Circle(String name, Float versione, String tipo, int idFigura, int nLati, ArrayList<Double> xPoints, ArrayList<Double> yPoints,
 			double angle, Color colore) {
 		super(name, versione, tipo, idFigura, nLati, xPoints, yPoints, angle, colore);
 	}
 
 	public void setXPoints(double centerX) {
-		this.xPoints[0] = centerX - width / 2;
+		this.xPoints.set(0, centerX - width /2 );
 	}
 
 	public void setYPoints(double centerY) {
-		this.yPoints[0] = centerY - width / 2;
+		this.yPoints.set(0, centerY - width / 2);
 	}
 
 	@Override
@@ -23,20 +27,23 @@ public class Circle extends Figura {
 		Graphics2D d = (Graphics2D) g;
 		super.draw(g);
 		d.setColor(getColor());
-		d.fillOval((int) xPoints[0], (int) yPoints[0], (int) width, (int) width);
+		d.fillOval(xPoints.get(0).intValue(), yPoints.get(0).intValue(), (int) width, (int) width);
 	}
 
 	@Override
 	public double getCenterX() {
 		double center;
-		center = this.xPoints[0];
+		center = this.xPoints.get(0);
 		center += this.width / 2;
 		return center;
 	}
 
 	@Override
 	public double getCenterY() {
-		return 0;
+		double center =0;
+		center = this.yPoints.get(0);
+		center += this.width / 2;
+		return center;
 	}
 
 	@Override
@@ -58,13 +65,12 @@ public class Circle extends Figura {
 	@Override
 	public void resize(double scaleX, double scaleY, double centerX, double centerY) {
 		super.resize(scaleX, scaleY, centerX, centerY);
-
 	}
 
 	@Override
 	public boolean contains(Point test) {
-		double xc = this.xPoints[0] + (this.width / 2);
-		double yc = this.yPoints[0] + (this.width / 2);
+		double xc = this.xPoints.get(0) + (this.width / 2);
+		double yc = this.yPoints.get(0) + (this.width / 2);
 		double quadratica = ((test.x - xc) * (test.x - xc)) + ((test.y - yc) * (test.y - yc));
 		double raggio2 = (this.width / 2) * (this.width / 2);
 		if (quadratica <= raggio2) { // disuguaglianza per vedere se il punto in cui ho clickato col mouse è

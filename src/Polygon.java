@@ -1,14 +1,31 @@
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.util.ArrayList;
 
 public class Polygon extends Figura {
-	public Polygon(String name, String tipo, int idFigura, double x, double y, double width, double height) {
-		super(name, tipo, idFigura, x, y, width, height);
+	public Polygon(String name, int nLati, int idFigura, double x, double y, double width, double height) {
+		super(name, nLati, idFigura, x, y, width, height);
+		xPoints.add(200.0);
+		yPoints.add(200.0);
+		double newPoint;
+		double theta = (2 * Math.PI) /nLati;
+		double translation = 200.0;
+		for(int i = 0; i< nLati; i++){
+			double z = Math.cos(theta *i);
+			double k = Math.sin(theta *i);
+			newPoint = translation +  (width/2)*k;
+			xPoints.add(i,newPoint);
+			newPoint = translation +  (width/2)*z;
+			yPoints.add(i,newPoint);
+		}
 	}
 
-	public Polygon(String name, Float versione, String tipo, int idFigura, int nLati, double[] xPoints,
-			double[] yPoints, double angle, Color colore) {
+	public Polygon(String name, Float versione, String tipo, int idFigura, int nLati, ArrayList<Double> xPoints, ArrayList<Double> yPoints, double angle, Color colore) {
 		super(name, versione, tipo, idFigura, nLati, xPoints, yPoints, angle, colore);
+	}
+
+	public void init(double x, double y, double width, double height) {
+
 	}
 
 	public double getAngle() {
@@ -26,11 +43,11 @@ public class Polygon extends Figura {
 		double rotationAngle = angle - getAngle();
 		this.setAngle(angle);
 		for (int i = 0; i < this.nLati; i++) {
-			double[] pt = { xPoints[i], yPoints[i] };
+			double[] pt = { xPoints.get(i), yPoints.get(i) };
 			AffineTransform.getRotateInstance(Math.toRadians(rotationAngle), centerX, centerY).transform(pt, 0, pt, 0,
 					1); // specifying to use this double[] to hold coords
-			xPoints[i] = pt[0];
-			yPoints[i] = pt[1];
+			xPoints.set(i, pt[0]);
+			yPoints.set(i, pt[1]);
 			/*
 			 * Per poter risolvere la traslazione (verso l'origine del canvas se rotazione
 			 * oraria o verso +inf e +inf se antioraria) la rotazione dovrebbe essere
@@ -42,31 +59,49 @@ public class Polygon extends Figura {
 
 	public void resize(double scaleX, double scaleY, double centerX, double centerY) {
 		for (int i = 0; i < this.nLati; i++) {
-			double[] pt = { xPoints[i] - centerX, yPoints[i] - centerY };
+			double[] pt = { xPoints.get(i) - centerX, yPoints.get(i) - centerY };
 			AffineTransform.getScaleInstance(scaleX, scaleY).transform(pt, 0, pt, 0, 1);
 			//if(pt[0] < centerX +2 || centerX > pt[0] - 2)
-				xPoints[i] = pt[0] + centerX;
+				xPoints.set(i, pt[0] + centerX);
 			//else
 			//	xPoints[i] = pt[0] + 3;
 			//if(pt[1] < centerY + 2 && centerY > pt[1] - 2)
-				yPoints[i] = pt[1] + centerY;
+				yPoints.set(i, pt[1] + centerY);
 			//else
 			//	yPoints[i] = pt[1] + 3;
 
 		}
 	}
 
+	@Override
+	public double getCenterX() {
+		double center = 0;
+		for (int i = 0; i < nLati; i++) {
+			center += this.xPoints.get(i);
+		}
+		center /= nLati;
+		return center;
+	}
+
+	@Override
+	public double getCenterY() {
+		double center = 0;
+		for (int i = 0; i < nLati; i++) {
+			center += this.yPoints.get(i);
+		}
+		center /= nLati;
+		return center;
+	}
 
 	@Override
 	public void draw(Graphics g) {
 		Graphics2D d = (Graphics2D) g;
 		super.draw(g);
-		// d.drawPolygon(xPoints, yPoints, nLati);
-		int[] xP = { 0, 0, 0, 0 };
-		int[] yP = { 0, 0, 0, 0 };
+		int[] xP = new int[nLati];
+		int[] yP = new int[nLati];
 		for (int i = 0; i < this.getNLati(); i++) {
-			xP[i] = (int) xPoints[i];
-			yP[i] = (int) yPoints[i];
+			xP[i] = xPoints.get(i).intValue();
+			yP[i] = yPoints.get(i).intValue();
 		}
 		p = new java.awt.Polygon(xP, yP, nLati);
 		d.setColor(getColor());

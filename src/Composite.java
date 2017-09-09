@@ -32,7 +32,7 @@ public class Composite extends Figura {
 		int j;
 		for (Figura i : Composition) {
 			for (j = 0; j < i.nLati; j++) {
-				center += i.xPoints[j];
+				center += i.xPoints.get(j);
 			}
 			nPoints += j;
 		}
@@ -47,7 +47,7 @@ public class Composite extends Figura {
 		int j;
 		for (Figura i : Composition) {
 			for (j = 0; j < i.nLati; j++) {
-				center += i.yPoints[j];
+				center += i.yPoints.get(j);
 			}
 			nPoints += j;
 		}
