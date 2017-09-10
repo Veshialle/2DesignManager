@@ -9,7 +9,7 @@ new FormModel {
 		}
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class info.clearthought.layout.TableLayout ) {
 			"$columnSpecs": "766.0, 97.0, 98.0"
-			"$rowSpecs": "41.0, 38.0, 36.0, pref"
+			"$rowSpecs": "41.0, 38.0, 36.0, 76.0, pref"
 			"hGap": 7
 			"vGap": 7
 		} ) {
@@ -20,24 +20,7 @@ new FormModel {
 				name: "scrollPane1"
 				add( new FormComponent( "javax.swing.JTable" ) {
 					name: "tableDB"
-					"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector {
-						add( new java.util.Vector {
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-						} )
-						add( new java.util.Vector {
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-						} )
-					}, new java.util.Vector {
+					"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector, new java.util.Vector {
 						add( "Name" )
 						add( "Version" )
 						add( "Type" )
@@ -52,7 +35,7 @@ new FormModel {
 						add( null )
 						add( null )
 					}, new java.util.Vector {
-						add( null )
+						add( false )
 						add( null )
 						add( null )
 						add( null )
@@ -67,6 +50,7 @@ new FormModel {
 						add( null )
 					} )
 					"autoCreateRowSorter": true
+					"selectionMode": 0
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.TableConstraints ) {
 				"gridHeight": 4
@@ -92,6 +76,14 @@ new FormModel {
 				"gridX": 1
 				"gridY": 1
 				"gridWidth": 2
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane2"
+				add( new FormComponent( "javax.swing.JTree" ) {
+					name: "tree1"
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.TableConstraints ) {
+				"gridY": 4
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 5, 0 )
