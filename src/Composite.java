@@ -6,7 +6,8 @@ import java.util.List;
 
 public class Composite extends Figura {
 	private List<Figura> Composition = new ArrayList<Figura>();
-	private boolean United;
+	private List<Color> stayColor = new ArrayList<Color>();
+	private boolean United = false;
 
 	public Composite(List<Figura> Parts, boolean United, String name) {
 		super();
@@ -16,7 +17,7 @@ public class Composite extends Figura {
 		}
 		super.setName(name);
 	}
-
+	@Override
 	public int getNFigure() {
 		return this.Composition.size();
 	}
@@ -26,7 +27,15 @@ public class Composite extends Figura {
 	}
 
 	@Override
-	public double getCenterX() {
+	public double getCenterX(){
+		double center = 0;
+		for(Figura i : Composition){
+			center += i.getCenterX();
+		}
+		center /= Composition.size();
+		return center;
+	}
+	public double getCenterXX() {
 		double center = 0;
 		int nPoints = 0;
 		int j;
@@ -41,7 +50,16 @@ public class Composite extends Figura {
 	}
 
 	@Override
-	public double getCenterY() {
+	public double getCenterY(){
+		double center = 0;
+		for(Figura i : Composition){
+			center += i.getCenterY();
+		}
+		center /= Composition.size();
+		return center;
+
+	}
+	public double getCenterYY() {
 		double center = 0;
 		int nPoints = 0;
 		int j;
@@ -100,7 +118,7 @@ public class Composite extends Figura {
 
 	@Override
 	public void setColor(Color color) {
-		super.setColor(color);
+		this.colore = color;
 	}
 
 	@Override
@@ -109,5 +127,32 @@ public class Composite extends Figura {
 			if(i.contains(test)) return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void resize(double scaleX, double scaleY, double centerX, double centerY) {
+		for(Figura i: this.Composition){
+			i.resize(scaleX, scaleY, centerX, centerY);
+		}
+	}
+
+	@Override
+	public int getNLati() {
+		//da fare????
+		return super.getNLati();
+	}
+
+	@Override
+	public Color getColor() {
+		return this.colore;
+	}
+
+	@Override
+	public boolean isUnited() {
+		return United;
+	}
+
+	public void setUnited(boolean united) {
+		United = united;
 	}
 }

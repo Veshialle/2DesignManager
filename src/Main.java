@@ -85,9 +85,13 @@ public class Main {
 					window.rotationBar.setValue((int) fig.get(window.list1.getSelectedIndex()).getAngle());
 					if(window.list1.getSelectedIndices().length >= 2){
 						window.btnCompFig.setEnabled(true);
-						if(fig.get(window.list1.getSelectedIndex()).getClass() != Composite.class) window.checkboColorComp.setEnabled(true);
-						else window.checkboColorComp.setEnabled(false);
+						System.out.println(Composite.class);
+						System.out.println(fig.get(window.list1.getSelectedIndex()).getClass());
 					} else window.btnCompFig.setEnabled(false);
+					if(fig.get(window.list1.getSelectedIndex()).getClass() == Composite.class) {
+						window.checkboColorComp.setEnabled(true);
+						window.checkboColorComp.setSelected(fig.get(window.list1.getSelectedIndex()).isUnited());
+					} else window.checkboColorComp.setEnabled(false);
 				} else {
 					window.btnRemoveFig.setEnabled(false);
 					window.btnSaveFig.setEnabled(false);
@@ -112,7 +116,7 @@ public class Main {
 		window.btnSetY.addActionListener(new ActionListener() { // Imposta val Y
 			public void actionPerformed(ActionEvent e) {
 				Figura f = fig.get(window.list1.getSelectedIndex());
-				f.setY((double) window.spinnerPos.getValue());
+				f.setY(Double.valueOf((int)window.spinnerPos.getValue()));
 				window.canvas.paintImage();
 			}
 		});
@@ -120,7 +124,7 @@ public class Main {
 		window.btnSetX.addActionListener(new ActionListener() { // Imposta val X
 			public void actionPerformed(ActionEvent e) {
 				Figura f = fig.get(window.list1.getSelectedIndex());
-				f.setX((double) window.spinnerPos.getValue());
+				f.setX(Double.valueOf((int)window.spinnerPos.getValue()));
 				window.canvas.paintImage();
 			}
 		});
@@ -152,23 +156,25 @@ public class Main {
 
 			// --------------------------------------------------------- Grazie google
 
-			Object[] possibilities = { "3", "4", "5", "6", "7", "8", "9", "10", "0" };
+			//Object[] possibilities = { "3", "4", "5", "6", "7", "8", "9", "10", "0" };
 			Component frame = null;
 			Icon icon = null;
-			String s = (String) JOptionPane.showInputDialog(frame, "Select Number of sides:\n", "Customized Dialog",
-					JOptionPane.PLAIN_MESSAGE, icon, possibilities, "3");
+			String s = JOptionPane.showInputDialog("Inserire numero di lati del poligono.", "3");
+			int nLati = Integer.valueOf(s);
 
 			// If a string was returned, say so.
-			if ((s != null) && (s.length() > 0)) {
-				int nLati = Integer.valueOf(s);
+			if ((s != null) && (s.length() > 0) && (nLati == 0 || nLati > 2)) {
+
 				String name = JOptionPane.showInputDialog("Inserire nome della figura.", s);
 				Figura f;
 				if (name != null && name.length() > 0) {
-					if (nLati == 0)
-						f = new Circle(name, nLati, idFigura, 200, 200, 200, 100); // inizializzo/creo la Figura(s=tipo di
-																				// figura, x=0, y=0, larghezza,
-																				// altezza);
-					else
+					if (nLati == 0) {
+						//f = new Circle(name, nLati, idFigura, 200, 200, 200, 100); // inizializzo/creo la Figura(s=tipo di
+						// figura, x=0, y=0, larghezza,
+						// altezza);
+						nLati = 450;
+					}
+
 						f = new Polygon(name, nLati, idFigura, 200, 200, 200, 100); // inizializzo/creo la Figura(s=tipo di
 																				// figura, x=0, y=0, larghezza,
 																				// altezza);
@@ -191,9 +197,11 @@ public class Main {
 
 			System.out.print(fig.get(window.list1.getSelectedIndex()).getName());
 			//model.remove(window.list1.getSelectedIndex());// rimuovi la stringa della figura nella lista dei tipi
-			fig.remove(window.list1.getSelectedIndex()); // rimuovi dalla lista di figure la figura con l'indice appena ricavato
+			int removeFig = window.list1.getSelectedIndex();
 			model.removeElement(fig.get(window.list1.getSelectedIndex()));
-			window.scrollPane.validate();
+			fig.remove(removeFig); // rimuovi dalla lista di figure la figura con l'indice appena ricavato
+			window.scrollPane.revalidate();
+			window.list1.setSelectedIndex(model.getSize() - 1);
 			window.canvas.paintImage();// disegna di nuovo
 			if(!model.isEmpty()) window.list1.setSelectedIndex(model.getSize() - 1);
 
@@ -221,7 +229,7 @@ public class Main {
 														// positivo
 				double x1 = (Integer)window.spinnerPos.getValue();
 				//double x1 = (-(double) window.spinnerPos.getValue());// prendi il valore negativo
-				fig.get(window.list1.getSelectedIndex()).move(x1, 0); // muovi la figura selezionata del valore x1, y rimangono uguali
+				fig.get(window.list1.getSelectedIndex()).move(-x1, 0); // muovi la figura selezionata del valore x1, y rimangono uguali
 			}
 			window.canvas.paintImage();// disegna di nuovo
 
@@ -277,11 +285,11 @@ public class Main {
 								JOptionPane.showMessageDialog(null, "Note is empty");
 							} else {
 								fig.get(window.list1.getSelectedIndex()).setDescription(note.textArea1.getText());
+								note.setVisible(false);
 								JOptionPane.showMessageDialog(frame, "Figure saved!");
 							}
 						});
 					}
-					System.out.println(fig.get(window.list1.getSelectedIndex()).getDescription().getName());
 					Manager.saveObj(fig.get(window.list1.getSelectedIndex()));
 				} catch ( IOException  e1) {
 					// TODO Auto-generated catch block
@@ -293,22 +301,36 @@ public class Main {
 
 		window.btnDB.addActionListener(e -> {
 			Manager m = new Manager();
-			DB table = new DB();
 			DefaultTableModel modelElement;
 			String[] columns = {"Name", "Version", "Class", "Number of Fields", "File Name", "Description"};
-			modelElement = new DefaultTableModel(m.loadModelDB(), columns);
+			modelElement = new DefaultTableModel(m.loadModelDB(), columns) {
+				@Override
+				public boolean isCellEditable(int row, int column) {
+					return false;
+				}
+			};
+			DB table = new DB();
+			table.tableDB.setModel(modelElement);
 			table.setSize(980, 465);
 			table.pack();
 			table.validate();
-			table.setLocationRelativeTo(null);
-			table.tableDB.setModel(modelElement);
 			table.setVisible(true);
+			table.setLocationRelativeTo(null);
 			table.btnLoad.addActionListener(acl -> {
 				if(table.tableDB.getSelectedRow() < 0){
 					JOptionPane.showMessageDialog(null, "Select a Figure to load");
 				} else {
 					try {
-						Figura newFig = m.loadObj(table.tableDB.getSelectedRow());
+						Figura loadedFig = m.loadObj(table.tableDB.getSelectedRow());
+						fig.add(loadedFig); // aggiungi la figura appena creata f alla lista di Figure "fig"
+						window.canvas.paintImage(); // disegna
+						model.addElement(loadedFig); // aggiungi alla lista di stringhe il tipo della nuova figura
+						// inserita
+						window.list1.setSelectedIndex(model.getSize() - 1);// seleziona nella lista output l'ultima figura
+						window.scrollPane.validate();
+						idFigura++;
+						table.setVisible(false);
+
 					} catch (IOException ioe){
 						ioe.printStackTrace();
 					}
@@ -336,9 +358,9 @@ public class Main {
 						if(note.textArea1.getText().isEmpty()){
 							JOptionPane.showMessageDialog(null, "Note is empty");
 						} else {
-							System.out.println(note.textArea1.getText());
 							fig.get(window.list1.getSelectedIndex()).setDescription(note.textArea1.getText());
 						}
+						note.setVisible(false);;
 					});
 					/*
 					if(JOptionPane.showConfirmDialog(null, m.getStringDescription(table.tableDB.getSelectedRow()) + "\n" + "Modificare?")== JOptionPane.YES_OPTION){
@@ -443,6 +465,10 @@ public class Main {
 				window.canvas.paintImage();
 			}
 
+		});
+
+		window.checkboColorComp.addActionListener(e -> {
+			fig.get(window.list1.getSelectedIndex()).setUnited(!fig.get(window.list1.getSelectedIndex()).isUnited());
 		});
 
 

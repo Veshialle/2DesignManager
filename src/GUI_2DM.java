@@ -1,6 +1,5 @@
-import java.awt.*;
 import javax.swing.*;
-import javax.swing.GroupLayout;
+import java.awt.*;
 /*
  * Created by JFormDesigner on Sat Sep 02 20:52:18 CEST 2017
  */

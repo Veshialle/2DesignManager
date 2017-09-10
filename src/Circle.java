@@ -40,7 +40,7 @@ public class Circle extends Figura {
 
 	@Override
 	public double getCenterY() {
-		double center =0;
+		double center = 0;
 		center = this.yPoints.get(0);
 		center += this.width / 2;
 		return center;
@@ -63,8 +63,15 @@ public class Circle extends Figura {
 	}
 
 	@Override
-	public void resize(double scaleX, double scaleY, double centerX, double centerY) {
-		super.resize(scaleX, scaleY, centerX, centerY);
+	public void resize(double oldX, double newX, double centerX, double centerY) {
+		double xVar = (newX - oldX) / (centerX - oldX);
+		double scaleX = (-xVar * 8 / 10) + 1.0; // era troppo veloce a ingrandire
+		this.setXPoints(this.getCenterX() + (this.getCenterX() - centerX) * getWidth() * (scaleX - 1));
+		this.setYPoints(this.getCenterY() + (this.getCenterX() - centerX) * getWidth() * (scaleX - 1));
+		setWidth(this.getWidth() * scaleX);
+		//xPoints.set(0, (this.getCenterX() - (centerX - this.getCenterX()) *scaleX)- width/2);
+		//yPoints.set(0, (this.getCenterY() - (centerY - this.getCenterX()) *scaleX) - width/2);
+		//move(scaleX, scaleX);
 	}
 
 	@Override

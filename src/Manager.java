@@ -126,16 +126,22 @@ public class Manager {
         }
         CSVParser parser = new CSVParserBuilder().withSeparator(',').withIgnoreQuotations(true).build();
         CSVReader reader = new CSVReaderBuilder(new FileReader(db)).withSkipLines(1).build();
+
         //CSVReader reader = new CSVReaderBuilder(new FileReader(db)).build();
         //Read CSV line by line and use the string array as you want
         String[] nextLine;
         while ((nextLine = reader.readNext()) != null) {
             if (nextLine != null) {
                 //Verifying the read data here
+                System.out.println(nextLine);
                 getWhole().add(new dbElement(nextLine));
             }
         }
         Collections.sort(getWhole(), new dbElementComparator());
+        System.out.println(getWhole().size());
+        for(int i = 0 ; i < getWhole().size(); i++){
+            System.out.println(getWhole().get(i).getFileName());
+        }
         return getWhole();
     }
 
@@ -166,11 +172,16 @@ public class Manager {
 
         CSVWriter writer = new CSVWriter(new FileWriter(db, true));
         System.out.println(fig.getDescription().getName());
+        String fields;
+        if(fig.getClass() == Composite.class)
+            fields = String.valueOf(fig.getNFigure());
+        else
+            fields = String.valueOf(fig.getNLati());
         String [] newRecord = {
                 fig.getName(),
                 String.valueOf(fig.getVersione()),
                 String.valueOf(fig.getClass()),
-                String.valueOf(fig.getNLati()),
+                String.valueOf(fields),
                 String.valueOf(file.getName()),
                 fig.getDescription().getName()
         };
@@ -186,10 +197,8 @@ public class Manager {
             FileInputStream fis = new FileInputStream(file);
             ObjectInputStream ois = new ObjectInputStream(fis);
 
-            String fileName = file.getName();
-            String[] tokens = fileName.split(".");
             try {
-                switch(tokens[3]){
+                switch(whole.get(i).getC()){
                     case "Polygon":
                         fig = (Polygon)ois.readObject();
                         break;
@@ -203,12 +212,13 @@ public class Manager {
                         fig = (Figura)ois.readObject();
                 }
                 return fig;
+
             } catch (Exception e){
                 e.printStackTrace();
             }
-
             return null;
         }
+
     }
 
     public static int countFigure() {
@@ -222,7 +232,7 @@ public class Manager {
     public String[][] loadModelDB() {
         try {
             //ciao = Manager.loadObj(fail);
-            setWhole(loadCSV());
+            if(whole.isEmpty()) loadCSV();
             int nFigure = whole.size();
             if (!whole.isEmpty()) {
                 String[][] modelGrid = new String[nFigure][6];
@@ -262,7 +272,7 @@ public class Manager {
             }
             for(dbElement k : getWhole()){
                 CSVWriter writer = new CSVWriter(new FileWriter(db, true));
-                String[] newRecord = {k.getName(), k.getVersion(), k.getClass().getCanonicalName(), k.getNumber(), k.getFileName(), k.getFileNote()};
+                String[] newRecord = {k.getName(), k.getVersion(), k.getClass().getName(), k.getNumber(), k.getFileName(), k.getFileNote()};
                 writer.writeNext(newRecord);
                 writer.close();
             }

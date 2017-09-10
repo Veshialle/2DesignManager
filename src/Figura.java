@@ -31,6 +31,7 @@ public class Figura implements java.io.Serializable{
 	protected String name;
 	protected Polygon p;
 	protected File description;
+	private boolean United;
 
 	public Figura() {
 		super();
@@ -60,7 +61,8 @@ public class Figura implements java.io.Serializable{
 		this.angle = angle;
 		this.colore = colore;
 		this.setVersione(versione);
-		this.description  = new File("save/", this.getFinalName() + "." + this.getClass()  + ".txt");
+		this.description  = new File("save/", this.getFinalName() + "." + this.getClass().getCanonicalName()  + ".txt");
+		System.out.println(description.getName());
 	}
 
 	public void move(double x, double y) { // muovi tutti i punti della figura
@@ -140,7 +142,18 @@ public class Figura implements java.io.Serializable{
 		return 0;
 	}
 
-	public void draw(Graphics g) { }
+	public int getNFigure(){ return 1; }
+
+	public boolean isUnited() {
+		return United;
+	}
+
+	public void setUnited(boolean united) {
+		United = united;
+	}
+
+	public void draw(Graphics g) {
+	}
 
 	public boolean contains(Point test) {
 		return p.contains(test);

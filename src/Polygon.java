@@ -58,6 +58,10 @@ public class Polygon extends Figura {
 	}
 
 	public void resize(double scaleX, double scaleY, double centerX, double centerY) {
+		/*
+		double xVar = (newX - oldX) / (centerX - oldX);
+		double scaleX = (-xVar * 8 / 10) + 1.0; // era troppo veloce a ingrandire
+		*/
 		for (int i = 0; i < this.nLati; i++) {
 			double[] pt = { xPoints.get(i) - centerX, yPoints.get(i) - centerY };
 			AffineTransform.getScaleInstance(scaleX, scaleY).transform(pt, 0, pt, 0, 1);
@@ -96,7 +100,6 @@ public class Polygon extends Figura {
 	@Override
 	public void draw(Graphics g) {
 		Graphics2D d = (Graphics2D) g;
-		super.draw(g);
 		int[] xP = new int[nLati];
 		int[] yP = new int[nLati];
 		for (int i = 0; i < this.getNLati(); i++) {
