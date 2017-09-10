@@ -35,14 +35,13 @@ public class DB extends JFrame {
         btnRemove = new JButton();
         btnDescription = new JButton();
         scrollPane2 = new JScrollPane();
-        tree1 = new JTree();
 
         //======== this ========
         setTitle("Database");
         Container contentPane = getContentPane();
         contentPane.setLayout(new TableLayout(new double[][] {
             {766, 97, 98},
-            {41, 38, 36, 76, TableLayout.PREFERRED}}));
+            {41, 38, 36, 76, TableLayout.PREFERRED, TableLayout.PREFERRED, TableLayout.PREFERRED}}));
         ((TableLayout)contentPane.getLayout()).setHGap(7);
         ((TableLayout)contentPane.getLayout()).setVGap(7);
 
@@ -69,7 +68,7 @@ public class DB extends JFrame {
             tableDB.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             scrollPane1.setViewportView(tableDB);
         }
-        contentPane.add(scrollPane1, new TableLayoutConstraints(0, 0, 0, 3, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
+        contentPane.add(scrollPane1, new TableLayoutConstraints(0, 0, 0, 6, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
 
         //---- btnLoad ----
         btnLoad.setText("Load");
@@ -82,11 +81,6 @@ public class DB extends JFrame {
         //---- btnDescription ----
         btnDescription.setText("Read Description");
         contentPane.add(btnDescription, new TableLayoutConstraints(1, 1, 2, 1, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
-
-        //======== scrollPane2 ========
-        {
-            scrollPane2.setViewportView(tree1);
-        }
         contentPane.add(scrollPane2, new TableLayoutConstraints(0, 4, 0, 4, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
@@ -100,6 +94,5 @@ public class DB extends JFrame {
     protected JButton btnRemove;
     protected JButton btnDescription;
     protected JScrollPane scrollPane2;
-    protected JTree tree1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

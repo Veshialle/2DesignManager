@@ -53,7 +53,7 @@ public class Main {
         window.list1 = new JList<>(model);
         window.scrollPane.setViewportView(window.list1);
 		window.canvas.paintImage();
-
+		window.checkboColorComp.setSelected(false);
 
 
 
@@ -85,8 +85,6 @@ public class Main {
 					window.rotationBar.setValue((int) fig.get(window.list1.getSelectedIndex()).getAngle());
 					if(window.list1.getSelectedIndices().length >= 2){
 						window.btnCompFig.setEnabled(true);
-						System.out.println(Composite.class);
-						System.out.println(fig.get(window.list1.getSelectedIndex()).getClass());
 					} else window.btnCompFig.setEnabled(false);
 					if(fig.get(window.list1.getSelectedIndex()).getClass() == Composite.class) {
 						window.checkboColorComp.setEnabled(true);
@@ -444,7 +442,7 @@ public class Main {
 				String name = JOptionPane.showInputDialog("Inserire nome della figura.", fig.get(window.list1.getSelectedIndex()).getName());
 				for(int k : window.list1.getSelectedIndices()) composition.add(fig.get(k));
 				Figura f;
-				f = new Composite(composition, true, name);
+				f = new Composite(composition, false, name);
 				window.list1.getSelectedIndices();
 				for(Figura i : composition){
 					fig.remove(window.list1.getSelectedIndex()); // rimuovi dalla lista di figure la figura con l'indice appena ricavato
@@ -469,6 +467,7 @@ public class Main {
 
 		window.checkboColorComp.addActionListener(e -> {
 			fig.get(window.list1.getSelectedIndex()).setUnited(!fig.get(window.list1.getSelectedIndex()).isUnited());
+			window.canvas.paintImage();
 		});
 
 

@@ -9,7 +9,7 @@ new FormModel {
 		}
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class info.clearthought.layout.TableLayout ) {
 			"$columnSpecs": "766.0, 97.0, 98.0"
-			"$rowSpecs": "41.0, 38.0, 36.0, 76.0, pref"
+			"$rowSpecs": "41.0, 38.0, 36.0, 76.0, pref, pref, pref"
 			"hGap": 7
 			"vGap": 7
 		} ) {
@@ -53,7 +53,7 @@ new FormModel {
 					"selectionMode": 0
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.TableConstraints ) {
-				"gridHeight": 4
+				"gridHeight": 7
 				"hAlign": 2
 				"vAlign": 2
 			} )
@@ -79,9 +79,6 @@ new FormModel {
 			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane2"
-				add( new FormComponent( "javax.swing.JTree" ) {
-					name: "tree1"
-				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.TableConstraints ) {
 				"gridY": 4
 			} )
