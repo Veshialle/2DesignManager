@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Polygon extends Figura {
 	public Polygon(String name, int nLati, int idFigura, double x, double y, double width, double height) {
 		super(name, nLati, idFigura, x, y, width, height);
+		if(nLati == 0)
 		xPoints.add(200.0);
 		yPoints.add(200.0);
 		double newPoint;

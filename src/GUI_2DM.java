@@ -57,6 +57,7 @@ public class GUI_2DM extends JFrame {
 
         //---- btnAddFig ----
         btnAddFig.setText("Add Figure");
+        btnAddFig.setToolTipText("Create a new Regular Polygon");
 
         //---- btnSetY ----
         btnSetY.setText("SetY");
@@ -69,25 +70,31 @@ public class GUI_2DM extends JFrame {
         //---- btnRotation ----
         btnRotation.setText("ZeroDegree");
         btnRotation.setEnabled(false);
+        btnRotation.setToolTipText("Bring to zero the rotation of the Figure");
 
         //---- btnCompFig ----
         btnCompFig.setText("Composite Figure");
         btnCompFig.setEnabled(false);
+        btnCompFig.setToolTipText("Collapse selected figure (from the list in the corner, press CTRL key and select with mouse)");
 
         //---- btnColor ----
-        btnColor.setText("Choice Color");
+        btnColor.setText("Choose Color");
         btnColor.setEnabled(false);
+        btnColor.setToolTipText("Choose Color for the Figure");
 
         //---- btnDB ----
         btnDB.setText("DataBase");
+        btnDB.setToolTipText("Open a list of Saved Figure. If none is disabled");
 
         //---- btnSaveFig ----
         btnSaveFig.setText("Save Figure");
         btnSaveFig.setEnabled(false);
+        btnSaveFig.setToolTipText("Save the selected Figure");
 
         //---- btnRemoveFig ----
         btnRemoveFig.setText("Remove Figure");
         btnRemoveFig.setEnabled(false);
+        btnRemoveFig.setToolTipText("Remove Selected Figure");
 
         //---- radioMove ----
         radioMove.setText("Move");
@@ -111,6 +118,7 @@ public class GUI_2DM extends JFrame {
         //---- checkboColorComp ----
         checkboColorComp.setText("Aggregate Color");
         checkboColorComp.setEnabled(false);
+        checkboColorComp.setToolTipText("Collapse color for the Figure composed");
 
         //---- btnUp ----
         btnUp.setText("\u2191");

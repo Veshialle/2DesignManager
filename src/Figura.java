@@ -47,7 +47,7 @@ public class Figura implements java.io.Serializable{
 		this.width = width;
 		this.height = height;
 		this.setColor(Color.BLACK);
-		this.description  = new File("save/", this.getFinalName() + "." + this.getClass()  + ".txt");
+		this.description  = new File("save/", this.getFinalName() + "." + this.getClass().getName() + ".txt");
 	}
 
 	// mossa azzardata, let's see what happen
@@ -165,6 +165,10 @@ public class Figura implements java.io.Serializable{
 
 	public void setVersione(Float versione) {
 		this.versione = versione;
+	}
+
+	public void incrementVersione(){
+		this.versione += 0.1f;
 	}
 
 

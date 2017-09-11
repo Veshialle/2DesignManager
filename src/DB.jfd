@@ -20,7 +20,18 @@ new FormModel {
 				name: "scrollPane1"
 				add( new FormComponent( "javax.swing.JTable" ) {
 					name: "tableDB"
-					"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector, new java.util.Vector {
+					"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector {
+						add( new java.util.Vector {
+							add( null )
+							add( null )
+							add( null )
+							add( null )
+							add( null )
+							add( null )
+							add( null )
+						} )
+					}, new java.util.Vector {
+						add( "ID" )
 						add( "Name" )
 						add( "Version" )
 						add( "Type" )
@@ -34,7 +45,9 @@ new FormModel {
 						add( null )
 						add( null )
 						add( null )
+						add( null )
 					}, new java.util.Vector {
+						add( null )
 						add( false )
 						add( null )
 						add( null )
@@ -42,6 +55,7 @@ new FormModel {
 						add( null )
 						add( null )
 					}, new java.util.Vector {
+						add( null )
 						add( null )
 						add( null )
 						add( null )
@@ -60,22 +74,32 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnLoad"
 				"text": "Load"
+				"toolTipText": "Load to Canvas the figure selected"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.TableConstraints ) {
 				"gridX": 1
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnRemove"
 				"text": "Remove"
+				"toolTipText": "Remove the figure selected"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.TableConstraints ) {
 				"gridX": 2
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnDescription"
-				"text": "Read Description"
+				"text": "Description"
+				"toolTipText": "See Description of the Figure"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.TableConstraints ) {
 				"gridX": 1
 				"gridY": 1
-				"gridWidth": 2
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btnExpand"
+				"text": "Expand"
+				"toolTipText": "See the detail of all the Figure saved"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.TableConstraints ) {
+				"gridX": 2
+				"gridY": 1
 			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane2"

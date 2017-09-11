@@ -27,6 +27,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnAddFig"
 				"text": "Add Figure"
+				"toolTipText": "Create a new Regular Polygon"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnSetY"
@@ -42,30 +43,36 @@ new FormModel {
 				name: "btnRotation"
 				"text": "ZeroDegree"
 				"enabled": false
+				"toolTipText": "Bring to zero the rotation of the Figure"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnCompFig"
 				"text": "Composite Figure"
 				"enabled": false
+				"toolTipText": "Collapse selected figure (from the list in the corner, press CTRL key and select with mouse)"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnColor"
-				"text": "Choice Color"
+				"text": "Choose Color"
 				"enabled": false
+				"toolTipText": "Choose Color for the Figure"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnDB"
 				"text": "DataBase"
+				"toolTipText": "Open a list of Saved Figure. If none is disabled"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnSaveFig"
 				"text": "Save Figure"
 				"enabled": false
+				"toolTipText": "Save the selected Figure"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnRemoveFig"
 				"text": "Remove Figure"
 				"enabled": false
+				"toolTipText": "Remove Selected Figure"
 			} )
 			add( new FormComponent( "javax.swing.JRadioButton" ) {
 				name: "radioMove"
@@ -96,6 +103,7 @@ new FormModel {
 				name: "checkboColorComp"
 				"text": "Aggregate Color"
 				"enabled": false
+				"toolTipText": "Collapse color for the Figure composed"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnUp"

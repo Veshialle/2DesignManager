@@ -12,13 +12,15 @@ import java.util.*;
 
 
 class dbElement{
+    private int ID;
     private String Name;
     private String Version;
     private String Class;
     private String Number;
     private String fileName;
     private String FileNote;
-    dbElement(String[] fields){
+    dbElement(String[] fields, int ID){
+        this.ID = ID;
         this.Name = fields[0];
         this.Version = fields[1];
         this.Class = fields[2];
@@ -68,8 +70,12 @@ class dbElement{
     }
 
     public void setFileNote(String FileNote) {
-        FileNote = FileNote;
+        this.FileNote = FileNote;
     }
+
+    public int getID() { return ID;}
+
+    public void setID(int ID) { this.ID = ID; }
 }
 
 class dbElementComparator implements  Comparator<dbElement>{
@@ -105,22 +111,26 @@ public class Manager {
     static private String pathName = "save/";
     static private File path = new File(pathName);
     static private File db;
+    private HashMap<String, List<dbElement>> HashMap = new HashMap<String, List<dbElement>>();
     private List<dbElement> whole = new ArrayList<dbElement>();
 
     static {
         db = new File(path, "db.csv");
     }
 
-    public Manager(){
+    public Manager() {
         try {
             loadCSV();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public List<dbElement> loadCSV() throws Exception{
+
+    public List<dbElement> loadCSV() throws Exception {
+        int ID = 0;
         //Start reading from line number 2 (line numbers start from zero)
-        if(!db.exists()) {
+        //setWhole(null);
+        if (!db.exists()) {
             saveWhole();
             return null;
         }
@@ -133,15 +143,19 @@ public class Manager {
         while ((nextLine = reader.readNext()) != null) {
             if (nextLine != null) {
                 //Verifying the read data here
-                System.out.println(nextLine);
-                getWhole().add(new dbElement(nextLine));
+                //System.out.println(nextLine);
+                getWhole().add(new dbElement(nextLine, 0));
             }
         }
         Collections.sort(getWhole(), new dbElementComparator());
+        for(dbElement e : getWhole())
+            e.setID(ID++);
+        /*
         System.out.println(getWhole().size());
         for(int i = 0 ; i < getWhole().size(); i++){
             System.out.println(getWhole().get(i).getFileName());
         }
+        */
         return getWhole();
     }
 
@@ -151,36 +165,37 @@ public class Manager {
         }
     }
 
-    public List<dbElement> getWhole(){
+    public List<dbElement> getWhole() {
         return this.whole;
     }
 
-    public void setWhole(List<dbElement> newWhole){
+    public void setWhole(List<dbElement> newWhole) {
         this.whole = newWhole;
     }
 
 
     public static void saveObj(Figura fig) throws java.io.IOException {
-        File file = new File(path, fig.getFinalName() + "." + fig.getClass().getName()  + ".obj");
-
+        File file = new File(path, fig.getFinalName() + "." + fig.getClass().getName() + ".obj");
+        System.out.println(fig.getClass().getName());
         if (!file.exists())
             file.createNewFile();
         FileOutputStream fos = new FileOutputStream(file);
         ObjectOutputStream oos = new ObjectOutputStream(fos);
 
         oos.writeObject(fig);
-
+        createCSV();
         CSVWriter writer = new CSVWriter(new FileWriter(db, true));
         System.out.println(fig.getDescription().getName());
         String fields;
-        if(fig.getClass() == Composite.class)
+        if (fig.getClass() == Composite.class)
             fields = String.valueOf(fig.getNFigure());
-        else
+        else {
             fields = String.valueOf(fig.getNLati());
-        String [] newRecord = {
+        }
+        String[] newRecord = {
                 fig.getName(),
                 String.valueOf(fig.getVersione()),
-                String.valueOf(fig.getClass()),
+                String.valueOf(fig.getClass().getName()),
                 String.valueOf(fields),
                 String.valueOf(file.getName()),
                 fig.getDescription().getName()
@@ -189,31 +204,31 @@ public class Manager {
         writer.close();
     }
 
-    public Figura loadObj(int i) throws java.io.IOException{
+    public Figura loadObj(int i) throws java.io.IOException {
         File file = new File(path, whole.get(i).getFileName());
         Figura fig;
-        if(!file.exists()) return null;
+        if (!file.exists()) return null;
         else {
             FileInputStream fis = new FileInputStream(file);
             ObjectInputStream ois = new ObjectInputStream(fis);
 
             try {
-                switch(whole.get(i).getC()){
+                switch (whole.get(i).getC()) { //dai che posso farlo, tutti gli id sono in rigoroso ordine numerico di come è stato, appunnto, inserito nel whole
                     case "Polygon":
-                        fig = (Polygon)ois.readObject();
+                        fig = (Polygon) ois.readObject();
                         break;
                     case "Circle":
-                        fig = (Circle)ois.readObject();
+                        fig = (Circle) ois.readObject();
                         break;
                     case "Composite":
-                        fig = (Composite)ois.readObject();
+                        fig = (Composite) ois.readObject();
                         break;
                     default:
-                        fig = (Figura)ois.readObject();
+                        fig = (Figura) ois.readObject();
                 }
                 return fig;
 
-            } catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             return null;
@@ -227,23 +242,24 @@ public class Manager {
     }
 
 
-
-
-    public String[][] loadModelDB() {
+    public String[][] loadModelDB(List<dbElement> toModel) {
+        if (toModel == null) toModel = getLastVersionFigure();
         try {
             //ciao = Manager.loadObj(fail);
-            if(whole.isEmpty()) loadCSV();
-            int nFigure = whole.size();
-            if (!whole.isEmpty()) {
-                String[][] modelGrid = new String[nFigure][6];
+            //loadCSV();
+            int nFigure = toModel.size();
+            if (!toModel.isEmpty()) {
+                String[][] modelGrid = new String[nFigure][7];
                 int k = 0;
-                for (dbElement dbe : whole) {
-                    modelGrid[k][0] = dbe.getName();
-                    modelGrid[k][1] = dbe.getVersion();
-                    modelGrid[k][2] = dbe.getC();
-                    modelGrid[k][3] = dbe.getNumber();
-                    modelGrid[k][4] = dbe.getFileName();
-                    modelGrid[k][5] = dbe.getFileNote();
+                for (dbElement dbe : toModel) {
+                    modelGrid[k][0] = String.valueOf(dbe.getID());
+                    modelGrid[k][1] = dbe.getName();
+                    modelGrid[k][2] = dbe.getVersion();
+                    modelGrid[k][3] = dbe.getC();
+                    modelGrid[k][4] = dbe.getNumber();
+                    modelGrid[k][5] = dbe.getFileName();
+                    modelGrid[k][6] = dbe.getFileNote();
+                    k++;
                 }
                 return modelGrid;
             }
@@ -253,7 +269,7 @@ public class Manager {
         return null;
     }
 
-    public void rmvFig(int i){
+    public void rmvFig(int i) {
         File file = new File(path, getWhole().get(i).getFileName());
         file.delete();
         db.delete();
@@ -263,46 +279,92 @@ public class Manager {
 
     public void saveWhole() {
         try {
-            if(!db.exists()) {
-                db.createNewFile();
-                CSVWriter writer = new CSVWriter(new FileWriter(db, true));
-                String[] newRecord = {"Name","Version","Class","Number of Fields","File Name","Note File"};
-                writer.writeNext(newRecord);
-                writer.close();
-            }
-            for(dbElement k : getWhole()){
+            createCSV();
+            for (dbElement k : getWhole()) {
                 CSVWriter writer = new CSVWriter(new FileWriter(db, true));
                 String[] newRecord = {k.getName(), k.getVersion(), k.getClass().getName(), k.getNumber(), k.getFileName(), k.getFileNote()};
                 writer.writeNext(newRecord);
                 writer.close();
             }
-            } catch (IOException e){
-                e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
-    public String getStringDescription(int i){
+
+    public String getFileDescription(int i) {
         File fileDescription = new File(path, whole.get(i).getFileNote());
-        BufferedReader buffR = null;
-        Reader inputReader = null;
-        try {
-            System.out.println(whole.size());
-            System.out.println(fileDescription.getName());
-            buffR = new BufferedReader((new FileReader(fileDescription)));
-            StringBuilder stringB = new StringBuilder();
-            String line = buffR.readLine();
-            while(line != null){
-                stringB.append(line);
-                stringB.append(System.lineSeparator());
-                line = buffR.readLine();
-            }
-            return stringB.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
+        return getDescription(fileDescription);
+    }
+
+    public static String getDescription(File readFile) {
+        if (readFile.exists()) {
+            BufferedReader buffR = null;
+            Reader inputReader = null;
             try {
-                buffR.close();
-            } catch (Exception e){ }
+                buffR = new BufferedReader((new FileReader(readFile)));
+                StringBuilder stringB = new StringBuilder();
+                String line = buffR.readLine();
+                while (line != null) {
+                    stringB.append(line);
+                    stringB.append(System.lineSeparator());
+                    line = buffR.readLine();
+                }
+                return stringB.toString();
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    buffR.close();
+                } catch (Exception e) {
+                }
+            }
         }
         return null;
     }
+
+
+    public List<dbElement> getLastVersionFigure() {
+        Float last = 0.0f;
+        List<dbElement> groupedByName = new ArrayList<dbElement>();
+        groupedByName.add(whole.get(0));
+        int k = 0;
+        for (dbElement e : whole) {
+            if (e.getName().equals(groupedByName.get(k).getName())) {
+                if (Float.valueOf(e.getVersion()) > Float.valueOf(groupedByName.get(k).getVersion())) {
+                    groupedByName.set(k, e);
+                }
+            } else {
+                k++; // posso farlo perché già ordinati per nome
+                groupedByName.add(e);
+            }
+        }
+        return groupedByName;
+    }
+
+    public List<dbElement> getListName(int i) {
+        dbElement name = getWhole().get(i);
+        List<dbElement> ListByName = new ArrayList<dbElement>();
+        for (dbElement e : whole) {
+            if (name.getName().equals(e.getName())) {
+                ListByName.add(e);
+            }
+        }
+        return ListByName;
+    }
+
+
+    public static void createCSV(){
+        try {
+            if (!db.exists()) {
+                db.createNewFile();
+                CSVWriter writer = new CSVWriter(new FileWriter(db, true));
+                String[] newRecord = {"Name", "Version", "Class", "Number of Fields", "File Name", "Note File"};
+                writer.writeNext(newRecord);
+                writer.close();
+            }
+        } catch (IOException  e){
+            e.printStackTrace();
+        }
+    }
 }
+

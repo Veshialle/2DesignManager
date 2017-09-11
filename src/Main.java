@@ -54,8 +54,9 @@ public class Main {
         window.scrollPane.setViewportView(window.list1);
 		window.canvas.paintImage();
 		window.checkboColorComp.setSelected(false);
-
-
+		if(Manager.countFigure() < 3){
+			window.btnDB.setEnabled(false);
+		}
 
 
 
@@ -90,6 +91,11 @@ public class Main {
 						window.checkboColorComp.setEnabled(true);
 						window.checkboColorComp.setSelected(fig.get(window.list1.getSelectedIndex()).isUnited());
 					} else window.checkboColorComp.setEnabled(false);
+					if(Manager.countFigure() < 3){
+						window.btnDB.setEnabled(false);
+					} else {
+						window.btnDB.setEnabled(true);
+					}
 				} else {
 					window.btnRemoveFig.setEnabled(false);
 					window.btnSaveFig.setEnabled(false);
@@ -161,16 +167,17 @@ public class Main {
 			int nLati = Integer.valueOf(s);
 
 			// If a string was returned, say so.
-			if ((s != null) && (s.length() > 0) && (nLati == 0 || nLati > 2)) {
+			if ((s != null) && (s.length() > 0) && ((nLati == 0) || (nLati > 2))) {
 
 				String name = JOptionPane.showInputDialog("Inserire nome della figura.", s);
 				Figura f;
 				if (name != null && name.length() > 0) {
+
 					if (nLati == 0) {
 						//f = new Circle(name, nLati, idFigura, 200, 200, 200, 100); // inizializzo/creo la Figura(s=tipo di
 						// figura, x=0, y=0, larghezza,
 						// altezza);
-						nLati = 450;
+						nLati = 500;
 					}
 
 						f = new Polygon(name, nLati, idFigura, 200, 200, 200, 100); // inizializzo/creo la Figura(s=tipo di
@@ -275,6 +282,7 @@ public class Main {
 					//XMLManager.savePolygon(fig.get(window.list1.getSelectedIndex()));
 					if(JOptionPane.showConfirmDialog(null, "Do you want to take a note of the Figure saved?") == JOptionPane.YES_OPTION){
 						TakeNote note = new TakeNote();
+						note.textArea1.setText(Manager.getDescription(fig.get(window.list1.getSelectedIndex()).getDescription()));
 						note.pack();
 						note.validate();
 						note.setVisible(true);
@@ -289,6 +297,7 @@ public class Main {
 						});
 					}
 					Manager.saveObj(fig.get(window.list1.getSelectedIndex()));
+					window.btnDB.setEnabled(true);
 				} catch ( IOException  e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -300,8 +309,8 @@ public class Main {
 		window.btnDB.addActionListener(e -> {
 			Manager m = new Manager();
 			DefaultTableModel modelElement;
-			String[] columns = {"Name", "Version", "Class", "Number of Fields", "File Name", "Description"};
-			modelElement = new DefaultTableModel(m.loadModelDB(), columns) {
+			String[] columns = {"ID","Name", "Version", "Class", "Number of Fields", "File Name", "Description"};
+			modelElement = new DefaultTableModel(m.loadModelDB(null), columns) {
 				@Override
 				public boolean isCellEditable(int row, int column) {
 					return false;
@@ -319,7 +328,9 @@ public class Main {
 					JOptionPane.showMessageDialog(null, "Select a Figure to load");
 				} else {
 					try {
-						Figura loadedFig = m.loadObj(table.tableDB.getSelectedRow());
+						//int IDSelected = (Integer)table.tableDB.getValueAt(table.tableDB.getSelectedRow(), 0);
+						Figura loadedFig = m.loadObj(Integer.valueOf((String)table.tableDB.getValueAt(table.tableDB.getSelectedRow(), 0)));
+						loadedFig.incrementVersione();
 						fig.add(loadedFig); // aggiungi la figura appena creata f alla lista di Figure "fig"
 						window.canvas.paintImage(); // disegna
 						model.addElement(loadedFig); // aggiungi alla lista di stringhe il tipo della nuova figura
@@ -335,10 +346,11 @@ public class Main {
 				}
 			});
 			table.btnRemove.addActionListener(acl ->{
+
 				if(table.tableDB.getSelectedRow() < 0){
 					JOptionPane.showMessageDialog(null, "Select a Figure to remove");
 				} else {
-					m.rmvFig(table.tableDB.getSelectedRow());
+					m.rmvFig(Integer.valueOf((String)table.tableDB.getValueAt(table.tableDB.getSelectedRow(), 0)));
 				}
 			});
 
@@ -348,7 +360,7 @@ public class Main {
 				} else {
 					TakeNote note = new TakeNote();
 					note.btnSaveNote.setText("Change");
-					note.textArea1.setText(m.getStringDescription(table.tableDB.getSelectedRow()));
+					note.textArea1.setText(m.getFileDescription(Integer.valueOf((String)table.tableDB.getValueAt(table.tableDB.getSelectedRow(), 0))));
 					note.pack();
 					note.validate();
 					note.setVisible(true);
@@ -358,7 +370,7 @@ public class Main {
 						} else {
 							fig.get(window.list1.getSelectedIndex()).setDescription(note.textArea1.getText());
 						}
-						note.setVisible(false);;
+						note.setVisible(false);
 					});
 					/*
 					if(JOptionPane.showConfirmDialog(null, m.getStringDescription(table.tableDB.getSelectedRow()) + "\n" + "Modificare?")== JOptionPane.YES_OPTION){
@@ -366,6 +378,27 @@ public class Main {
 
 					}
 					*/
+				}
+			});
+			table.btnExpand.addActionListener(acl ->{
+				if(table.tableDB.getSelectedRow() < 0)
+					JOptionPane.showMessageDialog(null, "Select a Figure to see all the version");
+				else {
+					/*
+					modelElement = new DefaultTableModel(m.loadModelDB(null), columns) {
+						@Override
+						public boolean isCellEditable(int row, int column) {
+							return false;
+						}
+					};
+					*/
+					//asdElement = new DefaultTableModel();
+					modelElement.setDataVector(
+							m.loadModelDB(
+									m.getListName(Integer.valueOf((String)table.tableDB.getValueAt(table.tableDB.getSelectedRow(), 0)))
+							), columns);
+					table.tableDB.repaint();
+					table.tableDB.revalidate();
 				}
 			});
 
@@ -410,7 +443,12 @@ public class Main {
 						double scaleX = (-xVar * 8 / 10) + 1.0; // era troppo veloce a ingrandire
 						double yVar = (e.getY() - mousePt.y) / (fig.get(window.list1.getSelectedIndex()).getCenterY() - mousePt.y);
 						double scaleY = (-yVar * 8 / 10) + 1.0; // era troppo veloce a ingrandire
-						fig.get(window.list1.getSelectedIndex()).resize(scaleX, scaleX, fig.get(window.list1.getSelectedIndex()).getCenterX(), fig.get(window.list1.getSelectedIndex()).getCenterY());
+						fig.get(
+								window.list1.getSelectedIndex()).resize(
+										scaleX,
+										scaleX,
+										fig.get(window.list1.getSelectedIndex()).getCenterX(),
+										fig.get(window.list1.getSelectedIndex()).getCenterY());
 					} else {
 						fig.get(window.list1.getSelectedIndex()).move(dx, dy);
 					}

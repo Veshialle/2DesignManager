@@ -34,6 +34,7 @@ public class DB extends JFrame {
         btnLoad = new JButton();
         btnRemove = new JButton();
         btnDescription = new JButton();
+        btnExpand = new JButton();
         scrollPane2 = new JScrollPane();
 
         //======== this ========
@@ -51,13 +52,14 @@ public class DB extends JFrame {
             //---- tableDB ----
             tableDB.setModel(new DefaultTableModel(
                 new Object[][] {
+                    {null, null, null, null, null, null, null},
                 },
                 new String[] {
-                    "Name", "Version", "Type", "Number of sides/figures", "File Name", "Note File"
+                    "ID", "Name", "Version", "Type", "Number of sides/figures", "File Name", "Note File"
                 }
             ) {
                 boolean[] columnEditable = new boolean[] {
-                    false, true, true, true, true, true
+                    true, false, true, true, true, true, true
                 };
                 @Override
                 public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -72,15 +74,23 @@ public class DB extends JFrame {
 
         //---- btnLoad ----
         btnLoad.setText("Load");
+        btnLoad.setToolTipText("Load to Canvas the figure selected");
         contentPane.add(btnLoad, new TableLayoutConstraints(1, 0, 1, 0, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
 
         //---- btnRemove ----
         btnRemove.setText("Remove");
+        btnRemove.setToolTipText("Remove the figure selected");
         contentPane.add(btnRemove, new TableLayoutConstraints(2, 0, 2, 0, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
 
         //---- btnDescription ----
-        btnDescription.setText("Read Description");
-        contentPane.add(btnDescription, new TableLayoutConstraints(1, 1, 2, 1, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
+        btnDescription.setText("Description");
+        btnDescription.setToolTipText("See Description of the Figure");
+        contentPane.add(btnDescription, new TableLayoutConstraints(1, 1, 1, 1, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
+
+        //---- btnExpand ----
+        btnExpand.setText("Expand");
+        btnExpand.setToolTipText("See the detail of all the Figure saved");
+        contentPane.add(btnExpand, new TableLayoutConstraints(2, 1, 2, 1, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
         contentPane.add(scrollPane2, new TableLayoutConstraints(0, 4, 0, 4, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
@@ -93,6 +103,7 @@ public class DB extends JFrame {
     protected JButton btnLoad;
     protected JButton btnRemove;
     protected JButton btnDescription;
+    protected JButton btnExpand;
     protected JScrollPane scrollPane2;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
