@@ -19,8 +19,8 @@ class dbElement{
     private String Number;
     private String fileName;
     private String FileNote;
-    dbElement(String[] fields, int ID){
-        this.ID = ID;
+    dbElement(String[] fields){
+        this.ID = 0;
         this.Name = fields[0];
         this.Version = fields[1];
         this.Class = fields[2];
@@ -76,6 +76,9 @@ class dbElement{
     public int getID() { return ID;}
 
     public void setID(int ID) { this.ID = ID; }
+
+
+
 }
 
 class dbElementComparator implements  Comparator<dbElement>{
@@ -111,8 +114,7 @@ public class Manager {
     static private String pathName = "save/";
     static private File path = new File(pathName);
     static private File db;
-    private HashMap<String, List<dbElement>> HashMap = new HashMap<String, List<dbElement>>();
-    private List<dbElement> whole = new ArrayList<dbElement>();
+    private List<dbElement> whole = new ArrayList<>();
 
     static {
         db = new File(path, "db.csv");
@@ -120,6 +122,7 @@ public class Manager {
 
     public Manager() {
         try {
+            createCSV();
             loadCSV();
         } catch (Exception e) {
             e.printStackTrace();
@@ -141,13 +144,10 @@ public class Manager {
         //Read CSV line by line and use the string array as you want
         String[] nextLine;
         while ((nextLine = reader.readNext()) != null) {
-            if (nextLine != null) {
-                //Verifying the read data here
-                //System.out.println(nextLine);
-                getWhole().add(new dbElement(nextLine, 0));
-            }
+            //Verifying the read data here
+            getWhole().add(new dbElement(nextLine));
         }
-        Collections.sort(getWhole(), new dbElementComparator());
+        getWhole().sort(new dbElementComparator());
         for(dbElement e : getWhole())
             e.setID(ID++);
         /*
@@ -217,9 +217,6 @@ public class Manager {
                     case "Polygon":
                         fig = (Polygon) ois.readObject();
                         break;
-                    case "Circle":
-                        fig = (Circle) ois.readObject();
-                        break;
                     case "Composite":
                         fig = (Composite) ois.readObject();
                         break;
@@ -271,10 +268,15 @@ public class Manager {
 
     public void rmvFig(int i) {
         File file = new File(path, getWhole().get(i).getFileName());
-        file.delete();
+        if(file.exists())file.delete();
+        System.out.println(getFileDescription(i));
+        File filenote = new File(path, getWhole().get(i).getFileNote());
+        System.out.println(filenote.getName());
+        if(filenote.exists()) filenote.delete();
         db.delete();
         whole.remove(i);
         saveWhole();
+        //si lo so sono uno stronzo, ma si fa ben prima a cancellare e riscrivere tutto
     }
 
     public void saveWhole() {
@@ -314,8 +316,10 @@ public class Manager {
                 e.printStackTrace();
             } finally {
                 try {
+                    assert buffR != null;
                     buffR.close();
                 } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         }
@@ -325,8 +329,10 @@ public class Manager {
 
     public List<dbElement> getLastVersionFigure() {
         Float last = 0.0f;
-        List<dbElement> groupedByName = new ArrayList<dbElement>();
-        groupedByName.add(whole.get(0));
+        List<dbElement> groupedByName = new ArrayList<>();
+        System.out.println(getWhole().size());
+        if(!whole.isEmpty())
+            groupedByName.add(whole.get(0));
         int k = 0;
         for (dbElement e : whole) {
             if (e.getName().equals(groupedByName.get(k).getName())) {
@@ -343,7 +349,7 @@ public class Manager {
 
     public List<dbElement> getListName(int i) {
         dbElement name = getWhole().get(i);
-        List<dbElement> ListByName = new ArrayList<dbElement>();
+        List<dbElement> ListByName = new ArrayList<>();
         for (dbElement e : whole) {
             if (name.getName().equals(e.getName())) {
                 ListByName.add(e);

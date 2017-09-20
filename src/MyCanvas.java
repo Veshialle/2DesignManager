@@ -25,7 +25,7 @@ public class MyCanvas extends JComponent{
         this.array = array;
     }
 
-    public MyCanvas(){ this.setGridFlag(false);};
+    public MyCanvas(){ this.setGridFlag(false);}
 
     public MyCanvas(List<Figura> fig) {
         super();
@@ -56,7 +56,7 @@ public class MyCanvas extends JComponent{
             // della griglia e non dall'angolo in alto a sinistra
         }
         for (Figura i : this.getArray()) { // per ogni figura nella lista di figure
-            if (i.visibile == true) {// se la figura e' visibile
+            if (i.visibile) {// se la figura e' visibile
                 i.draw(d);// chiama il metodo "disegna" della figura
             }
         }

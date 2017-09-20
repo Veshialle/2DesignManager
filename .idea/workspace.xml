@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="8" />
+    <option name="CUSTOM_SCOPE_NAME" value="test" />
+  </component>
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
       <artifact name="2DesignManager:jar" />
@@ -7,19 +11,463 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a0404e16-4dce-4d13-8563-5d5bb132dbde" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/2DesignManager_jar.zip" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/2DesignManager_jar/META-INF/MANIFEST.MF" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/2DM.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/2DM.xml" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TemplateProgettazione.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/resources/background.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/resources/tab.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/resources/titlebar.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/resources/titlebar_end.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/CSVIterator.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/CSVParser$1.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/CSVParser$StringFragmentCopier.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/CSVParser.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/CSVParserBuilder.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/CSVReader.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/CSVReaderBuilder.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/CSVWriter.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/ICSVParser.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/RFC4180Parser.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/RFC4180ParserBuilder.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/ResultSetColumnNameHelperService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/ResultSetHelper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/ResultSetHelperService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/bean/AbstractBeanField.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/bean/AbstractCSVToBean.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/bean/BeanField.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/bean/BeanFieldDate.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/bean/BeanFieldPrimitiveTypes.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/bean/ColumnPositionMappingStrategy.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/bean/CsvBindByName.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/bean/CsvBindByPosition.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/bean/CsvCustomBindByName.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/bean/CsvCustomBindByPosition.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/bean/CsvDate.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/bean/CsvToBean$CsvToBeanIterator.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/bean/CsvToBean.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/bean/CsvToBeanBuilder.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/bean/CsvToBeanFilter.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/bean/HeaderColumnNameMappingStrategy.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/bean/HeaderColumnNameTranslateMappingStrategy.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/bean/IterableCSVToBean$1.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/bean/IterableCSVToBean.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/bean/IterableCSVToBeanBuilder.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/bean/MappingStrategy.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/bean/StatefulBeanToCsv.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/bean/StatefulBeanToCsvBuilder.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/bean/concurrent/AccumulateCsvResults.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/bean/concurrent/IntolerantThreadPoolExecutor.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/bean/concurrent/OrderedObject.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/bean/concurrent/ProcessCsvBean.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/bean/concurrent/ProcessCsvLine.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/bean/customconverter/ConvertGermanToBoolean.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/bean/customconverter/ConvertSplitOnWhitespace.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/bean/opencsvUtils.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/enums/CSVReaderNullFieldIndicator.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/exceptions/CsvBadConverterException.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/exceptions/CsvBeanIntrospectionException.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/exceptions/CsvConstraintViolationException.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/exceptions/CsvDataTypeMismatchException.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/exceptions/CsvException.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/exceptions/CsvRequiredFieldEmptyException.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/exceptions/CsvRuntimeException.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/com/opencsv/stream/reader/LineReader.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/2DesignManager_jar/TableLayout.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/2DesignManager_jar/commons-io-2.5.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/2DesignManager_jar/opencsv-4.0.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/2DesignManager_jar/save/db.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.classpath" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.project" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/2DM.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/2DM.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/2DesignManager.eml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/2DesignManager.userlibraries" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/CONTRIBUTING.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/LICENSE.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/NOTICE.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/RELEASE-NOTES.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/allclasses-frame.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/allclasses-noframe.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/constant-values.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/deprecated-list.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/help-doc.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/index-all.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/AnnotationUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/ArchUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/ArrayUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/BitField.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/BooleanUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/CharEncoding.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/CharSequenceUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/CharSet.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/CharSetUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/CharUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/ClassPathUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/ClassUtils.Interfaces.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/ClassUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/Conversion.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/EnumUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/JavaVersion.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/LocaleUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/NotImplementedException.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/ObjectUtils.Null.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/ObjectUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/RandomStringUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/RandomUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/Range.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/SerializationException.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/SerializationUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/StringEscapeUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/StringUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/SystemUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/ThreadUtils.NamePredicate.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/ThreadUtils.ThreadGroupPredicate.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/ThreadUtils.ThreadIdPredicate.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/ThreadUtils.ThreadPredicate.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/ThreadUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/Validate.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/arch/Processor.Arch.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/arch/Processor.Type.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/arch/Processor.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/arch/class-use/Processor.Arch.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/arch/class-use/Processor.Type.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/arch/class-use/Processor.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/arch/package-frame.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/arch/package-summary.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/arch/package-tree.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/arch/package-use.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/Builder.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/CompareToBuilder.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/Diff.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/DiffBuilder.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/DiffResult.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/Diffable.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/EqualsBuilder.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/EqualsExclude.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/HashCodeBuilder.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/HashCodeExclude.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/MultilineRecursiveToStringStyle.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/RecursiveToStringStyle.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/ReflectionDiffBuilder.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/ReflectionToStringBuilder.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/StandardToStringStyle.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/ToStringBuilder.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/ToStringExclude.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/ToStringStyle.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/Builder.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/CompareToBuilder.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/Diff.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/DiffBuilder.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/DiffResult.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/Diffable.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/EqualsBuilder.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/EqualsExclude.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/HashCodeBuilder.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/HashCodeExclude.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/MultilineRecursiveToStringStyle.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/RecursiveToStringStyle.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/ReflectionDiffBuilder.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/ReflectionToStringBuilder.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/StandardToStringStyle.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/ToStringBuilder.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/ToStringExclude.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/class-use/ToStringStyle.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/package-frame.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/package-summary.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/package-tree.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/builder/package-use.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/AnnotationUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/ArchUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/ArrayUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/BitField.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/BooleanUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/CharEncoding.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/CharSequenceUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/CharSet.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/CharSetUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/CharUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/ClassPathUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/ClassUtils.Interfaces.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/ClassUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/Conversion.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/EnumUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/JavaVersion.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/LocaleUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/NotImplementedException.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/ObjectUtils.Null.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/ObjectUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/RandomStringUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/RandomUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/Range.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/SerializationException.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/SerializationUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/StringEscapeUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/StringUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/SystemUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/ThreadUtils.NamePredicate.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/ThreadUtils.ThreadGroupPredicate.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/ThreadUtils.ThreadIdPredicate.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/ThreadUtils.ThreadPredicate.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/ThreadUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/class-use/Validate.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/AbstractCircuitBreaker.State.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/AbstractCircuitBreaker.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/AtomicInitializer.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/AtomicSafeInitializer.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/BackgroundInitializer.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/BasicThreadFactory.Builder.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/BasicThreadFactory.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/CallableBackgroundInitializer.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/CircuitBreaker.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/CircuitBreakingException.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/Computable.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/ConcurrentException.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/ConcurrentInitializer.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/ConcurrentRuntimeException.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/ConcurrentUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/ConstantInitializer.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/EventCountCircuitBreaker.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/LazyInitializer.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/Memoizer.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/MultiBackgroundInitializer.MultiBackgroundInitializerResults.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/MultiBackgroundInitializer.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/ThresholdCircuitBreaker.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/TimedSemaphore.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/AbstractCircuitBreaker.State.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/AbstractCircuitBreaker.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/AtomicInitializer.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/AtomicSafeInitializer.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/BackgroundInitializer.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/BasicThreadFactory.Builder.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/BasicThreadFactory.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/CallableBackgroundInitializer.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/CircuitBreaker.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/CircuitBreakingException.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/Computable.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/ConcurrentException.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/ConcurrentInitializer.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/ConcurrentRuntimeException.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/ConcurrentUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/ConstantInitializer.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/EventCountCircuitBreaker.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/LazyInitializer.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/Memoizer.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/MultiBackgroundInitializer.MultiBackgroundInitializerResults.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/MultiBackgroundInitializer.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/ThresholdCircuitBreaker.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/class-use/TimedSemaphore.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/package-frame.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/package-summary.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/package-tree.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/concurrent/package-use.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/event/EventListenerSupport.ProxyInvocationHandler.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/event/EventListenerSupport.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/event/EventUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/event/class-use/EventListenerSupport.ProxyInvocationHandler.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/event/class-use/EventListenerSupport.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/event/class-use/EventUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/event/package-frame.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/event/package-summary.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/event/package-tree.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/event/package-use.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/exception/CloneFailedException.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/exception/ContextedException.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/exception/ContextedRuntimeException.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/exception/DefaultExceptionContext.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/exception/ExceptionContext.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/exception/ExceptionUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/exception/class-use/CloneFailedException.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/exception/class-use/ContextedException.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/exception/class-use/ContextedRuntimeException.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/exception/class-use/DefaultExceptionContext.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/exception/class-use/ExceptionContext.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/exception/class-use/ExceptionUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/exception/package-frame.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/exception/package-summary.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/exception/package-tree.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/exception/package-use.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/math/Fraction.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/math/IEEE754rUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/math/NumberUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/math/class-use/Fraction.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/math/class-use/IEEE754rUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/math/class-use/NumberUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/math/package-frame.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/math/package-summary.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/math/package-tree.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/math/package-use.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/Mutable.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/MutableBoolean.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/MutableByte.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/MutableDouble.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/MutableFloat.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/MutableInt.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/MutableLong.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/MutableObject.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/MutableShort.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/class-use/Mutable.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/class-use/MutableBoolean.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/class-use/MutableByte.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/class-use/MutableDouble.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/class-use/MutableFloat.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/class-use/MutableInt.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/class-use/MutableLong.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/class-use/MutableObject.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/class-use/MutableShort.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/package-frame.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/package-summary.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/package-tree.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/mutable/package-use.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/package-frame.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/package-summary.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/package-tree.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/package-use.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/ConstructorUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/FieldUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/InheritanceUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/MethodUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/TypeLiteral.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/TypeUtils.WildcardTypeBuilder.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/TypeUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/Typed.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/class-use/ConstructorUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/class-use/FieldUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/class-use/InheritanceUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/class-use/MethodUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/class-use/TypeLiteral.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/class-use/TypeUtils.WildcardTypeBuilder.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/class-use/TypeUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/class-use/Typed.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/package-frame.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/package-summary.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/package-tree.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/reflect/package-use.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/CompositeFormat.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/ExtendedMessageFormat.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/FormatFactory.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/FormattableUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/StrBuilder.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/StrLookup.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/StrMatcher.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/StrSubstitutor.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/StrTokenizer.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/WordUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/class-use/CompositeFormat.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/class-use/ExtendedMessageFormat.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/class-use/FormatFactory.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/class-use/FormattableUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/class-use/StrBuilder.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/class-use/StrLookup.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/class-use/StrMatcher.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/class-use/StrSubstitutor.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/class-use/StrTokenizer.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/class-use/WordUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/package-frame.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/package-summary.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/package-tree.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/package-use.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/AggregateTranslator.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/CharSequenceTranslator.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/CodePointTranslator.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/EntityArrays.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/JavaUnicodeEscaper.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/LookupTranslator.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/NumericEntityEscaper.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.OPTION.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/OctalUnescaper.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/UnicodeEscaper.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/UnicodeUnescaper.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/UnicodeUnpairedSurrogateRemover.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/class-use/AggregateTranslator.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/class-use/CharSequenceTranslator.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/class-use/CodePointTranslator.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/class-use/EntityArrays.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/class-use/JavaUnicodeEscaper.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/class-use/LookupTranslator.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/class-use/NumericEntityEscaper.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/class-use/NumericEntityUnescaper.OPTION.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/class-use/NumericEntityUnescaper.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/class-use/OctalUnescaper.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/class-use/UnicodeEscaper.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/class-use/UnicodeUnescaper.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/class-use/UnicodeUnpairedSurrogateRemover.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/package-frame.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/package-summary.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/package-tree.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/text/translate/package-use.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/DateFormatUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/DateParser.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/DatePrinter.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/DateUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/DurationFormatUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/FastDateFormat.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/FastDateParser.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/FastDatePrinter.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/StopWatch.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/class-use/DateFormatUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/class-use/DateParser.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/class-use/DatePrinter.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/class-use/DateUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/class-use/DurationFormatUtils.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/class-use/FastDateFormat.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/class-use/FastDateParser.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/class-use/FastDatePrinter.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/class-use/StopWatch.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/package-frame.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/package-summary.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/package-tree.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/time/package-use.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/tuple/ImmutablePair.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/tuple/ImmutableTriple.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/tuple/MutablePair.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/tuple/MutableTriple.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/tuple/Pair.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/tuple/Triple.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/tuple/class-use/ImmutablePair.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/tuple/class-use/ImmutableTriple.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/tuple/class-use/MutablePair.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/tuple/class-use/MutableTriple.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/tuple/class-use/Pair.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/tuple/class-use/Triple.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/tuple/package-frame.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/tuple/package-summary.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/tuple/package-tree.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/org/apache/commons/lang3/tuple/package-use.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/overview-frame.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/overview-summary.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/overview-tree.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/package-list" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/script.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/serialized-form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/apidocs/stylesheet.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/META-INF/MANIFEST.MF" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/META-INF/maven/com.opencsv/opencsv/pom.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/META-INF/maven/com.opencsv/opencsv/pom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/convertGermanToBoolean.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/convertGermanToBoolean_de.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/convertSplitOnWhitespace.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/convertSplitOnWhitespace_de.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/opencsv.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/opencsv-4.0/opencsv_de.properties" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Circle.java" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commons-lang3-3.6-bin/commons-lang3-3.6/commons-lang3-3.6-javadoc.jar" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/commons-lang3-3.6-javadoc.jar" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commons-lang3-3.6-bin/commons-lang3-3.6/commons-lang3-3.6-sources.jar" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/commons-lang3-3.6-sources.jar" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commons-lang3-3.6-bin/commons-lang3-3.6/commons-lang3-3.6-test-sources.jar" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/commons-lang3-3.6-test-sources.jar" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commons-lang3-3.6-bin/commons-lang3-3.6/commons-lang3-3.6-tests.jar" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/commons-lang3-3.6-tests.jar" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/commons-lang3-3.6-bin/commons-lang3-3.6/commons-lang3-3.6.jar" afterPath="$PROJECT_DIR$/lib/commons-lang3-3.6/commons-lang3-3.6.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/2DesignManager_jar.zip" afterPath="$PROJECT_DIR$/out/artifacts/2DesignManager_jar.zip" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/2DesignManager_jar/2DesignManager.jar" afterPath="$PROJECT_DIR$/out/artifacts/2DesignManager_jar/2DesignManager.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DB.java" afterPath="$PROJECT_DIR$/src/DB.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DB.jfd" afterPath="$PROJECT_DIR$/src/DB.jfd" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/2DesignManager.iml" afterPath="$PROJECT_DIR$/2DesignManager.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/2DesignManager_jar/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/out/artifacts/2DesignManager_jar/META-INF/MANIFEST.MF" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Composite.java" afterPath="$PROJECT_DIR$/src/Composite.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Figura.java" afterPath="$PROJECT_DIR$/src/Figura.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI_2DM.java" afterPath="$PROJECT_DIR$/src/GUI_2DM.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI_2DM.jfd" afterPath="$PROJECT_DIR$/src/GUI_2DM.jfd" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main.java" afterPath="$PROJECT_DIR$/src/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Manager.java" afterPath="$PROJECT_DIR$/src/Manager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MyCanvas.java" afterPath="$PROJECT_DIR$/src/MyCanvas.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Polygon.java" afterPath="$PROJECT_DIR$/src/Polygon.java" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -38,14 +486,58 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="169" column="78" lean-forward="false" selection-start-line="169" selection-start-column="78" selection-end-line="169" selection-end-column="78" />
+            <state relative-caret-position="-7169">
+              <caret line="15" column="94" lean-forward="false" selection-start-line="15" selection-start-column="94" selection-end-line="15" selection-end-column="94" />
               <folding>
-                <marker date="1505163121413" expanded="false" signature="14090:14100" ph=" { " />
-                <marker date="1505163121413" expanded="false" signature="14113:14121" ph=" }" />
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Composite.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Composite.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="427">
+              <caret line="157" column="0" lean-forward="false" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Figura.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Figura.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2365">
+              <caret line="216" column="60" lean-forward="false" selection-start-line="216" selection-start-column="60" selection-end-line="216" selection-end-column="60" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DB.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/DB.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="396">
+              <caret line="106" column="38" lean-forward="true" selection-start-line="106" selection-start-column="38" selection-end-line="107" selection-end-column="72" />
+              <folding>
+                <marker date="1505146174106" expanded="true" signature="816:4104" ph="// JFormDesigner - Component initialization - DO NOT MODIFY" />
+                <marker date="1505146174106" expanded="true" signature="4116:4583" ph="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Polygon.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Polygon.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-624">
+              <caret line="58" column="86" lean-forward="false" selection-start-line="58" selection-start-column="86" selection-end-line="58" selection-end-column="86" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -54,33 +546,46 @@
       <file leaf-file-name="Manager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Manager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2482">
-              <caret line="185" column="20" lean-forward="false" selection-start-line="185" selection-start-column="20" selection-end-line="185" selection-end-column="20" />
+            <state relative-caret-position="-2239">
+              <caret line="218" column="30" lean-forward="false" selection-start-line="218" selection-start-column="30" selection-end-line="218" selection-end-column="30" />
               <folding>
-                <element signature="e#0#11445#0" expanded="true" />
+                <element signature="e#0#11586#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GUI_2DM.jfd" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GUI_2DM.jfd">
-          <provider selected="true" editor-type-id="JFormDesigner">
-            <state />
+      <file leaf-file-name="2DM.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/2DM.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="323" column="16" lean-forward="false" selection-start-line="323" selection-start-column="16" selection-end-line="323" selection-end-column="16" />
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TakeNote.jfd" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/TakeNote.jfd">
-          <provider selected="true" editor-type-id="JFormDesigner">
-            <state />
+      <file leaf-file-name="MyCanvas.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/MyCanvas.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="884">
+              <caret line="58" column="26" lean-forward="false" selection-start-line="58" selection-start-column="16" selection-end-line="58" selection-end-column="26" />
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DB.jfd" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/DB.jfd">
-          <provider selected="true" editor-type-id="JFormDesigner">
-            <state paletteWidth="234" propertiesWidth="330" />
+      <file leaf-file-name="GUI_2DM.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/GUI_2DM.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="158">
+              <caret line="212" column="97" lean-forward="false" selection-start-line="212" selection-start-column="97" selection-end-line="212" selection-end-column="97" />
+              <folding>
+                <marker date="1505241756439" expanded="true" signature="283:15112" ph="// JFormDesigner - Component initialization - DO NOT MODIFY" />
+                <marker date="1505241756439" expanded="false" signature="15124:16130" ph="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
+              </folding>
+            </state>
           </provider>
         </entry>
       </file>
@@ -95,19 +600,9 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getCenter</find>
-      <find>getN</find>
-      <find>getColor</find>
-      <find>setColor</find>
-      <find>draw</find>
-      <find>selected</find>
-      <find>color</find>
-      <find>Composition</find>
-      <find>resize</find>
       <find>setCo</find>
       <find>System</find>
       <find>setW</find>
-      <find>save</find>
       <find>btnAddFig</find>
       <find>getWhole</find>
       <find>btnAdd</find>
@@ -116,7 +611,6 @@
       <find>write</find>
       <find>whole</find>
       <find>ta</find>
-      <find>btnSaveFig</find>
       <find>Ta</find>
       <find>loadmodel</find>
       <find>setVersione</find>
@@ -124,7 +618,18 @@
       <find>table</find>
       <find>loadcsv</find>
       <find>saveWhole</find>
+      <find>btnRemove</find>
+      <find>btnLeft</find>
+      <find>resize</find>
+      <find>getFileDescription</find>
+      <find>rmv</find>
+      <find>save</find>
+      <find>createCSV</find>
+      <find>btnDB</find>
       <find>btnSave</find>
+      <find>getFileName</find>
+      <find>btnSaveFig</find>
+      <find>e -</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -139,7 +644,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/bin/XMLManager.class" />
-        <option value="$PROJECT_DIR$/src/GUI_2DM.java" />
         <option value="/usr/lib/jvm/java-8-openjdk/jre/lib/rt.jar!/java/util/ArrayList.class" />
         <option value="/usr/lib/jvm/java-8-openjdk/jre/lib/rt.jar!/javax/swing/plaf/basic/BasicButtonListener.class" />
         <option value="$PROJECT_DIR$/src/XMLManager.java" />
@@ -147,17 +651,18 @@
         <option value="$PROJECT_DIR$/src/ObjManager.java" />
         <option value="$PROJECT_DIR$/src/TakeNote.java" />
         <option value="$PROJECT_DIR$/src/TakeNote.jfd" />
-        <option value="$PROJECT_DIR$/src/MyCanvas.java" />
         <option value="$PROJECT_DIR$/src/DB.java" />
         <option value="$PROJECT_DIR$/src/tableNotEditable.java" />
-        <option value="$PROJECT_DIR$/src/Circle.java" />
-        <option value="$PROJECT_DIR$/src/Composite.java" />
-        <option value="$PROJECT_DIR$/src/Polygon.java" />
-        <option value="$PROJECT_DIR$/src/Figura.java" />
-        <option value="$PROJECT_DIR$/src/GUI_2DM.jfd" />
         <option value="$PROJECT_DIR$/src/DB.jfd" />
+        <option value="$PROJECT_DIR$/src/GUI_2DM.jfd" />
+        <option value="$PROJECT_DIR$/src/MyCanvas.java" />
+        <option value="$PROJECT_DIR$/src/Figura.java" />
+        <option value="$PROJECT_DIR$/src/Circle.java" />
+        <option value="$PROJECT_DIR$/src/GUI_2DM.java" />
         <option value="$PROJECT_DIR$/src/Manager.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/Composite.java" />
+        <option value="$PROJECT_DIR$/src/Polygon.java" />
       </list>
     </option>
   </component>
@@ -167,10 +672,36 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand />
+      <select />
+    </treeState>
+  </component>
+  <component name="NamedScopeManager">
+    <scope name="test" pattern="src:*" />
+  </component>
   <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="782" />
     <option name="y" value="24" />
-    <option name="width" value="683" />
-    <option name="height" value="744" />
+    <option name="width" value="673" />
+    <option name="height" value="742" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>Android</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -187,8 +718,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -199,14 +728,27 @@
             <path>
               <item name="2DesignManager" type="b2602c69:ProjectViewProjectNode" />
               <item name="2DesignManager" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="2DesignManager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="2DesignManager" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="2DesignManager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="2DesignManager" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -217,14 +759,15 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="GenerateAntBuildDialog.enableUiFormCompile" value="true" />
     <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
-    <property name="GenerateAntBuildDialog.backupFiles" value="true" />
     <property name="GenerateAntBuildDialog.outputFileNameProperty" value="2DM" />
     <property name="GenerateAntBuildDialog.generateSingleFile" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/save/db.csv" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/2DM.xml" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
     <property name="Downloaded.Files.Path.Enabled" value="true" />
     <property name="Repository.Attach.JavaDocs" value="true" />
     <property name="Repository.Attach.Sources" value="true" />
+    <property name="GenerateAntBuildDialog.generateIdeaHomeProperty" value="true" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -239,6 +782,12 @@
     </option>
   </component>
   <component name="RunManager" selected="Application.2DesignManager">
+    <configuration name="2DM" type="AntRunConfiguration" factoryName="Ant Target">
+      <antsettings antfile="file://$PROJECT_DIR$/2DM.xml" target="all" />
+      <method>
+        <option name="Make" enabled="false" />
+      </method>
+    </configuration>
     <configuration name="2DesignManager" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="Main" />
@@ -252,11 +801,15 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="2DesignManager" />
       <envs />
+      <method>
+        <option name="AntTarget" enabled="true" antfile="file://$PROJECT_DIR$/2DM.xml" target="compile.module.2designmanager.production" />
+      </method>
     </configuration>
     <configuration name="2DesignManager.jar" type="JarApplication" factoryName="JAR Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/2DesignManager_jar/2DesignManager.jar" />
-      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
       <envs />
       <module name="2DesignManager" />
     </configuration>
@@ -639,9 +1192,10 @@
     <configuration default="true" type="osgi.bnd.run" factoryName="Test Launcher (JUnit)">
       <method />
     </configuration>
-    <list size="2">
-      <item index="0" class="java.lang.String" itemvalue="Application.2DesignManager" />
-      <item index="1" class="java.lang.String" itemvalue="JAR Application.2DesignManager.jar" />
+    <list size="3">
+      <item index="0" class="java.lang.String" itemvalue="Ant Target.2DM" />
+      <item index="1" class="java.lang.String" itemvalue="Application.2DesignManager" />
+      <item index="2" class="java.lang.String" itemvalue="JAR Application.2DesignManager.jar" />
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
@@ -683,46 +1237,53 @@
       <workItem from="1505152516950" duration="21000" />
       <workItem from="1505162816078" duration="173000" />
       <workItem from="1505163083940" duration="40000" />
+      <workItem from="1505206164986" duration="11000" />
+      <workItem from="1505207110564" duration="7891000" />
+      <workItem from="1505222789579" duration="36000" />
+      <workItem from="1505222929947" duration="44000" />
+      <workItem from="1505223028429" duration="1093000" />
+      <workItem from="1505224151331" duration="8870000" />
+      <workItem from="1505904451157" duration="302000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="144540000" />
+    <option name="totallyTimeSpent" value="162787000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="24" width="1600" height="876" extended-state="6" />
-    <editor active="true" />
+    <frame x="782" y="24" width="1366" height="744" extended-state="6" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="1.0" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21463415" sideWeight="0.48411497" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17670682" sideWeight="0.515885" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24228792" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18154311" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32357723" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21104388" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22390318" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39674798" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39674798" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32931727" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31869918" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32520324" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -766,142 +1327,48 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Circle.java</url>
-          <line>70</line>
-          <properties />
-          <option name="timeStamp" value="37" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Circle.java</url>
-          <line>71</line>
-          <properties />
-          <option name="timeStamp" value="38" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>319</line>
+          <line>301</line>
           <properties />
           <option name="timeStamp" value="39" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Manager.java</url>
-          <line>263</line>
-          <properties />
-          <option name="timeStamp" value="40" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>395</line>
+          <line>368</line>
           <properties />
           <option name="timeStamp" value="41" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>331</line>
+          <line>313</line>
           <properties />
           <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Manager.java</url>
+          <line>272</line>
+          <properties />
+          <option name="timeStamp" value="47" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Manager.java</url>
+          <line>145</line>
+          <properties />
+          <option name="timeStamp" value="48" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="46" />
+      <option name="time" value="49" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="antWorkspaceConfiguration">
-    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="true" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/GUI_2DM.jfd">
-      <provider selected="true" editor-type-id="JFormDesigner">
-        <state paletteWidth="0" propertiesWidth="0" structureHeight="0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/TakeNote.jfd">
-      <provider selected="true" editor-type-id="JFormDesigner">
-        <state paletteWidth="0" propertiesWidth="0" structureHeight="0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/DB.jfd">
-      <provider selected="true" editor-type-id="JFormDesigner">
-        <state paletteWidth="0" propertiesWidth="0" structureHeight="0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Composite.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#202#210#0" expanded="true" />
-            <element signature="e#260#267#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1547">
-          <caret line="91" column="4" lean-forward="false" selection-start-line="91" selection-start-column="4" selection-end-line="91" selection-end-column="4" />
-          <folding>
-            <marker date="1505163121413" expanded="false" signature="14090:14100" ph=" { " />
-            <marker date="1505163121413" expanded="false" signature="14113:14121" ph=" }" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MyCanvas.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1003">
-          <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Manager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3111">
-          <caret line="183" column="37" lean-forward="false" selection-start-line="183" selection-start-column="37" selection-end-line="183" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#11445#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Polygon.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1785">
-          <caret line="111" column="25" lean-forward="false" selection-start-line="111" selection-start-column="25" selection-end-line="111" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Figura.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2618">
-          <caret line="154" column="34" lean-forward="false" selection-start-line="154" selection-start-column="34" selection-end-line="154" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3694#3695#0" expanded="true" />
-            <element signature="e#3722#3723#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/DB.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1105">
-          <caret line="74" column="115" lean-forward="true" selection-start-line="74" selection-start-column="115" selection-end-line="74" selection-end-column="115" />
-          <folding>
-            <marker date="1505146174106" expanded="true" signature="816:4104" ph="// JFormDesigner - Component initialization - DO NOT MODIFY" />
-            <marker date="1505146174106" expanded="true" signature="4116:4583" ph="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/GUI_2DM.jfd">
       <provider selected="true" editor-type-id="JFormDesigner">
         <state paletteWidth="0" propertiesWidth="0" structureHeight="0" />
@@ -917,8 +1384,8 @@
         <state relative-caret-position="1666">
           <caret line="101" column="10" lean-forward="false" selection-start-line="101" selection-start-column="10" selection-end-line="101" selection-end-column="10" />
           <folding>
-            <marker date="1505146023956" expanded="true" signature="283:14890" ph="// JFormDesigner - Component initialization - DO NOT MODIFY" />
-            <marker date="1505146023956" expanded="false" signature="14902:15908" ph="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
+            <marker date="1505241756439" expanded="true" signature="283:15112" ph="// JFormDesigner - Component initialization - DO NOT MODIFY" />
+            <marker date="1505241756439" expanded="false" signature="15124:16130" ph="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
           </folding>
         </state>
       </provider>
@@ -927,10 +1394,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1666">
           <caret line="106" column="22" lean-forward="false" selection-start-line="106" selection-start-column="22" selection-end-line="106" selection-end-column="22" />
-          <folding>
-            <element signature="e#202#210#0" expanded="true" />
-            <element signature="e#260#267#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -939,8 +1403,7 @@
         <state relative-caret-position="7888">
           <caret line="464" column="0" lean-forward="false" selection-start-line="464" selection-start-column="0" selection-end-line="464" selection-end-column="0" />
           <folding>
-            <marker date="1505163121413" expanded="false" signature="14090:14100" ph=" { " />
-            <marker date="1505163121413" expanded="false" signature="14113:14121" ph=" }" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -957,11 +1420,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2618">
           <caret line="154" column="34" lean-forward="false" selection-start-line="154" selection-start-column="34" selection-end-line="154" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3694#3695#0" expanded="true" />
-            <element signature="e#3722#3723#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -985,8 +1444,8 @@
         <state relative-caret-position="1870">
           <caret line="113" column="0" lean-forward="false" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
           <folding>
-            <marker date="1505146023956" expanded="true" signature="283:14890" ph="// JFormDesigner - Component initialization - DO NOT MODIFY" />
-            <marker date="1505146023956" expanded="false" signature="14902:15908" ph="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
+            <marker date="1505241756439" expanded="true" signature="283:15112" ph="// JFormDesigner - Component initialization - DO NOT MODIFY" />
+            <marker date="1505241756439" expanded="false" signature="15124:16130" ph="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
           </folding>
         </state>
       </provider>
@@ -1006,10 +1465,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1445">
           <caret line="93" column="42" lean-forward="false" selection-start-line="93" selection-start-column="42" selection-end-line="93" selection-end-column="42" />
-          <folding>
-            <element signature="e#202#210#0" expanded="true" />
-            <element signature="e#260#267#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1026,8 +1482,7 @@
         <state relative-caret-position="6936">
           <caret line="408" column="0" lean-forward="false" selection-start-line="408" selection-start-column="0" selection-end-line="408" selection-end-column="0" />
           <folding>
-            <marker date="1505163121413" expanded="false" signature="14090:14100" ph=" { " />
-            <marker date="1505163121413" expanded="false" signature="14113:14121" ph=" }" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1037,7 +1492,8 @@
         <state relative-caret-position="3842">
           <caret line="226" column="28" lean-forward="false" selection-start-line="226" selection-start-column="22" selection-end-line="226" selection-end-column="33" />
           <folding>
-            <element signature="e#0#11445#0" expanded="true" />
+            <element signature="e#0#11586#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1046,11 +1502,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1258">
           <caret line="84" column="0" lean-forward="true" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3694#3695#0" expanded="true" />
-            <element signature="e#3722#3723#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1080,8 +1532,8 @@
         <state relative-caret-position="238">
           <caret line="18" column="8" lean-forward="true" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
           <folding>
-            <marker date="1505146023956" expanded="true" signature="283:14890" ph="// JFormDesigner - Component initialization - DO NOT MODIFY" />
-            <marker date="1505146023956" expanded="false" signature="14902:15908" ph="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
+            <marker date="1505241756439" expanded="true" signature="283:15112" ph="// JFormDesigner - Component initialization - DO NOT MODIFY" />
+            <marker date="1505241756439" expanded="false" signature="15124:16130" ph="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
           </folding>
         </state>
       </provider>
@@ -1090,9 +1542,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1071">
           <caret line="63" column="0" lean-forward="true" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1100,10 +1550,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="833">
           <caret line="53" column="26" lean-forward="false" selection-start-line="53" selection-start-column="26" selection-end-line="53" selection-end-column="26" />
-          <folding>
-            <element signature="e#202#210#0" expanded="true" />
-            <element signature="e#260#267#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1111,9 +1558,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="11" column="130" lean-forward="false" selection-start-line="11" selection-start-column="130" selection-end-line="11" selection-end-column="130" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1130,8 +1575,7 @@
         <state relative-caret-position="2924">
           <caret line="172" column="92" lean-forward="false" selection-start-line="172" selection-start-column="92" selection-end-line="172" selection-end-column="92" />
           <folding>
-            <marker date="1505163121413" expanded="false" signature="14090:14100" ph=" { " />
-            <marker date="1505163121413" expanded="false" signature="14113:14121" ph=" }" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1145,11 +1589,7 @@
           <caret line="68" column="34" lean-forward="false" selection-start-line="68" selection-start-column="34" selection-end-line="68" selection-end-column="34" />
           <caret line="97" column="27" lean-forward="false" selection-start-line="97" selection-start-column="27" selection-end-line="97" selection-end-column="27" />
           <caret line="101" column="37" lean-forward="false" selection-start-line="101" selection-start-column="37" selection-end-line="101" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3694#3695#0" expanded="true" />
-            <element signature="e#3722#3723#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1169,10 +1609,126 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tableNotEditable.java" />
+    <entry file="file://$PROJECT_DIR$/src/DB.jfd">
+      <provider selected="true" editor-type-id="JFormDesigner">
+        <state paletteWidth="0" propertiesWidth="0" structureHeight="0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI_2DM.jfd">
+      <provider selected="true" editor-type-id="JFormDesigner">
+        <state paletteWidth="0" propertiesWidth="0" structureHeight="0" />
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk/jre/lib/rt.jar!/java/util/ArrayList.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2873">
+          <caret line="190" column="0" lean-forward="false" selection-start-line="190" selection-start-column="0" selection-end-line="190" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TakeNote.jfd">
+      <provider selected="true" editor-type-id="JFormDesigner">
+        <state paletteWidth="0" propertiesWidth="0" structureHeight="0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TakeNote.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="22" column="13" lean-forward="false" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+          <folding>
+            <element signature="e#705#706#0" expanded="true" />
+            <element signature="e#737#738#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/opencsv-4.0.jar!/com/opencsv/CSVParser.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2DesignManager.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="50" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2DesignManager.eml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.project">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.classpath">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2DesignManager.userlibraries">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/opencsv-4.0/META-INF/MANIFEST.MF">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="83">
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Circle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="16" column="16" lean-forward="false" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7169">
+          <caret line="15" column="94" lean-forward="false" selection-start-line="15" selection-start-column="94" selection-end-line="15" selection-end-column="94" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Composite.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="427">
+          <caret line="157" column="0" lean-forward="false" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Figura.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2365">
+          <caret line="216" column="60" lean-forward="false" selection-start-line="216" selection-start-column="60" selection-end-line="216" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/DB.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1122">
-          <caret line="75" column="82" lean-forward="false" selection-start-line="75" selection-start-column="82" selection-end-line="75" selection-end-column="82" />
+        <state relative-caret-position="396">
+          <caret line="106" column="38" lean-forward="true" selection-start-line="106" selection-start-column="38" selection-end-line="107" selection-end-column="72" />
           <folding>
             <marker date="1505146174106" expanded="true" signature="816:4104" ph="// JFormDesigner - Component initialization - DO NOT MODIFY" />
             <marker date="1505146174106" expanded="true" signature="4116:4583" ph="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
@@ -1180,23 +1736,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Composite.java">
+    <entry file="file://$PROJECT_DIR$/src/Polygon.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="158" column="4" lean-forward="false" selection-start-line="157" selection-start-column="0" selection-end-line="169" selection-end-column="0" />
+        <state relative-caret-position="-624">
+          <caret line="58" column="86" lean-forward="false" selection-start-line="58" selection-start-column="86" selection-end-line="58" selection-end-column="86" />
           <folding>
-            <element signature="e#202#210#0" expanded="true" />
-            <element signature="e#260#267#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Circle.java">
+    <entry file="file://$PROJECT_DIR$/src/Manager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-102">
-          <caret line="3" column="13" lean-forward="false" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+        <state relative-caret-position="-2239">
+          <caret line="218" column="30" lean-forward="false" selection-start-line="218" selection-start-column="30" selection-end-line="218" selection-end-column="30" />
           <folding>
+            <element signature="e#0#11586#0" expanded="true" />
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2DM.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="323" column="16" lean-forward="false" selection-start-line="323" selection-start-column="16" selection-end-line="323" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI_2DM.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="212" column="97" lean-forward="false" selection-start-line="212" selection-start-column="97" selection-end-line="212" selection-end-column="97" />
+          <folding>
+            <marker date="1505241756439" expanded="true" signature="283:15112" ph="// JFormDesigner - Component initialization - DO NOT MODIFY" />
+            <marker date="1505241756439" expanded="false" signature="15124:16130" ph="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
           </folding>
         </state>
       </provider>
@@ -1204,77 +1779,8 @@
     <entry file="file://$PROJECT_DIR$/src/MyCanvas.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="884">
-          <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
+          <caret line="58" column="26" lean-forward="false" selection-start-line="58" selection-start-column="16" selection-end-line="58" selection-end-column="26" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Figura.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="170" column="30" lean-forward="false" selection-start-line="170" selection-start-column="30" selection-end-line="170" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3694#3695#0" expanded="true" />
-            <element signature="e#3722#3723#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Polygon.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="9" lean-forward="false" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUI_2DM.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2686">
-          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding>
-            <marker date="1505146023956" expanded="true" signature="283:14890" ph="// JFormDesigner - Component initialization - DO NOT MODIFY" />
-            <marker date="1505146023956" expanded="false" signature="14902:15908" ph="// JFormDesigner - Variables declaration - DO NOT MODIFY" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUI_2DM.jfd">
-      <provider selected="true" editor-type-id="JFormDesigner">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/TakeNote.jfd">
-      <provider selected="true" editor-type-id="JFormDesigner">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/DB.jfd">
-      <provider selected="true" editor-type-id="JFormDesigner">
-        <state paletteWidth="234" propertiesWidth="330" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Manager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2482">
-          <caret line="185" column="20" lean-forward="false" selection-start-line="185" selection-start-column="20" selection-end-line="185" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#11445#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="169" column="78" lean-forward="false" selection-start-line="169" selection-start-column="78" selection-end-line="169" selection-end-column="78" />
-          <folding>
-            <marker date="1505163121413" expanded="false" signature="14090:14100" ph=" { " />
-            <marker date="1505163121413" expanded="false" signature="14113:14121" ph=" }" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1285,10 +1791,10 @@
         <settings>
           <artifact-editor>
             <show-content>
-              <type id="artifact" />
-              <type id="javaee-facet-resources" />
               <type id="jpa-descriptors" />
               <type id="library" />
+              <type id="artifact" />
+              <type id="javaee-facet-resources" />
             </show-content>
           </artifact-editor>
           <last-edited>2DesignManager:jar</last-edited>
@@ -1344,7 +1850,6 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
@@ -1364,7 +1869,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>commons-lang3-3.6</last-edited>
+          <last-edited>opencsv-4</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1372,6 +1877,21 @@
               </list>
             </option>
           </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <last-edited>test</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+          <order>
+            <scope name="test" />
+          </order>
         </settings>
       </state>
     </states>

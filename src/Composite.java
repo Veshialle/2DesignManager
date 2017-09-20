@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Composite extends Figura {
-	private List<Figura> Composition = new ArrayList<Figura>();
-	private List<Color> stayColor = new ArrayList<Color>();
+	private List<Figura> Composition = new ArrayList<>();
+	private List<Color> stayColor = new ArrayList<>();
 	private boolean United = false;
 
 	public Composite(List<Figura> Parts, boolean United, String name) {
@@ -84,18 +84,6 @@ public class Composite extends Figura {
 		double rotationAngle = angle - getAngle();
 		for (Figura i : Composition) {
 			i.rotate(rotationAngle, centerX, centerY);
-			/*
-			 *
-			 * for(int j=0;j<this.nLati;j++){ double[] pt = {i.xPoints[j], i.yPoints[j]};
-			 * AffineTransform.getRotateInstance(Math.toRadians(rotationAngle), center[0],
-			 * center[1]).transform(pt, 0, pt, 0, 1); // specifying to use this double[] to
-			 * hold coords i.xPoints[j] = pt[0]; i.yPoints[j] = pt[1]; /* Per poter
-			 * risolvere la traslazione (verso l'origine del canvas se rotazione oraria o
-			 * verso +inf e +inf se antioraria) la rotazione dovrebbe essere affinata, il
-			 * ritorno ad intero fa perdere parte del calcolo nella rotazione
-			 */
-
-			// }
 
 		}
 	}
@@ -167,4 +155,5 @@ public class Composite extends Figura {
 			setColor(Color.BLACK);
 		}
 	}
+
 }

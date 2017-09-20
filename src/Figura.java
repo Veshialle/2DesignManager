@@ -8,10 +8,6 @@ import java.util.ArrayList;
 //import java.awt.geom.AffineTransform;
 
 /**
- * 
- */
-
-/**
  * @author probelter
  *
  */
@@ -25,8 +21,8 @@ public class Figura implements java.io.Serializable{
 	protected Color colore;
 	protected double angle;
 	protected Float versione = 0.0f;
-	protected ArrayList<Double> xPoints = new ArrayList<Double>();
-	protected ArrayList<Double> yPoints = new ArrayList<Double>();
+	protected ArrayList<Double> xPoints = new ArrayList<>();
+	protected ArrayList<Double> yPoints = new ArrayList<>();
 	protected double[] angleToGenerate = new double[] {60, 90, 108, 120, 128.57, 135, 140, 144};
 	protected String name;
 	protected Polygon p;
@@ -75,10 +71,10 @@ public class Figura implements java.io.Serializable{
 
 	public double getAngle() {
 		return 0.0;
-	};
+	}
 
 	public void rotate(double angle, double centerX, double centerY) {
-	};
+	}
 
 	public void setX(double x) {
 		this.move(x - this.xPoints.get(0), 0);
@@ -120,7 +116,7 @@ public class Figura implements java.io.Serializable{
 		this.width = width;
 	}
 
-	public void resize(double scaleX, double scaleY, double centerX, double centerY) {	};
+	public void resize(double scaleX, double scaleY, double centerX, double centerY) {	}
 
 	public void setHeight(double d) {
 		this.height = d;
@@ -181,16 +177,14 @@ public class Figura implements java.io.Serializable{
 	public String getFinalName() {
 		if (name.isEmpty())
 			return null;
-		String finalName = name + "." + versione;
-		return finalName;
+		return name + "." + versione;
 	}
 
 	@Override
 	public String toString() {
 		if(name.isEmpty())
 			return null;
-		String finalName = name + " " + versione;
-		return finalName;
+		return name + " " + versione;
 	}
 
 	public void setName(String name) {
@@ -228,8 +222,10 @@ public class Figura implements java.io.Serializable{
 		} finally {
 			try {
 				// Close the writer regardless of what happens...
+				assert writer != null;
 				writer.close();
 			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 
