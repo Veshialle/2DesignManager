@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
@@ -63,18 +64,27 @@ public class Polygon extends Figura {
 		double xVar = (newX - oldX) / (centerX - oldX);
 		double scaleX = (-xVar * 8 / 10) + 1.0; // era troppo veloce a ingrandire
 		*/
+		int distance = 5;
+		boolean flag = true;
+		double[][] pt = new double[this.nLati][2];
 		for (int i = 0; i < this.nLati; i++) {
-			double[] pt = { xPoints.get(i) - centerX, yPoints.get(i) - centerY };
-			AffineTransform.getScaleInstance(scaleX, scaleY).transform(pt, 0, pt, 0, 1);
-			//if(pt[0] < centerX +2 || centerX > pt[0] - 2)
-				xPoints.set(i, pt[0] + centerX);
-			//else
-			//	xPoints[i] = pt[0] + 3;
-			//if(pt[1] < centerY + 2 && centerY > pt[1] - 2)
-				yPoints.set(i, pt[1] + centerY);
-			//else
-			//	yPoints[i] = pt[1] + 3;
+			pt[i][0] = xPoints.get(i) - centerX;
+			pt[i][1] = yPoints.get(i) - centerY;
+			AffineTransform.getScaleInstance(scaleX, scaleY).transform(pt[i], 0, pt[i], 0, 1);
+		}
+		for(int i = 0; i < this.nLati; i++){
+			if(pt[i][0] > -distance && pt[i][0] < +distance && pt[i][1] > -distance && pt[i][1] < +distance){
+				flag = false;
+			}
 
+		}
+		if(flag){
+			for(int i = 0; i < this.nLati; i++){
+				xPoints.set(i, pt[i][0] + centerX);
+				yPoints.set(i, pt[i][1] + centerY);
+			}
+		} else {
+			JOptionPane.showMessageDialog(null, "Making Figure smaller then this ");
 		}
 	}
 

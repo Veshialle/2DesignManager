@@ -1,8 +1,4 @@
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
@@ -34,11 +30,11 @@ public class Main {
 	private static boolean isInside;
 	private static int idFigura = (Manager.countFigure()-1)/2;
 	private static List<Figura> fig = new ArrayList<>(); // fig e' una lista di oggetti Figura
+	//private static Manager m = new Manager();
 
 
 
 	public static void main(String[] a) {
-
 		GUI_2DM window = new GUI_2DM();
 		window.canvas.setArray(fig);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -54,7 +50,8 @@ public class Main {
         window.scrollPane.setViewportView(window.list1);
 		window.canvas.paintImage();
 		window.checkboColorComp.setSelected(false);
-		if(Manager.countFigure() < 3){
+		Manager m = new Manager();
+		if(m.getWhole().isEmpty()){
 			window.btnDB.setEnabled(false);
 		}
 
@@ -64,97 +61,87 @@ public class Main {
 		// (scrollPane)
 
 
-		window.list1.addListSelectionListener(new ListSelectionListener() {
-			@Override
-			public void valueChanged(ListSelectionEvent arg0) {
-				// TODO Auto-generated method stub
-				if (window.list1.getSelectedIndex() >= 0) {
-					window.btnRemoveFig.setEnabled(true);
-					window.btnSaveFig.setEnabled(true);
-					window.btnDown.setEnabled(true);
-					window.btnUp.setEnabled(true);
-					window.btnRight.setEnabled(true);
-					window.btnLeft.setEnabled(true);
-					window.btnSetX.setEnabled(true);
-					window.btnSetY.setEnabled(true);
-					window.spinnerPos.setEnabled(true);
-					window.radioMove.setEnabled(true);
-					window.radioResize.setEnabled(true);
-					window.btnColor.setEnabled(true);
-					window.btnRotation.setEnabled(true);
-					window.rotationBar.setEnabled(true);
-					window.rotationBar.setValue((int) fig.get(window.list1.getSelectedIndex()).getAngle());
-					if(window.list1.getSelectedIndices().length >= 2){
-						window.btnCompFig.setEnabled(true);
-					} else window.btnCompFig.setEnabled(false);
-					if(fig.get(window.list1.getSelectedIndex()).getClass() == Composite.class) {
-						window.checkboColorComp.setEnabled(true);
-						window.checkboColorComp.setSelected(fig.get(window.list1.getSelectedIndex()).isUnited());
-					} else window.checkboColorComp.setEnabled(false);
-					if(Manager.countFigure() < 3){
-						window.btnDB.setEnabled(false);
-					} else {
-						window.btnDB.setEnabled(true);
-					}
-				} else {
-					window.btnRemoveFig.setEnabled(false);
-					window.btnSaveFig.setEnabled(false);
-					window.btnDown.setEnabled(false);
-					window.btnUp.setEnabled(false);
-					window.btnRight.setEnabled(false);
-					window.btnLeft.setEnabled(false);
-					window.btnSetX.setEnabled(false);
-					window.btnSetY.setEnabled(false);
-					window.spinnerPos.setEnabled(false);
-					window.radioMove.setEnabled(false);
-					window.radioResize.setEnabled(false);
-					window.btnColor.setEnabled(false);
-					window.btnRotation.setEnabled(false);
-					window.rotationBar.setValue(0);
-					window.rotationBar.setEnabled(false);
-				}
-			}
-		});
+		window.list1.addListSelectionListener(arg0 -> {
+            // TODO Auto-generated method stub
+            if (window.list1.getSelectedIndex() >= 0) {
+                window.btnRemoveFig.setEnabled(true);
+                window.btnSaveFig.setEnabled(true);
+                window.btnDown.setEnabled(true);
+                window.btnUp.setEnabled(true);
+                window.btnRight.setEnabled(true);
+                window.btnLeft.setEnabled(true);
+                window.btnSetX.setEnabled(true);
+                window.btnSetY.setEnabled(true);
+                window.spinnerPos.setEnabled(true);
+                window.radioMove.setEnabled(true);
+                window.radioResize.setEnabled(true);
+                window.btnColor.setEnabled(true);
+                window.btnRotation.setEnabled(true);
+                window.rotationBar.setEnabled(true);
+                window.rotationBar.setValue((int) fig.get(window.list1.getSelectedIndex()).getAngle());
+                if(window.list1.getSelectedIndices().length >= 2){
+                    window.btnCompFig.setEnabled(true);
+                } else window.btnCompFig.setEnabled(false);
+                if(fig.get(window.list1.getSelectedIndex()).getClass() == Composite.class) {
+                    window.checkboColorComp.setEnabled(true);
+                    window.checkboColorComp.setSelected(fig.get(window.list1.getSelectedIndex()).isUnited());
+                } else window.checkboColorComp.setEnabled(false);
+                if(m.getWhole().isEmpty()){
+                    window.btnDB.setEnabled(false);
+                } else {
+                    window.btnDB.setEnabled(true);
+                }
+            } else {
+                window.btnRemoveFig.setEnabled(false);
+                window.btnSaveFig.setEnabled(false);
+                window.btnDown.setEnabled(false);
+                window.btnUp.setEnabled(false);
+                window.btnRight.setEnabled(false);
+                window.btnLeft.setEnabled(false);
+                window.btnSetX.setEnabled(false);
+                window.btnSetY.setEnabled(false);
+                window.spinnerPos.setEnabled(false);
+                window.radioMove.setEnabled(false);
+                window.radioResize.setEnabled(false);
+                window.btnColor.setEnabled(false);
+                window.btnRotation.setEnabled(false);
+                window.rotationBar.setValue(0);
+                window.rotationBar.setEnabled(false);
+            }
+        });
 
 
-		window.btnSetY.addActionListener(new ActionListener() { // Imposta val Y
-			public void actionPerformed(ActionEvent e) {
-				Figura f = fig.get(window.list1.getSelectedIndex());
-				f.setY(Double.valueOf((int)window.spinnerPos.getValue()));
-				window.canvas.paintImage();
-			}
-		});
+		// Imposta val Y
+		window.btnSetY.addActionListener(e -> {
+            Figura f = fig.get(window.list1.getSelectedIndex());
+            f.setY((double) (int) window.spinnerPos.getValue());
+            window.canvas.paintImage();
+        });
 
-		window.btnSetX.addActionListener(new ActionListener() { // Imposta val X
-			public void actionPerformed(ActionEvent e) {
-				Figura f = fig.get(window.list1.getSelectedIndex());
-				f.setX(Double.valueOf((int)window.spinnerPos.getValue()));
-				window.canvas.paintImage();
-			}
-		});
+		// Imposta val X
+		window.btnSetX.addActionListener(e -> {
+            Figura f = fig.get(window.list1.getSelectedIndex());
+            f.setX((double) (int) window.spinnerPos.getValue());
+            window.canvas.paintImage();
+        });
 
-		window.btnRotation.addActionListener(new ActionListener() { // Riportare alla posizione iniziale (0 gradi)
-			public void actionPerformed(ActionEvent e) {
-				Figura f = fig.get(window.list1.getSelectedIndex());
-				f.rotate(0.0, f.getCenterX(), f.getCenterY());
-				window.rotationBar.setValue((int) f.getAngle());
-				window.canvas.paintImage();
-			}
+		// Riportare alla posizione iniziale (0 gradi)
+		window.btnRotation.addActionListener(e -> {
+            Figura f = fig.get(window.list1.getSelectedIndex());
+            f.rotate(0.0, f.getCenterX(), f.getCenterY());
+            window.rotationBar.setValue((int) f.getAngle());
+            window.canvas.paintImage();
+        });
 
-		});
-
-		window.rotationBar.addChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				if(!model.isEmpty()) {
-					JSlider rotation = (JSlider) e.getSource();
-					double angle = (double) rotation.getValue();
-					Figura f = fig.get(window.list1.getSelectedIndex());
-					f.rotate(angle, f.getCenterX(), f.getCenterY());
-					window.canvas.paintImage();
-				}
-			}
-		});
+		window.rotationBar.addChangeListener(e -> {
+            if(!model.isEmpty()) {
+                JSlider rotation = (JSlider) e.getSource();
+                double angle = (double) rotation.getValue();
+                Figura f = fig.get(window.list1.getSelectedIndex());
+                f.rotate(angle, f.getCenterX(), f.getCenterY());
+                window.canvas.paintImage();
+            }
+        });
 
 		window.btnAddFig.addActionListener((ActionEvent e) -> { // Bottone aggiungi/crea una nuova Figura
 
@@ -167,7 +154,7 @@ public class Main {
 			int nLati = Integer.valueOf(s);
 
 			// If a string was returned, say so.
-			if ((s != null) && (s.length() > 0) && ((nLati == 0) || (nLati > 2))) {
+			if (s.length() > 0 && (nLati == 0 || nLati > 2)) {
 
 				String name = JOptionPane.showInputDialog("Inserire nome della figura.", s);
 				Figura f;
@@ -193,7 +180,7 @@ public class Main {
 					idFigura++;
 				}
 			} else {
-				JOptionPane.showMessageDialog(frame, "Hai annullato la creazione di una nuova figura");
+				JOptionPane.showMessageDialog(null, "Hai annullato la creazione di una nuova figura");
 			}
 		});
 
@@ -214,13 +201,11 @@ public class Main {
 
 		// bottone scelta colore
 
-		window.btnColor.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0){
-				Color newColor = JColorChooser.showDialog(null, "Choose a color", Color.RED);
-				fig.get(window.list1.getSelectedIndex()).setColor(newColor);
-				window.canvas.paintImage();
-			}
-		});
+		window.btnColor.addActionListener(arg0 -> {
+            Color newColor = JColorChooser.showDialog(null, "Choose a color", Color.RED);
+            fig.get(window.list1.getSelectedIndex()).setColor(newColor);
+            window.canvas.paintImage();
+        });
 
 
 
@@ -234,7 +219,7 @@ public class Main {
 														// positivo
 				double x1 = (Integer)window.spinnerPos.getValue();
 				//double x1 = (-(double) window.spinnerPos.getValue());// prendi il valore negativo
-				fig.get(window.list1.getSelectedIndex()).move(-x1, 0); // muovi la figura selezionata del valore x1, y rimangono uguali
+				fig.get(window.list1.getSelectedIndex()).move(x1, 0); // muovi la figura selezionata del valore x1, y rimangono uguali
 			}
 			window.canvas.paintImage();// disegna di nuovo
 
@@ -244,7 +229,7 @@ public class Main {
 		window.btnRight.addActionListener(e -> { // stessa cosa di prima, muovi a destra
 			if (!window.spinnerPos.getValue().equals(0)) {
 				double x1 = (+(Integer) window.spinnerPos.getValue());
-				fig.get(window.list1.getSelectedIndex()).move(x1, 0);
+				fig.get(window.list1.getSelectedIndex()).move(-x1, 0);
 
 			}
 			window.canvas.paintImage();
@@ -276,11 +261,12 @@ public class Main {
 		window.btnSaveFig.addActionListener(e -> {
 			Component frame = null;
 			if (fig.isEmpty()) {
-				JOptionPane.showMessageDialog(frame, "Error, first create or load a figure\n");
+				JOptionPane.showMessageDialog(null, "Error, first create or load a figure\n");
 			} else {
 				try {
 					//XMLManager.savePolygon(fig.get(window.list1.getSelectedIndex()));
-					if(JOptionPane.showConfirmDialog(null, "Do you want to take a note of the Figure saved?") == JOptionPane.YES_OPTION){
+					int choose = JOptionPane.showConfirmDialog(null, "Do you want to take a note of the Figure saved?");
+					if(choose == JOptionPane.YES_OPTION){
 						TakeNote note = new TakeNote();
 						note.textArea1.setText(Manager.getDescription(fig.get(window.list1.getSelectedIndex()).getDescription()));
 						note.pack();
@@ -292,22 +278,37 @@ public class Main {
 							} else {
 								fig.get(window.list1.getSelectedIndex()).setDescription(note.textArea1.getText());
 								note.setVisible(false);
-								JOptionPane.showMessageDialog(frame, "Figure saved!");
+								JOptionPane.showMessageDialog(null, "Figure saved!");
 							}
 						});
+						Manager.saveObj(fig.get(window.list1.getSelectedIndex()));
+						window.btnDB.setEnabled(true);
+						try{
+							m.loadCSV();
+						} catch (Exception ex){
+							ex.printStackTrace();
+						}
+					} else if (choose == JOptionPane.NO_OPTION){
+						fig.get(window.list1.getSelectedIndex()).setDescription(null);
+						Manager.saveObj(fig.get(window.list1.getSelectedIndex()));
+						window.btnDB.setEnabled(true);
+						try{
+							m.loadCSV();
+						} catch (Exception ex){
+							ex.printStackTrace();
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "Figure couldn't be saved!");
 					}
-					Manager.saveObj(fig.get(window.list1.getSelectedIndex()));
-					window.btnDB.setEnabled(true);
 				} catch ( IOException  e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-					JOptionPane.showMessageDialog(frame, "Error saving the Figure!");
+					JOptionPane.showMessageDialog(null, "Error saving the Figure!");
 				}
 			}
 		});
 
 		window.btnDB.addActionListener(e -> {
-			Manager m = new Manager();
 			DefaultTableModel modelElement;
 			String[] columns = {"ID","Name", "Version", "Class", "Number of Fields", "File Name", "Description"};
 			modelElement = new DefaultTableModel(m.loadModelDB(null), columns) {
@@ -351,6 +352,12 @@ public class Main {
 					JOptionPane.showMessageDialog(null, "Select a Figure to remove");
 				} else {
 					m.rmvFig(Integer.valueOf((String)table.tableDB.getValueAt(table.tableDB.getSelectedRow(), 0)));
+					modelElement.setDataVector(m.loadModelDB(null), columns);
+					table.tableDB.repaint();
+					table.tableDB.revalidate();
+					if(m.getWhole().isEmpty()){
+						window.btnDB.setEnabled(false);
+					}
 				}
 			});
 
@@ -475,7 +482,7 @@ public class Main {
 			Icon icon = null;
 			String choosed = null;
 			List<Figura> composition = new ArrayList<>();
-			if (JOptionPane.showConfirmDialog(frame, "Are You sure to join figures selected?")
+			if (JOptionPane.showConfirmDialog(null, "Are You sure to join figures selected?")
 					== JOptionPane.YES_OPTION){
 				String name = JOptionPane.showInputDialog("Inserire nome della figura.", fig.get(window.list1.getSelectedIndex()).getName());
 				for(int k : window.list1.getSelectedIndices()) composition.add(fig.get(k));
@@ -508,6 +515,7 @@ public class Main {
 			window.canvas.paintImage();
 		});
 
+		window.addWindowStateListener(e -> window.canvas.paintImage());
 
 	}
 }

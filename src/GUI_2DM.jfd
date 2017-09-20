@@ -33,11 +33,13 @@ new FormModel {
 				name: "btnSetY"
 				"text": "SetY"
 				"enabled": false
+				"toolTipText": "Set the X coordinate for the figure selected"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnSetX"
 				"text": "SetX"
 				"enabled": false
+				"toolTipText": "Set the Y coordinate for the figure selected"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnRotation"
@@ -128,6 +130,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JSpinner" ) {
 				name: "spinnerPos"
 				"enabled": false
+				"toolTipText": "Value for the movement buttons"
 			} )
 			add( new FormComponent( "MyCanvas" ) {
 				name: "canvas"
@@ -138,6 +141,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JCheckBox" ) {
 				name: "checkGrid"
 				"text": "Grid"
+				"toolTipText": "Show a Grid with 20x20 cell"
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )

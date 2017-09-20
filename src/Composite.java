@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Composite extends Figura {
-	private List<Figura> Composition = new ArrayList<Figura>();
-	private List<Color> stayColor = new ArrayList<Color>();
+	private List<Figura> Composition = new ArrayList<>();
+	private List<Color> stayColor = new ArrayList<>();
 	private boolean United = false;
 
 	public Composite(List<Figura> Parts, boolean United, String name) {

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component inheritJdk="true">
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$"/>
+	<lib name="opencsv-4.0.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/lib/opencsv-4.0.jar!/"/>
+	</lib>
+	<levels>
+		<level name="TableLayout" value="project"/>
+		<level name="commons-lang3-3.6" value="project"/>
+	</levels>
+</component>

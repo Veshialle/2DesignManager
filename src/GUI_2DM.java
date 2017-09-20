@@ -62,10 +62,12 @@ public class GUI_2DM extends JFrame {
         //---- btnSetY ----
         btnSetY.setText("SetY");
         btnSetY.setEnabled(false);
+        btnSetY.setToolTipText("Set the X coordinate for the figure selected");
 
         //---- btnSetX ----
         btnSetX.setText("SetX");
         btnSetX.setEnabled(false);
+        btnSetX.setToolTipText("Set the Y coordinate for the figure selected");
 
         //---- btnRotation ----
         btnRotation.setText("ZeroDegree");
@@ -138,6 +140,7 @@ public class GUI_2DM extends JFrame {
 
         //---- spinnerPos ----
         spinnerPos.setEnabled(false);
+        spinnerPos.setToolTipText("Value for the movement buttons");
 
         //---- canvas ----
         canvas.setMinimumSize(new Dimension(1000, 563));
@@ -146,6 +149,7 @@ public class GUI_2DM extends JFrame {
 
         //---- checkGrid ----
         checkGrid.setText("Grid");
+        checkGrid.setToolTipText("Show a Grid with 20x20 cell");
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
@@ -206,8 +210,8 @@ public class GUI_2DM extends JFrame {
                     .addContainerGap(338, Short.MAX_VALUE))
                 .addComponent(canvas, GroupLayout.DEFAULT_SIZE, 1198, Short.MAX_VALUE)
         );
-        contentPaneLayout.linkSize(SwingConstants.HORIZONTAL, new Component[] {btnDown, btnLeft, btnRight, btnUp});
-        contentPaneLayout.linkSize(SwingConstants.HORIZONTAL, new Component[] {btnAddFig, btnDB, btnRemoveFig, btnSaveFig});
+        contentPaneLayout.linkSize(SwingConstants.HORIZONTAL, btnDown, btnLeft, btnRight, btnUp);
+        contentPaneLayout.linkSize(SwingConstants.HORIZONTAL, btnAddFig, btnDB, btnRemoveFig, btnSaveFig);
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
@@ -259,8 +263,8 @@ public class GUI_2DM extends JFrame {
                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(canvas, GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE))
         );
-        contentPaneLayout.linkSize(SwingConstants.VERTICAL, new Component[] {btnDown, btnLeft, btnRight, btnUp});
-        contentPaneLayout.linkSize(SwingConstants.VERTICAL, new Component[] {btnAddFig, btnDB, btnRemoveFig, btnSaveFig});
+        contentPaneLayout.linkSize(SwingConstants.VERTICAL, btnDown, btnLeft, btnRight, btnUp);
+        contentPaneLayout.linkSize(SwingConstants.VERTICAL, btnAddFig, btnDB, btnRemoveFig, btnSaveFig);
         pack();
         setLocationRelativeTo(getOwner());
 
