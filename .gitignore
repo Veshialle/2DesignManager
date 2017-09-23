@@ -7,7 +7,6 @@ JavaSwing\.pdf
 .idea/
 consegna.pdf
 consegna.odt
-/save/
-/out/
-/lib/
-/bin/
+/save
+/out
+/lib
